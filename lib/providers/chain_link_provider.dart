@@ -16,6 +16,7 @@ class ChainLinkProvider extends ChangeNotifier {
   ChainLinkProvider() {
     materialModel = materials.first; // Default selection
   }
+
   final List<MaterialModel> materials = [
     MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 0.0068),
     MaterialModel(id: 'br', name: 'Brass', color: Color(0xFFB08D57), kValue: 0.021),
