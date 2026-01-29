@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:measurements/models/material_model.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_button.dart';
@@ -13,13 +14,17 @@ class ChainLinkScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F6FA),
+      backgroundColor: AppColors().cf5F6FA,
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: AppColors().c5B2C2C,
-        title: const Text(
+        title: Text(
           AppString.chainLinkCalculator,
-          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: AppColors().cFFFFFF,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -28,62 +33,97 @@ class ChainLinkScreen extends StatelessWidget {
           builder: (context, p, child) {
             return Column(
               children: [
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(18),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 14, offset: const Offset(0, 6))],
-                  ),
-                  child: Column(
-                    children: [
-                      Image.asset(AppAssets.chainLink, height: 160, fit: BoxFit.contain),
-                      const SizedBox(height: 12),
-                      const Text(
-                        AppString.chainLinkFenceParameters,
-                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black87),
+                Column(
+                  children: [
+                    Image.asset(
+                      AppAssets.chainLink,
+                      height: 160,
+                      fit: BoxFit.contain,
+                    ),
+                    const SizedBox(height: 12),
+                    const Text(
+                      AppString.chainLinkFenceParameters,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 12)],
-                  ),
-                  child: Column(
-                    children: [
-                      DropdownButtonFormField<String>(
-                        value: p.material,
-                        decoration: InputDecoration(
-                          labelText: AppString.material,
-                          filled: true,
-                          fillColor: const Color(0xFFF1F2F6),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                Column(
+                  children: [
+                    DropdownButtonFormField<MaterialModel>(
+                      decoration: InputDecoration(
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        labelText: p.materialModel.name,
+                        filled: true,
+                        fillColor: p.materialModel.color.withOpacity(0.12),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: p.materialModel.color,
+                            width: 1.4,
+                          ),
                         ),
-                        items: p.materialK.keys.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-                        onChanged: (v) {
-                          p.material = v!;
-                        },
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: p.materialModel.color,
+                            width: 1,
+                          ),
+                        ),
                       ),
-                      const SizedBox(height: 12),
-                      AppTextField().textField(p.openingCtrl, AppString.openingOpgMm),
-                      SizedBox(height: 18),
-                      AppTextField().textField(p.wireCtrl, AppString.wireDiameterWdMm),
-                      SizedBox(height: 18),
-                      AppTextField().textField(p.widthCtrl, AppString.widthWmm),
-                      SizedBox(height: 18),
-                      AppTextField().textField(p.lengthCtrl, AppString.lengthLmm),
-                      SizedBox(height: 18),
-                      AppTextField().textField(p.wastageCtrl, "${AppString.wastage} (%)"),
-                      SizedBox(height: 18),
-                      AppTextField().textField(p.costCtrl, AppString.costPerKg),
-                    ],
-                  ),
+                      value: p.materialModel,
+                      items: p.materials.map((m) {
+                        return DropdownMenuItem(
+                          value: m,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 14,
+                                height: 14,
+                                decoration: BoxDecoration(
+                                  color: m.color,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Text(m.name, style: TextStyle(color: m.color)),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (val) {
+                        if (val != null) {
+                          p.onMaterialChange(val);
+                        }
+                      },
+                    ),
+
+                    const SizedBox(height: 12),
+                    AppTextField().textField(
+                      p.openingCtrl,
+                      AppString.openingOpgMm,
+                    ),
+                    SizedBox(height: 18),
+                    AppTextField().textField(
+                      p.wireCtrl,
+                      AppString.wireDiameterWdMm,
+                    ),
+                    SizedBox(height: 18),
+                    AppTextField().textField(p.widthCtrl, AppString.widthWmm),
+                    SizedBox(height: 18),
+                    AppTextField().textField(p.lengthCtrl, AppString.lengthLmm),
+                    SizedBox(height: 18),
+                    AppTextField().textField(
+                      p.wastageCtrl,
+                      "${AppString.wastage} (%)",
+                    ),
+                    SizedBox(height: 18),
+                    AppTextField().textField(p.costCtrl, AppString.costPerKg),
+                  ],
                 ),
                 const SizedBox(height: 20),
                 GestureDetector(
@@ -96,7 +136,10 @@ class ChainLinkScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 Container(
-                  decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2), borderRadius: BorderRadius.all(Radius.circular(14))),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.2),
+                    borderRadius: BorderRadius.all(Radius.circular(14)),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: Column(
@@ -104,16 +147,30 @@ class ChainLinkScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(AppString.totalWeight, style: Theme.of(context).textTheme.labelLarge),
-                            Text(p.totalWeight.toStringAsFixed(2), style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w500)),
+                            Text(
+                              AppString.totalWeight,
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            Text(
+                              p.totalWeight.toStringAsFixed(2),
+                              style: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(fontWeight: FontWeight.w500),
+                            ),
                           ],
                         ),
                         Divider(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(AppString.totalCost, style: Theme.of(context).textTheme.labelLarge),
-                            Text('₹ ${p.totalCost.toStringAsFixed(2)}', style: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w500)),
+                            Text(
+                              AppString.totalCost,
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            Text(
+                              '₹ ${p.totalCost.toStringAsFixed(2)}',
+                              style: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(fontWeight: FontWeight.w500),
+                            ),
                           ],
                         ),
                       ],
