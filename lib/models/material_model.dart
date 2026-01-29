@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/animation.dart';
 
 class MaterialModel {
   final String id;
@@ -12,4 +12,13 @@ class MaterialModel {
     required this.color,
     required this.kValue,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is MaterialModel && other.id == id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }

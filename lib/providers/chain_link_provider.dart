@@ -11,7 +11,11 @@ class ChainLinkProvider extends ChangeNotifier {
   String material = 'Cast Iron';
   double totalWeight = 0;
   double totalCost = 0;
-  MaterialModel materialModel = MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 0.0068);
+  late MaterialModel materialModel;
+
+  ChainLinkProvider() {
+    materialModel = materials.first; // Default selection
+  }
   final List<MaterialModel> materials = [
     MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 0.0068),
     MaterialModel(id: 'br', name: 'Brass', color: Color(0xFFB08D57), kValue: 0.021),
@@ -22,7 +26,7 @@ class ChainLinkProvider extends ChangeNotifier {
     MaterialModel(id: 'st', name: 'Steel', color: Color(0xFF607D8B), kValue: 0.020),
   ];
 
-  final Map<String, double> materialK = {'Aluminiu  m': 0.0068, 'Brass': 0.021, 'Bronze': 0.022, 'Cast Iron': 0.020, 'Copper': 0.023, 'Galvanized Iron': 0.020, 'Steel': 0.020};
+  final Map<String, double> materialK = {'Aluminium': 0.0068, 'Brass': 0.021, 'Bronze': 0.022, 'Cast Iron': 0.020, 'Copper': 0.023, 'Galvanized Iron': 0.020, 'Steel': 0.020};
 
   final Map<String, Color> materialColors = {
     'Aluminium': const Color(0xFFB0BEC5),
@@ -53,7 +57,7 @@ class ChainLinkProvider extends ChangeNotifier {
       return;
     }
 
-    final K = materialModel?.kValue ?? 0;
+    final K = materialModel.kValue;
     final widthM = widthMm / 1000;
     final lengthM = lengthMm / 1000;
     totalWeight = ((wire * wire) / (opening + wire)) * K * widthM * lengthM * 100 * (1 + wastage / 100);
