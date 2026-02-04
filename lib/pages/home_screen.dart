@@ -49,7 +49,7 @@ class ChainLinkScreen extends StatelessWidget {
                     GestureDetector(
                       onTap: () => p.showMaterialBottomSheet(context, p),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         decoration: BoxDecoration(
                           color: p.materialModel.color.withOpacity(0.12),
                           borderRadius: BorderRadius.circular(12),
@@ -57,10 +57,13 @@ class ChainLinkScreen extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            Container(
-                              width: 14,
-                              height: 14,
-                              decoration: BoxDecoration(color: p.materialModel.color, shape: BoxShape.circle),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 14,
+                                height: 14,
+                                decoration: BoxDecoration(color: p.materialModel.color, shape: BoxShape.circle),
+                              ),
                             ),
                             const SizedBox(width: 10),
                             Expanded(

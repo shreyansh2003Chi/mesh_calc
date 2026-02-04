@@ -45,7 +45,7 @@ class ChainLinkProvider extends ChangeNotifier {
   }
 
   final List<MaterialModel> materials = [
-    MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 0.0068),
+    MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 67),
     MaterialModel(id: 'br', name: 'Brass', color: Color(0xFFB08D57), kValue: 0.021),
     MaterialModel(id: 'bz', name: 'Bronze', color: Color(0xFF8D6E63), kValue: 0.022),
     MaterialModel(id: 'ci', name: 'Cast Iron', color: Color(0xFF424242), kValue: 0.020),

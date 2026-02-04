@@ -47,9 +47,15 @@ class _MaterialSelectionBottomSheetState extends State<MaterialSelectionBottomSh
 
                     return ListTile(
                       leading: Container(
-                        width: 14,
-                        height: 14,
-                        decoration: BoxDecoration(color: m.color, shape: BoxShape.circle),
+                        decoration: BoxDecoration(color: m.color.withOpacity(0.2), shape: BoxShape.circle),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 14,
+                            height: 14,
+                            decoration: BoxDecoration(color: m.color, shape: BoxShape.circle),
+                          ),
+                        ),
                       ),
                       title: Text(
                         m.name,
