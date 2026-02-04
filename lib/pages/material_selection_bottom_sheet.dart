@@ -15,7 +15,7 @@ class _MaterialSelectionBottomSheetState extends State<MaterialSelectionBottomSh
     return Consumer<ChainLinkProvider>(
       builder: (context, p, child) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.6,
+          height: MediaQuery.of(context).size.height * 0.4,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),

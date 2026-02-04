@@ -50,7 +50,7 @@ class ChainLinkProvider extends ChangeNotifier {
     MaterialModel(id: 'bz', name: 'Bronze', color: Color(0xFF8D6E63), kValue: 0.022),
     MaterialModel(id: 'ci', name: 'Cast Iron', color: Color(0xFF424242), kValue: 0.020),
     MaterialModel(id: 'cu', name: 'Copper', color: Color(0xFFB87333), kValue: 0.023),
-    MaterialModel(id: 'gi', name: 'Galvanized Iron', color: Color(0xFF90A4AE), kValue: 0.020),
+    MaterialModel(id: 'gi', name: 'Galvanized Iron', color: Color(0xFF90A4AE), kValue: 22.2),
     MaterialModel(id: 'ms', name: 'Mild Steel', color: Color(0xFF78909C), kValue: 0.020),
     MaterialModel(id: 'ss', name: 'Stainless Steel', color: Color(0xFFB0BEC5), kValue: 0.017),
     MaterialModel(id: 'st', name: 'Steel', color: Color(0xFF607D8B), kValue: 0.020),
@@ -111,31 +111,27 @@ class ChainLinkProvider extends ChangeNotifier {
   void calculate() {
     final openingMm = openingUnit.toMm(double.tryParse(openingCtrl.text) ?? 0);
     final diameterMm = diameterUnit.toMm(double.tryParse(diameterCtrl.text) ?? 0);
-    final widthMm = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0);
-    final lengthMm = lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0);
+    final widthM = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0) / 1000;
+    final lengthM = lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0) / 1000;
+
     final wastage = double.tryParse(wastageCtrl.text) ?? 0;
     final costKg = double.tryParse(costCtrl.text) ?? 0;
 
-    if (openingMm <= 0 || diameterMm <= 0 || widthMm <= 0 || lengthMm <= 0) {
+    if (openingMm <= 0 || diameterMm <= 0 || widthM <= 0 || lengthM <= 0) {
       totalWeight = 0;
       totalCost = 0;
       notifyListeners();
       return;
     }
 
-    final openingM = openingMm / 1000;
-    final diameterM = diameterMm / 1000;
-    final widthM = widthMm / 1000;
-    final lengthM = lengthMm / 1000;
+    final area = widthM * lengthM;
 
-    final area = (pi / 4) * diameterM * diameterM;
+    final factor = (materialModel.kValue * pow(diameterMm, 2)) / (openingMm + diameterMm);
 
-    final wireLengthPerSqM = 2 / (openingM + diameterM);
+    final netWeight = factor * area;
+    final totalWithWastage = netWeight * (1 + wastage / 100);
 
-    final totalWireLength = wireLengthPerSqM * widthM * lengthM;
-
-    totalWeight = area * totalWireLength * materialModel.kValue * 1000 * (1 + wastage / 100);
-
+    totalWeight = totalWithWastage;
     totalCost = totalWeight * costKg;
 
     notifyListeners();
