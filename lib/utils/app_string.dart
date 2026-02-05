@@ -12,4 +12,5 @@ class AppString {
   static const String chainLinkFenceParameters = 'Chain Link Fence Parameters';
   static const String material = 'Material';
   static const String chainLinkCalculator = 'Chain Link Calculator';
+  static const String chainLink = 'Chain Link';
 }
