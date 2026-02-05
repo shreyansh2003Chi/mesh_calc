@@ -9,7 +9,7 @@ class AppButton {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: Center(
-          child: Text(label, style: TextStyle(color: Colors.white)),
+          child: Text(label, style: TextStyle(color: Colors.white,fontSize: 18)),
         ),
       ),
     );

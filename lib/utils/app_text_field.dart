@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:measurements/utils/app_colors.dart';
 
 class AppTextField {
@@ -8,7 +9,8 @@ class AppTextField {
   Widget textField(TextEditingController textEditingController, String? label) {
     return TextField(
       controller: textEditingController,
-      keyboardType: TextInputType.number,
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$'))],
       decoration: InputDecoration(
         labelStyle: TextStyle(color: AppColors().c666666),
         floatingLabelStyle: TextStyle(color: AppColors().c464646, fontSize: 18),

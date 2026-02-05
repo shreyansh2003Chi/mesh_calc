@@ -6,12 +6,7 @@ class MaterialModel {
   final Color color;
   final double kValue;
 
-  MaterialModel({
-    required this.id,
-    required this.name,
-    required this.color,
-    required this.kValue,
-  });
+  MaterialModel({required this.id, required this.name, required this.color, required this.kValue});
 
   @override
   bool operator ==(Object other) {
