@@ -51,4 +51,18 @@ class AppColors {
   Color cF09300 = Color(0xffF09300);
   Color c5B2C2C = Color(0xff5B2C2C);
   Color cf5F6FA = Color(0xFFF5F6FA);
+
+  //theme colors
+
+  Color c7A3F3F = Color(0xff7A3F3F);
+  Color c8F5555 = Color(0xff8F5555);
+  Color cA96F6F = Color(0xffA96F6F);
+  Color cC38A8A = Color(0xffC38A8A);
+  Color cDDADAD = Color(0xffDDADAD);
+  Color cEADCDC = Color(0xffEADCDC);
+  Color cF1E6E6 = Color(0xffF1E6E6);
+  Color cF6EFEF = Color(0xffF6EFEF);
+  Color cFAF5F5 = Color(0xffFAF5F5);
+  Color cFDFBFB = Color(0xffFDFBFB);
+  Color c2B1414 = Color(0xff2B1414);
 }
