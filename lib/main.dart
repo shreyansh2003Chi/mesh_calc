@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:measurements/pages/dashboard_pages/dashboard.dart';
 import 'package:measurements/pages/home_screen.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: const ChainLinkScreen());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: const Dashboard());
   }
 }

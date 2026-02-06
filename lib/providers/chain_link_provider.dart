@@ -11,39 +11,6 @@ class ChainLinkProvider extends ChangeNotifier {
   final lengthCtrl = TextEditingController();
   final wastageCtrl = TextEditingController();
   final costCtrl = TextEditingController();
-
-  MeasureUnit openingUnit = MeasureUnit.mm;
-  MeasureUnit diameterUnit = MeasureUnit.mm;
-  MeasureUnit widthUnit = MeasureUnit.mm;
-  MeasureUnit lengthUnit = MeasureUnit.mm;
-
-  double totalWeight = 0;
-  double totalCost = 0;
-
-  late MaterialModel materialModel;
-
-  void showMaterialBottomSheet(BuildContext context, ChainLinkProvider p) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) {
-        return MaterialSelectionBottomSheet();
-      },
-    );
-  }
-
-  ChainLinkProvider() {
-    materialModel = materials.first;
-  }
-
-  String? validateRequired(String? value, {String fieldName = "Field"}) {
-    if (value == null || value.trim().isEmpty) {
-      return "$fieldName is required";
-    }
-    return null;
-  }
-
   final List<MaterialModel> materials = [
     MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 67),
     MaterialModel(id: 'br', name: 'Brass', color: Color(0xFFB08D57), kValue: 0.021),
@@ -82,6 +49,40 @@ class ChainLinkProvider extends ChangeNotifier {
     MaterialModel(id: 'si', name: 'Silicon', color: Color(0xFFB0BEC5), kValue: 0.0023),
     MaterialModel(id: 'cm', name: 'Cement', color: Color(0xFFBDBDBD), kValue: 0.0020),
   ];
+
+
+  MeasureUnit openingUnit = MeasureUnit.mm;
+  MeasureUnit diameterUnit = MeasureUnit.mm;
+  MeasureUnit widthUnit = MeasureUnit.mm;
+  MeasureUnit lengthUnit = MeasureUnit.mm;
+
+  double totalWeight = 0;
+  double totalCost = 0;
+
+  late MaterialModel materialModel;
+
+  void showMaterialBottomSheet(BuildContext context, ChainLinkProvider p) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) {
+        return MaterialSelectionBottomSheet();
+      },
+    );
+  }
+
+  ChainLinkProvider() {
+    materialModel = materials.first;
+  }
+
+  String? validateRequired(String? value, {String fieldName = "Field"}) {
+    if (value == null || value.trim().isEmpty) {
+      return "$fieldName is required";
+    }
+    return null;
+  }
+
 
   void onMaterialChange(MaterialModel m) {
     materialModel = m;

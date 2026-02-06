@@ -16,7 +16,6 @@ extension MeasureUnitX on MeasureUnit {
     }
   }
 
-  /// convert entered value to MM
   double toMm(double value) {
     switch (this) {
       case MeasureUnit.mm:

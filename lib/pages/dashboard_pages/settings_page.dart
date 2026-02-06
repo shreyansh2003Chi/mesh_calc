@@ -19,12 +19,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors().cFAF5F5,
-      appBar: AppBar(
-        title: const Text("Settings"),
-        centerTitle: true,
-        backgroundColor: AppColors().c5B2C2C,
-        elevation: 0,
-      ),
+
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -63,12 +58,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 _dropdownTile(
                   title: "Default Material",
                   value: selectedMaterial,
-                  items: const [
-                    "Mild Steel",
-                    "GI",
-                    "PVC Coated",
-                    "Stainless Steel"
-                  ],
+                  items: const ["Mild Steel", "GI", "PVC Coated", "Stainless Steel"],
                   onChanged: (v) => setState(() => selectedMaterial = v),
                 ),
                 _simpleTile(
@@ -116,11 +106,7 @@ class _SettingsPageState extends State<SettingsPage> {
       padding: const EdgeInsets.only(bottom: 10),
       child: Text(
         title,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: AppColors().c5B2C2C,
-        ),
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors().c5B2C2C),
       ),
     );
   }
@@ -128,10 +114,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _card({required Widget child}) {
     return Container(
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: AppColors().cF1E6E6,
-        borderRadius: BorderRadius.circular(16),
-      ),
+      decoration: BoxDecoration(color: AppColors().cF1E6E6, borderRadius: BorderRadius.circular(16)),
       child: child,
     );
   }
@@ -148,9 +131,7 @@ class _SettingsPageState extends State<SettingsPage> {
       trailing: DropdownButton<String>(
         value: value,
         underline: const SizedBox(),
-        items: items
-            .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-            .toList(),
+        items: items.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
         onChanged: (v) => onChanged(v!),
       ),
     );
@@ -179,12 +160,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _simpleTile({
-    required String title,
-    String? subtitle,
-    Widget? trailing,
-    VoidCallback? onTap,
-  }) {
+  Widget _simpleTile({required String title, String? subtitle, Widget? trailing, VoidCallback? onTap}) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       title: Text(title),
@@ -201,14 +177,9 @@ class _SettingsPageState extends State<SettingsPage> {
         title: const Text("Reset Settings"),
         content: const Text("Are you sure you want to reset all settings?"),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors().c5B2C2C,
-            ),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors().c5B2C2C),
             onPressed: () {
               setState(() {
                 selectedUnit = "MM";
