@@ -96,48 +96,23 @@ class _DynamicCalculatorPageState extends State<DynamicCalculatorPage> {
                     ),
 
                     const SizedBox(height: 20),
-
-                    MeasurementField(
-                      controller: p.openingCtrl,
-                      label: AppString.openingOpgMm,
-                      unit: p.openingUnit,
-                      onUnitChanged: p.setOpeningUnit,
-                    ),
-
+                    p.openingCtrlIsVisible
+                        ? MeasurementField(controller: p.openingCtrl, label: AppString.openingOpgMm, unit: p.openingUnit, onUnitChanged: p.setOpeningUnit)
+                        : Container(),
                     const SizedBox(height: 18),
-
-                    MeasurementField(
-                      controller: p.diameterCtrl,
-                      label: AppString.wDWireDiameter,
-                      unit: p.diameterUnit,
-                      onUnitChanged: p.setDiameterUnit,
-                    ),
-
+                    p.diameterCtrlIsVisible
+                        ? MeasurementField(controller: p.diameterCtrl, label: AppString.wDWireDiameter, unit: p.diameterUnit, onUnitChanged: p.setDiameterUnit)
+                        : Container(),
                     const SizedBox(height: 18),
-
-                    MeasurementField(
-                      controller: p.widthCtrl,
-                      label: AppString.widthWmm,
-                      unit: p.widthUnit,
-                      onUnitChanged: p.setWidthUnit,
-                    ),
-
+                    p.widthCtrlIsVisible ? MeasurementField(controller: p.widthCtrl, label: AppString.widthWmm, unit: p.widthUnit, onUnitChanged: p.setWidthUnit) : Container(),
                     const SizedBox(height: 18),
-
-                    MeasurementField(
-                      controller: p.lengthCtrl,
-                      label: AppString.lengthLmm,
-                      unit: p.lengthUnit,
-                      onUnitChanged: p.setLengthUnit,
-                    ),
-
+                    p.lengthCtrlIsVisible
+                        ? MeasurementField(controller: p.lengthCtrl, label: AppString.lengthLmm, unit: p.lengthUnit, onUnitChanged: p.setLengthUnit)
+                        : Container(),
                     const SizedBox(height: 18),
-
-                    AppTextField().textField(p.wastageCtrl, "${AppString.wastage} (%)"),
-
+                    p.wastageCtrlIsVisible ? AppTextField().textField(p.wastageCtrl, "${AppString.wastage} (%)") : Container(),
                     const SizedBox(height: 18),
-
-                    AppTextField().textField(p.costCtrl, AppString.costPerKg),
+                    p.costCtrlIsVisible ? AppTextField().textField(p.costCtrl, AppString.costPerKg) : Container(),
                   ],
                 ),
 
@@ -145,7 +120,7 @@ class _DynamicCalculatorPageState extends State<DynamicCalculatorPage> {
 
                 GestureDetector(
                   onTap: () {
-                    p.calculateChainLink();
+                    p.calculate(meshItem: widget.meshItem);
                     showDialog(
                       context: context,
                       barrierDismissible: true,

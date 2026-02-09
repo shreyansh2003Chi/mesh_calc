@@ -154,32 +154,63 @@ class DynamicCalculatorPageProvider with ChangeNotifier {
   }
 
   void calculateWeightPerRole() {
-    final openingMm = openingUnit.toMm(double.tryParse(openingCtrl.text) ?? 0);
+    totalWeight = 0;
+    totalCost = 0;
+
+    final widthOpeningMm = openingUnit.toMm(double.tryParse(widthOpeningCtrl.text) ?? 0);
     final diameterMm = diameterUnit.toMm(double.tryParse(diameterCtrl.text) ?? 0);
-    final widthM = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0) / 1000;
-    final lengthM = lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0) / 1000;
+    final widthMm = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0);
+    final lengthMm = lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0);
 
     final wastage = double.tryParse(wastageCtrl.text) ?? 0;
     final costKg = double.tryParse(costCtrl.text) ?? 0;
 
-    if (openingMm <= 0 || diameterMm <= 0 || widthM <= 0 || lengthM <= 0) {
-      totalWeight = 0;
-      totalCost = 0;
+    if (widthOpeningMm <= 0 || diameterMm <= 0 || widthMm <= 0 || lengthMm <= 0) {
       notifyListeners();
       return;
     }
 
-    final area = widthM * lengthM;
+    final pitch = widthOpeningMm + diameterMm;
 
-    final factor = (materialModel.kValue * pow(diameterMm, 2)) / (openingMm + diameterMm);
+    final wiresAcrossWidth = widthMm / pitch;
+    final wiresAcrossLength = lengthMm / pitch;
 
-    final netWeight = factor * area;
-    final totalWithWastage = netWeight * (1 + wastage / 100);
+    final totalWireLengthMm =
+        (wiresAcrossWidth * lengthMm) + (wiresAcrossLength * widthMm);
 
-    totalWeight = totalWithWastage;
+    final wireArea = pi * pow(diameterMm, 2) / 4;
+
+    final density = _materialDensity(materialModel.id);
+
+    final baseWeight = totalWireLengthMm * wireArea * density;
+
+    totalWeight = baseWeight * (1 + wastage / 100);
+
     totalCost = totalWeight * costKg;
 
     notifyListeners();
+  }
+  double _materialDensity(String id) {
+    switch (id) {
+      case 'al': return 0.0000027;
+      case 'ss': return 0.0000079;
+      case 'gi':
+      case 'ms':
+      case 'st': return 0.00000785;
+      case 'cu': return 0.00000896;
+      case 'br': return 0.0000084;
+      default: return 0.00000785;
+    }
+  }
+  void calculate({required MeshItem meshItem}) {
+    switch (meshItem.title) {
+      case AppString.chainLink:
+        calculateChainLink();
+        break;
+      case AppString.weightPerRole:
+        calculateWeightPerRole();
+        break;
+    }
   }
 
   void calculateChainLink() {
