@@ -13,4 +13,5 @@ class AppString {
   static const String material = 'Material';
   static const String chainLinkCalculator = 'Chain Link Calculator';
   static const String chainLink = 'Chain Link';
+  static const String weightPerRole = 'Weight Per Role';
 }
