@@ -83,9 +83,11 @@ class DynamicCalculatorPageProvider with ChangeNotifier {
         widthOpeningCtrlIsVisible = true;
         break;
     }
+    notifyListeners();
   }
 
   MeasureUnit openingUnit = MeasureUnit.mm;
+  MeasureUnit widthOpeningUnit = MeasureUnit.mm;
   MeasureUnit diameterUnit = MeasureUnit.mm;
   MeasureUnit widthUnit = MeasureUnit.mm;
   MeasureUnit lengthUnit = MeasureUnit.mm;
@@ -126,6 +128,11 @@ class DynamicCalculatorPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setWidthOpeningUnit(MeasureUnit u) {
+    widthOpeningUnit = u;
+    notifyListeners();
+  }
+
   void setDiameterUnit(MeasureUnit u) {
     diameterUnit = u;
     notifyListeners();
@@ -157,59 +164,80 @@ class DynamicCalculatorPageProvider with ChangeNotifier {
     totalWeight = 0;
     totalCost = 0;
 
-    final widthOpeningMm = openingUnit.toMm(double.tryParse(widthOpeningCtrl.text) ?? 0);
-    final diameterMm = diameterUnit.toMm(double.tryParse(diameterCtrl.text) ?? 0);
+    // Width direction
+    final widthOpeningMm = widthOpeningUnit.toMm(double.tryParse(widthOpeningCtrl.text) ?? 0);
+    final widthWireDiaMm = diameterUnit.toMm(double.tryParse(diameterCtrl.text) ?? 0);
+
+    // Length direction (reuse openingCtrl as length opening)
+    final lengthOpeningMm = openingUnit.toMm(double.tryParse(openingCtrl.text) ?? 0);
+    final lengthWireDiaMm = diameterUnit.toMm(double.tryParse(diameterCtrl.text) ?? 0);
+
     final widthMm = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0);
     final lengthMm = lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0);
 
     final wastage = double.tryParse(wastageCtrl.text) ?? 0;
     final costKg = double.tryParse(costCtrl.text) ?? 0;
 
-    if (widthOpeningMm <= 0 || diameterMm <= 0 || widthMm <= 0 || lengthMm <= 0) {
+    if (widthOpeningMm <= 0 || lengthOpeningMm <= 0 || widthWireDiaMm <= 0 || lengthWireDiaMm <= 0 || widthMm <= 0 || lengthMm <= 0) {
       notifyListeners();
       return;
     }
 
-    final pitch = widthOpeningMm + diameterMm;
+    /// Pitches
+    final pitchWidth = widthOpeningMm + widthWireDiaMm;
+    final pitchLength = lengthOpeningMm + lengthWireDiaMm;
 
-    final wiresAcrossWidth = widthMm / pitch;
-    final wiresAcrossLength = lengthMm / pitch;
+    /// Wire counts
+    final verticalWires = widthMm / pitchWidth;
+    final horizontalWires = lengthMm / pitchLength;
 
-    final totalWireLengthMm =
-        (wiresAcrossWidth * lengthMm) + (wiresAcrossLength * widthMm);
+    /// Cross-section areas
+    final areaWidthWire = pi * pow(widthWireDiaMm, 2) / 4;
+    final areaLengthWire = pi * pow(lengthWireDiaMm, 2) / 4;
 
-    final wireArea = pi * pow(diameterMm, 2) / 4;
+    /// Total lengths
+    final totalVerticalLength = verticalWires * lengthMm;
+    final totalHorizontalLength = horizontalWires * widthMm;
 
+    /// Volumes
+    final volumeVertical = totalVerticalLength * areaWidthWire;
+    final volumeHorizontal = totalHorizontalLength * areaLengthWire;
+
+    /// Density (kg/mm³)
     final density = _materialDensity(materialModel.id);
 
-    final baseWeight = totalWireLengthMm * wireArea * density;
+    final baseWeight = (volumeVertical + volumeHorizontal) * density;
 
     totalWeight = baseWeight * (1 + wastage / 100);
-
     totalCost = totalWeight * costKg;
 
     notifyListeners();
   }
+
   double _materialDensity(String id) {
     switch (id) {
-      case 'al': return 0.0000027;
-      case 'ss': return 0.0000079;
+      case 'al':
+        return 0.0000027;
+      case 'ss':
+        return 0.0000079;
       case 'gi':
       case 'ms':
-      case 'st': return 0.00000785;
-      case 'cu': return 0.00000896;
-      case 'br': return 0.0000084;
-      default: return 0.00000785;
+      case 'st':
+        return 0.00000785;
+      case 'cu':
+        return 0.00000896;
+      case 'br':
+        return 0.0000084;
+      default:
+        return 0.00000785;
     }
   }
+
   void calculate({required MeshItem meshItem}) {
-    switch (meshItem.title) {
-      case AppString.chainLink:
-        calculateChainLink();
-        break;
-      case AppString.weightPerRole:
-        calculateWeightPerRole();
-        break;
+    if (meshItem.title == AppString.chainLink) {
+      calculateChainLink();
+    } else if (meshItem.title == AppString.weightPerRole) {
+      calculateWeightPerRole();
     }
   }
 

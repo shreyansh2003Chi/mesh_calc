@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 
 class DynamicCalculatorPage extends StatefulWidget {
   final MeshItem meshItem;
-
   const DynamicCalculatorPage({super.key, required this.meshItem});
 
   @override
@@ -26,7 +25,6 @@ class _DynamicCalculatorPageState extends State<DynamicCalculatorPage> {
     });
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,6 +96,10 @@ class _DynamicCalculatorPageState extends State<DynamicCalculatorPage> {
                     const SizedBox(height: 20),
                     p.openingCtrlIsVisible
                         ? MeasurementField(controller: p.openingCtrl, label: AppString.openingOpgMm, unit: p.openingUnit, onUnitChanged: p.setOpeningUnit)
+                        : Container(),
+                    const SizedBox(height: 18),
+                    p.widthOpeningCtrlIsVisible
+                        ? MeasurementField(controller: p.widthOpeningCtrl, label: AppString.widthOpeningWopgMm, unit: p.widthOpeningUnit, onUnitChanged: p.setWidthOpeningUnit)
                         : Container(),
                     const SizedBox(height: 18),
                     p.diameterCtrlIsVisible

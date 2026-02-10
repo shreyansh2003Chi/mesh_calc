@@ -3,6 +3,7 @@ class AppString {
   static const String calculate = "Calculate";
   static const String totalCost = "Total Cost";
   static const String openingOpgMm = "Opening (OPG)";
+  static const String widthOpeningWopgMm = "Width Opening (WOPG)";
   static const String wireDiameterWdMm = 'Length (L)';
   static const String wDWireDiameter = 'WD – Wire Diameter';
   static const String wastage = 'Wastage';
