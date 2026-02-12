@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/result_dialog.dart';
-import 'package:measurements/providers/dynamic_calculator_page_provider.dart';
+import 'package:measurements/providers/weight_per_role_provider.dart';
 import 'package:measurements/utils/app_button.dart';
 import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
@@ -34,15 +34,12 @@ class _WeightPerRoleState extends State<WeightPerRole> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Consumer<DynamicCalculatorPageProvider>(
-          builder: (_, p, __) {
-            final isChainLink = widget.meshItem.title == AppString.chainLink;
-
+        child: Consumer<WeightPerRoleProvider>(
+          builder: (context, p, child) {
             return Column(
               children: [
                 Image.asset(widget.meshItem.image, height: 200),
                 const SizedBox(height: 12),
-
                 GestureDetector(
                   onTap: () => p.showMaterialBottomSheet(context, p),
                   child: Container(
@@ -59,7 +56,7 @@ class _WeightPerRoleState extends State<WeightPerRole> {
                         Expanded(
                           child: Text(
                             p.materialModel.name,
-                            style: TextStyle(color: p.materialModel.color, fontWeight: FontWeight.w500),
+                            style: TextStyle(color: p.materialModel.color, fontWeight: FontWeight.w600),
                           ),
                         ),
                         Icon(Icons.keyboard_arrow_down, color: p.materialModel.color),
@@ -70,59 +67,48 @@ class _WeightPerRoleState extends State<WeightPerRole> {
 
                 const SizedBox(height: 20),
 
-                MeasurementField(
-                  controller: p.widthOpeningCtrl,
-                  label: AppString.widthOpeningWopgMm,
-                  unit: p.widthOpeningUnit,
-                  onUnitChanged: p.setWidthOpeningUnit,
-                ),
+                MeasurementField(controller: p.widthOpeningCtrl, label: AppString.widthOpeningWopgMm, unit: p.widthOpeningUnit, onUnitChanged: p.setWidthOpeningUnit),
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.wireDiameterForWidth,
-                  label: AppString.wireDiameterWdMm,
-                  unit: p.wireDiameterForWidthUnit,
-                  onUnitChanged: p.setWireDiameterWidthUnit,
-                ),
+                MeasurementField(controller: p.wireDiameterWidthCtrl, label: AppString.wireDiameter, unit: p.widthDiameterUnit, onUnitChanged: p.setWidthDiameterUnit),
+
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.lengthOpeningCtrl,
-                  label: AppString.openingOpgMm,
-                  unit: p.lengthOpeningUnit,
-                  onUnitChanged: p.setWireLengthOpeningUnit,
-                ),
+                MeasurementField(controller: p.lengthOpeningCtrl, label: AppString.openingOpgMm, unit: p.lengthOpeningUnit, onUnitChanged: p.setLengthOpeningUnit),
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.wireDiameterForLength,
-                  label: AppString.wireDiameterWdMm,
-                  unit: p.wireDiameterForLengthUnit,
-                  onUnitChanged: p.setWireDiameterLengthUnit,
-                ),
+                MeasurementField(controller: p.wireDiameterLengthCtrl, label: AppString.wireDiameter, unit: p.lengthDiameterUnit, onUnitChanged: p.setLengthDiameterUnit),
+
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.widthCtrl,
-                  label: AppString.widthWmm,
-                  unit: p.widthUnit,
-                  onUnitChanged: p.setWidthUnit,
-                ),
+                MeasurementField(controller: p.widthCtrl, label: AppString.widthW, unit: p.widthUnit, onUnitChanged: p.setWidthUnit),
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.lengthCtrl,
-                  label: AppString.lengthLmm,
-                  unit: p.lengthUnit,
-                  onUnitChanged: p.setLengthUnit,
-                ),
+                MeasurementField(controller: p.lengthCtrl, label: AppString.lengthL, unit: p.lengthUnit, onUnitChanged: p.setLengthUnit),
 
                 const SizedBox(height: 18),
                 AppTextField().textField(p.wastageCtrl, "${AppString.wastage} (%)"),
                 const SizedBox(height: 18),
                 AppTextField().textField(p.costCtrl, AppString.costPerKg),
-
+                const SizedBox(height: 18),
+                Container(
+                  height: 54,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(color: AppColors().cEAEAEA, borderRadius: BorderRadius.circular(12)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      value: p.selectedCrimp ?? p.crimpList?[0],
+                      items: p.crimpList?.map((u) {
+                        return DropdownMenuItem<String>(value: u, child: Text(u));
+                      }).toList(),
+                      onChanged: (v) {
+                        if (v != null) {
+                          p.setSelectedCrimpPercentage(v);
+                        }
+                      },
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 24),
 
                 GestureDetector(
                   onTap: () {
-                    p.calculate(meshItem: widget.meshItem);
-
                     showDialog(
                       context: context,
                       builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),

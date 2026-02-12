@@ -6,17 +6,21 @@ import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/utils/app_string.dart';
 import 'package:measurements/utils/measurement_unit.dart';
 
-class DynamicCalculatorPageProvider with ChangeNotifier {
-  final openingCtrl = TextEditingController();
-  final diameterCtrl = TextEditingController();
+class WeightPerRoleProvider with ChangeNotifier {
   final widthCtrl = TextEditingController();
   final lengthCtrl = TextEditingController();
   final wastageCtrl = TextEditingController();
   final costCtrl = TextEditingController();
+
   final widthOpeningCtrl = TextEditingController();
-  final wireDiameterForWidth = TextEditingController();
-  final wireDiameterForLength = TextEditingController();
+  final wireDiameterWidthCtrl = TextEditingController();
+  final wireDiameterLengthCtrl = TextEditingController();
   final lengthOpeningCtrl = TextEditingController();
+
+  String? selectedCrimp;
+  double? selectedCrimpPercentage = 0;
+
+  List<String>? crimpList = ["NO CRIMP", "2% CRIMP", "5% CRIMP", "9% CRIMP"];
 
   final List<MaterialModel> materials = [
     MaterialModel(id: 'gi', name: 'Galvanized Iron (GI)', color: Color(0xFF90A4AE), kValue: 22.2),
@@ -62,26 +66,19 @@ class DynamicCalculatorPageProvider with ChangeNotifier {
   ];
 
   void init(MeshItem meshItem) {
-    openingCtrl.clear();
-    diameterCtrl.clear();
     widthOpeningCtrl.clear();
     lengthOpeningCtrl.clear();
-    wireDiameterForWidth.clear();
-    wireDiameterForLength.clear();
+    wireDiameterWidthCtrl.clear();
+    wireDiameterLengthCtrl.clear();
     widthCtrl.clear();
     lengthCtrl.clear();
     wastageCtrl.clear();
     costCtrl.clear();
 
-    openingUnit = MeasureUnit.mm;
-    diameterUnit = MeasureUnit.mm;
-
     widthOpeningUnit = MeasureUnit.mm;
+    widthDiameterUnit = MeasureUnit.mm;
     lengthOpeningUnit = MeasureUnit.mm;
-
-    wireDiameterForWidthUnit = MeasureUnit.mm;
-    wireDiameterForLengthUnit = MeasureUnit.mm;
-
+    lengthDiameterUnit = MeasureUnit.mm;
     widthUnit = MeasureUnit.mm;
     lengthUnit = MeasureUnit.mm;
 
@@ -93,20 +90,21 @@ class DynamicCalculatorPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  MeasureUnit openingUnit = MeasureUnit.mm;
   MeasureUnit widthOpeningUnit = MeasureUnit.mm;
   MeasureUnit lengthOpeningUnit = MeasureUnit.mm;
   MeasureUnit diameterUnit = MeasureUnit.mm;
+
   MeasureUnit widthUnit = MeasureUnit.mm;
   MeasureUnit lengthUnit = MeasureUnit.mm;
-  MeasureUnit wireDiameterForWidthUnit = MeasureUnit.mm;
-  MeasureUnit wireDiameterForLengthUnit = MeasureUnit.mm;
+
+  MeasureUnit widthDiameterUnit = MeasureUnit.mm;
+  MeasureUnit lengthDiameterUnit = MeasureUnit.mm;
 
   double totalWeight = 0;
   double totalCost = 0;
   late MaterialModel materialModel;
 
-  void showMaterialBottomSheet(BuildContext context, DynamicCalculatorPageProvider p) {
+  void showMaterialBottomSheet(BuildContext context, WeightPerRoleProvider p) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -117,7 +115,7 @@ class DynamicCalculatorPageProvider with ChangeNotifier {
     );
   }
 
-  DynamicCalculatorPageProvider() {
+  WeightPerRoleProvider() {
     materialModel = materials.first;
   }
 
@@ -133,33 +131,23 @@ class DynamicCalculatorPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setOpeningUnit(MeasureUnit u) {
-    openingUnit = u;
-    notifyListeners();
-  }
-
   void setWidthOpeningUnit(MeasureUnit u) {
     widthOpeningUnit = u;
     notifyListeners();
   }
 
-  void setWireDiameterWidthUnit(MeasureUnit u) {
-    wireDiameterForWidthUnit = u;
+  void setWidthDiameterUnit(MeasureUnit u) {
+    widthDiameterUnit = u;
     notifyListeners();
   }
 
-  void setWireLengthOpeningUnit(MeasureUnit u) {
+  void setLengthOpeningUnit(MeasureUnit u) {
     lengthOpeningUnit = u;
     notifyListeners();
   }
 
-  void setWireDiameterLengthUnit(MeasureUnit u) {
-    wireDiameterForLengthUnit = u;
-    notifyListeners();
-  }
-
-  void setDiameterUnit(MeasureUnit u) {
-    diameterUnit = u;
+  void setLengthDiameterUnit(MeasureUnit u) {
+    lengthDiameterUnit = u;
     notifyListeners();
   }
 
@@ -173,48 +161,12 @@ class DynamicCalculatorPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  void calculate({required MeshItem meshItem}) {
-    if (meshItem.title == AppString.chainLink) {
-      calculateChainLink();
-    } else if (meshItem.title == AppString.weightPerRole) {
-    }
-  }
-
-  void calculateChainLink() {
-    final openingMm = openingUnit.toMm(double.tryParse(openingCtrl.text) ?? 0);
-    final diameterMm = diameterUnit.toMm(double.tryParse(diameterCtrl.text) ?? 0);
-    final widthM = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0) / 1000;
-    final lengthM = lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0) / 1000;
-
-    final wastage = double.tryParse(wastageCtrl.text) ?? 0;
-    final costKg = double.tryParse(costCtrl.text) ?? 0;
-
-    if (openingMm <= 0 || diameterMm <= 0 || widthM <= 0 || lengthM <= 0) {
-      totalWeight = 0;
-      totalCost = 0;
-      notifyListeners();
-      return;
-    }
-
-    final area = widthM * lengthM;
-
-    final factor = (materialModel.kValue * pow(diameterMm, 2)) / (openingMm + diameterMm);
-
-    final netWeight = factor * area;
-    final totalWithWastage = netWeight * (1 + wastage / 100);
-
-    totalWeight = totalWithWastage;
-    totalCost = totalWeight * costKg;
-
-    notifyListeners();
+  void setSelectedCrimpPercentage(String? s) {
+    selectedCrimp = s;
   }
 
   @override
   void dispose() {
-    openingCtrl.dispose();
-    diameterCtrl.dispose();
     widthCtrl.dispose();
     lengthCtrl.dispose();
     wastageCtrl.dispose();

@@ -1,3 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-class MeshHomePageProvider with ChangeNotifier {}
+class MeshHomePageProvider with ChangeNotifier {
+
+}

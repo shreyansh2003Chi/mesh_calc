@@ -83,39 +83,19 @@ class ChainLinkScreen extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    MeasurementField(
-                      controller: p.openingCtrl,
-                      label: AppString.openingOpgMm,
-                      unit: p.openingUnit,
-                      onUnitChanged: p.setOpeningUnit,
-                    ),
+                    MeasurementField(controller: p.openingCtrl, label: AppString.openingOpgMm, unit: p.openingUnit, onUnitChanged: p.setOpeningUnit),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(
-                      controller: p.diameterCtrl,
-                      label: AppString.wDWireDiameter,
-                      unit: p.diameterUnit,
-                      onUnitChanged: p.setDiameterUnit,
-                    ),
+                    MeasurementField(controller: p.diameterCtrl, label: AppString.wireDiameter, unit: p.diameterUnit, onUnitChanged: p.setDiameterUnit),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(
-                      controller: p.widthCtrl,
-                      label: AppString.widthWmm,
-                      unit: p.widthUnit,
-                      onUnitChanged: p.setWidthUnit,
-                    ),
+                    MeasurementField(controller: p.widthCtrl, label: AppString.widthW, unit: p.widthUnit, onUnitChanged: p.setWidthUnit),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(
-                      controller: p.lengthCtrl,
-                      label: AppString.lengthLmm,
-                      unit: p.lengthUnit,
-                      onUnitChanged: p.setLengthUnit,
-                    ),
+                    MeasurementField(controller: p.lengthCtrl, label: AppString.lengthL, unit: p.lengthUnit, onUnitChanged: p.setLengthUnit),
 
                     const SizedBox(height: 18),
 
