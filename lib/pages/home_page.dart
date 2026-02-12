@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/dynamic_calculator_page.dart';
+import 'package:measurements/pages/home_screen.dart';
+import 'package:measurements/pages/weight_per_role.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_colors.dart';
+import 'package:measurements/utils/app_string.dart';
 
 class MeshHomePage extends StatelessWidget {
   MeshHomePage({super.key});
@@ -43,7 +46,11 @@ class MeshCard extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(20),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DynamicCalculatorPage(meshItem: item)));
+        if (item.title == AppString.chainLink) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ChainLinkScreen(item: item)));
+        } else if (item.title == AppString.wireDiameterWdMm) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => WeightPerRole(meshItem: item)));
+        }
       },
       child: Container(
         padding: const EdgeInsets.all(14),

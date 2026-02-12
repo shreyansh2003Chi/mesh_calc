@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:measurements/home_page.dart';
+import 'package:measurements/pages/home_page.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:measurements/providers/dynamic_calculator_page_provider.dart';
 import 'package:measurements/providers/home_page_provider.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/result_dialog.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:measurements/utils/app_assets.dart';
@@ -10,7 +11,9 @@ import 'package:measurements/utils/measurement_field.dart';
 import 'package:provider/provider.dart';
 
 class ChainLinkScreen extends StatelessWidget {
-  const ChainLinkScreen({super.key});
+  final MeshItem item;
+
+  const ChainLinkScreen({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
