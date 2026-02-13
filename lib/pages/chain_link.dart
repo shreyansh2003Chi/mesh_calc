@@ -11,10 +11,23 @@ import 'package:measurements/utils/app_text_field.dart';
 import 'package:measurements/utils/measurement_field.dart';
 import 'package:provider/provider.dart';
 
-class ChainLinkScreen extends StatelessWidget {
+class ChainLinkScreen extends StatefulWidget {
   final MeshItem item;
 
   const ChainLinkScreen({super.key, required this.item});
+
+  @override
+  State<ChainLinkScreen> createState() => _ChainLinkScreenState();
+}
+
+class _ChainLinkScreenState extends State<ChainLinkScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<ChainLinkProvider>(context, listen: false).clearControllers();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +41,12 @@ class ChainLinkScreen extends StatelessWidget {
           AppString.chainLinkCalculator,
           style: TextStyle(fontWeight: FontWeight.w600, color: AppColors().cFFFFFF),
         ),
+        iconTheme: IconThemeData(color: AppColors().cFFFFFF),
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
         padding: const EdgeInsets.all(16),
         child: Consumer<ChainLinkProvider>(
           builder: (context, p, child) {
@@ -97,39 +114,19 @@ class ChainLinkScreen extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    MeasurementField(
-                      controller: p.openingCtrl,
-                      label: AppString.openingOpgMm,
-                      unit: p.openingUnit,
-                      onUnitChanged: p.setOpeningUnit,
-                    ),
+                    MeasurementField(controller: p.openingCtrl, label: AppString.openingOpgMm, unit: p.openingUnit, onUnitChanged: p.setOpeningUnit),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(
-                      controller: p.diameterCtrl,
-                      label: AppString.wireDiameter,
-                      unit: p.diameterUnit,
-                      onUnitChanged: p.setDiameterUnit,
-                    ),
+                    MeasurementField(controller: p.diameterCtrl, label: AppString.wireDiameter, unit: p.diameterUnit, onUnitChanged: p.setDiameterUnit),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(
-                      controller: p.widthCtrl,
-                      label: AppString.widthW,
-                      unit: p.widthUnit,
-                      onUnitChanged: p.setWidthUnit,
-                    ),
+                    MeasurementField(controller: p.widthCtrl, label: AppString.widthW, unit: p.widthUnit, onUnitChanged: p.setWidthUnit),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(
-                      controller: p.lengthCtrl,
-                      label: AppString.lengthL,
-                      unit: p.lengthUnit,
-                      onUnitChanged: p.setLengthUnit,
-                    ),
+                    MeasurementField(controller: p.lengthCtrl, label: AppString.lengthL, unit: p.lengthUnit, onUnitChanged: p.setLengthUnit),
 
                     const SizedBox(height: 18),
 

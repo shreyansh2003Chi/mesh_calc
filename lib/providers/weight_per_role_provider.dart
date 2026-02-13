@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:measurements/models/material_model.dart';
 import 'package:measurements/utils/measurement_unit.dart';
@@ -7,11 +8,12 @@ class WeightPerRoleProvider with ChangeNotifier {
   final lengthCtrl = TextEditingController();
   final wastageCtrl = TextEditingController();
   final costCtrl = TextEditingController();
-
   final widthOpeningCtrl = TextEditingController();
   final wireDiameterWidthCtrl = TextEditingController();
   final wireDiameterLengthCtrl = TextEditingController();
   final lengthOpeningCtrl = TextEditingController();
+  double totalWeight = 0;
+  double totalCost = 0;
 
   String? selectedCrimp;
   double? selectedCrimpPercentage = 0;
@@ -21,16 +23,23 @@ class WeightPerRoleProvider with ChangeNotifier {
   MeasureUnit widthOpeningUnit = MeasureUnit.mm;
   MeasureUnit lengthOpeningUnit = MeasureUnit.mm;
   MeasureUnit diameterUnit = MeasureUnit.mm;
-
   MeasureUnit widthUnit = MeasureUnit.mm;
   MeasureUnit lengthUnit = MeasureUnit.mm;
-
   MeasureUnit widthDiameterUnit = MeasureUnit.mm;
   MeasureUnit lengthDiameterUnit = MeasureUnit.mm;
 
-  double totalWeight = 0;
-  double totalCost = 0;
-  MaterialModel selectedMaterial = MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 67);
+  MaterialModel selectedMaterial = MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), materialConstant: 67, density: 2700);
+
+  void clearController() {
+    widthCtrl.clear();
+    lengthCtrl.clear();
+    wastageCtrl.clear();
+    costCtrl.clear();
+    widthOpeningCtrl.clear();
+    wireDiameterWidthCtrl.clear();
+    wireDiameterLengthCtrl.clear();
+    lengthOpeningCtrl.clear();
+  }
 
   void setSelectedMaterial(MaterialModel m) {
     selectedMaterial = m;
@@ -73,42 +82,45 @@ class WeightPerRoleProvider with ChangeNotifier {
   }
 
   void calculate() {
-    final wOpg = widthOpeningUnit.toMm(double.tryParse(widthOpeningCtrl.text) ?? 0);
-    final wwd = widthDiameterUnit.toMm(double.tryParse(wireDiameterWidthCtrl.text) ?? 0);
-    final lOpg = lengthOpeningUnit.toMm(double.tryParse(lengthOpeningCtrl.text) ?? 0);
-    final lwd = lengthDiameterUnit.toMm(double.tryParse(wireDiameterLengthCtrl.text) ?? 0);
+    final wOpg = widthOpeningUnit.toMm(double.tryParse(widthOpeningCtrl.text) ?? 0) / 1000;
+    final wwd = widthDiameterUnit.toMm(double.tryParse(wireDiameterWidthCtrl.text) ?? 0) / 1000;
+    final lOpg = lengthOpeningUnit.toMm(double.tryParse(lengthOpeningCtrl.text) ?? 0) / 1000;
+    final lwd = lengthDiameterUnit.toMm(double.tryParse(wireDiameterLengthCtrl.text) ?? 0) / 1000;
+
     final widthM = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0) / 1000;
     final lengthM = lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0) / 1000;
+
     final wastage = double.tryParse(wastageCtrl.text) ?? 0;
     final costKg = double.tryParse(costCtrl.text) ?? 0;
 
-    double horizontalPitch = wOpg + wwd;
-    double verticalPitch = lOpg + lwd;
+    double pitch1 = wOpg + wwd;
+    double pitch2 = lOpg + lwd;
 
-    double numWiresAcrossWidth = widthM / horizontalPitch;
-    double numWiresAcrossLength = lengthM / verticalPitch;
+    if (pitch1 <= 0 || pitch2 <= 0 || widthM <= 0 || lengthM <= 0) {
+      totalWeight = 0;
+      totalCost = 0;
+      notifyListeners();
+      return;
+    }
 
-    double totalStraightLength = (numWiresAcrossWidth * lengthM) + (numWiresAcrossLength * widthM);
+    double numWiresWarp = widthM / pitch1;
+    double numWiresWeft = lengthM / pitch2;
 
-    // double area = (pi * pow(wd, 2)) / 4;
-    //double baseWeight = totalStraightLength * area * density;
+    double area1 = (pi * pow(wwd, 2)) / 4;
+    double totalLengthWarp = numWiresWarp * lengthM;
+    double volumeWarp = totalLengthWarp * area1;
 
-    // 5. Apply Crimp and Wastage
-    //double weightWithCrimp = baseWeight * (1 + ((selectedCrimp??0) / 100));
-    //double finalGrossWeight = weightWithCrimp * (1 + (wastage / 100));
+    double area2 = (pi * pow(lwd, 2)) / 4;
+    double totalLengthWeft = numWiresWeft * widthM;
+    double volumeWeft = totalLengthWeft * area2;
 
-    // 6. Calculate Total Cost
-    //double totalCost = finalGrossWeight * costKg;
-    totalWeight = 0;
-    totalCost = 0;
-  }
+    double totalBaseWeight = (volumeWarp + volumeWeft) * selectedMaterial.density;
 
-  @override
-  void dispose() {
-    widthCtrl.dispose();
-    lengthCtrl.dispose();
-    wastageCtrl.dispose();
-    costCtrl.dispose();
-    super.dispose();
+    double weightWithCrimp = totalBaseWeight * (1 + (2 / 100));
+
+    totalWeight = weightWithCrimp * (1 + (wastage / 100));
+    totalCost = totalWeight * costKg;
+
+    notifyListeners();
   }
 }

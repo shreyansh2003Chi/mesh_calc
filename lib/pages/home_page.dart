@@ -16,11 +16,15 @@ class MeshHomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F8FA),
       appBar: AppBar(
-        title: Text("Mesh Calc", style: TextStyle(color: AppColors().cFFFFFF)),
+        centerTitle: true,
         elevation: 0,
-        backgroundColor: AppColors().c7A3F3F,
+        backgroundColor: AppColors().c5B2C2C,
+        title: Text("Mesh Calc", style: TextStyle(color: AppColors().cFFFFFF)),
       ),
       body: ListView.separated(
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
         padding: const EdgeInsets.all(16),
         itemCount: items.length,
         separatorBuilder: (_, _) => const SizedBox(height: 12),

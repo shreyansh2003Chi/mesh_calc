@@ -2,50 +2,45 @@ import 'package:flutter/cupertino.dart';
 import 'package:measurements/models/material_model.dart';
 
 class MaterialSelectionBottomSheetProvider with ChangeNotifier {
-  MaterialModel material = MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 67);
+  MaterialModel material = MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), materialConstant: 67, density: 22);
   final List<MaterialModel> materials = [
-    MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 67),
-    MaterialModel(id: 'br', name: 'Brass', color: Color(0xFFB08D57), kValue: 0.021),
-    MaterialModel(id: 'bz', name: 'Bronze', color: Color(0xFF8D6E63), kValue: 0.022),
-    MaterialModel(id: 'ci', name: 'Cast Iron', color: Color(0xFF424242), kValue: 0.020),
-    MaterialModel(id: 'cu', name: 'Copper', color: Color(0xFFB87333), kValue: 0.023),
-    MaterialModel(id: 'gi', name: 'Galvanized Iron', color: Color(0xFF90A4AE), kValue: 22.2),
-    MaterialModel(id: 'ms', name: 'Mild Steel', color: Color(0xFF78909C), kValue: 0.020),
-    MaterialModel(id: 'ss', name: 'Stainless Steel', color: Color(0xFFB0BEC5), kValue: 0.017),
-    MaterialModel(id: 'st', name: 'Steel', color: Color(0xFF607D8B), kValue: 0.020),
-    MaterialModel(id: 'sp', name: 'Spring Steel', color: Color(0xFF455A64), kValue: 0.021),
-    MaterialModel(id: 'ni', name: 'Nickel', color: Color(0xFF757575), kValue: 0.022),
-    MaterialModel(id: 'zn', name: 'Zinc', color: Color(0xFFBDBDBD), kValue: 0.016),
-    MaterialModel(id: 'ti', name: 'Titanium', color: Color(0xFF9E9E9E), kValue: 0.0086),
-    MaterialModel(id: 'ag', name: 'Silver', color: Color(0xFFE0E0E0), kValue: 0.025),
-    MaterialModel(id: 'au', name: 'Gold', color: Color(0xFFFFD700), kValue: 0.030),
-    MaterialModel(id: 'pt', name: 'Platinum', color: Color(0xFFCFD8DC), kValue: 0.032),
-    MaterialModel(id: 'mo', name: 'Molybdenum', color: Color(0xFF6D4C41), kValue: 0.024),
-    MaterialModel(id: 'mn', name: 'Magnesium', color: Color(0xFFBDBDBD), kValue: 0.0040),
-    MaterialModel(id: 'cr', name: 'Chrome', color: Color(0xFF9E9E9E), kValue: 0.018),
-    MaterialModel(id: 'nc', name: 'Nichrome', color: Color(0xFF8D6E63), kValue: 0.019),
-    MaterialModel(id: 'mb', name: 'Monel', color: Color(0xFFBCAAA4), kValue: 0.022),
-    MaterialModel(id: 'pb', name: 'Phosphor Bronze', color: Color(0xFF795548), kValue: 0.022),
-    MaterialModel(id: 'hz', name: 'Hastelloy', color: Color(0xFF616161), kValue: 0.023),
-    MaterialModel(id: 'ic', name: 'Inconel', color: Color(0xFF5D4037), kValue: 0.024),
-
-    MaterialModel(id: 'ny', name: 'Nylon', color: Color(0xFF64B5F6), kValue: 0.0012),
-    MaterialModel(id: 'pe', name: 'Polyethylene', color: Color(0xFF81C784), kValue: 0.0009),
-    MaterialModel(id: 'pv', name: 'PVC', color: Color(0xFF4DB6AC), kValue: 0.0014),
-    MaterialModel(id: 'tf', name: 'Teflon', color: Color(0xFFB2EBF2), kValue: 0.0010),
-    MaterialModel(id: 'rs', name: 'Resin', color: Color(0xFFCE93D8), kValue: 0.0013),
-
-    MaterialModel(id: 'gl', name: 'Glass', color: Color(0xFF90CAF9), kValue: 0.0025),
-    MaterialModel(id: 'bk', name: 'Bakelite', color: Color(0xFF5D4037), kValue: 0.0018),
-    MaterialModel(id: 'tx', name: 'Textolite', color: Color(0xFF8BC34A), kValue: 0.0017),
-    MaterialModel(id: 'si', name: 'Silicon', color: Color(0xFFB0BEC5), kValue: 0.0023),
-    MaterialModel(id: 'cm', name: 'Cement', color: Color(0xFFBDBDBD), kValue: 0.0020),
+    MaterialModel(id: 'gi', name: 'Galvanized Iron (GI)', color: Color(0xFF9E9E9E), materialConstant: 22.2, density: 7850),
+    MaterialModel(id: 'mild_steel', name: 'Mild Steel', color: Color(0xFF616161), materialConstant: 22.2, density: 7850),
+    MaterialModel(id: 'steel', name: 'Steel', color: Color(0xFF757575), materialConstant: 22.2, density: 7850),
+    MaterialModel(id: 'spring_steel', name: 'Spring Steel', color: Color(0xFF5D5D5D), materialConstant: 22.15, density: 7850),
+    MaterialModel(id: 'ss304', name: 'Stainless Steel (304)', color: Color(0xFFB0BEC5), materialConstant: 22.5, density: 7930),
+    MaterialModel(id: 'aluminium', name: 'Aluminium', color: Color(0xFFCFD8DC), materialConstant: 7.6, density: 2700),
+    MaterialModel(id: 'copper', name: 'Copper', color: Color(0xFFB87333), materialConstant: 25.3, density: 8960),
+    MaterialModel(id: 'brass', name: 'Brass', color: Color(0xFFCD7F32), materialConstant: 24.1, density: 8500),
+    MaterialModel(id: 'bronze', name: 'Bronze', color: Color(0xFF8C6239), materialConstant: 25.0, density: 8800),
+    MaterialModel(id: 'phosphor_bronze', name: 'Phosphor Bronze', color: Color(0xFF8B5A2B), materialConstant: 25.1, density: 8850),
+    MaterialModel(id: 'cast_iron', name: 'Cast Iron', color: Color(0xFF4E4E4E), materialConstant: 20.4, density: 7200),
+    MaterialModel(id: 'nickel', name: 'Nickel', color: Color(0xFF8D8D8D), materialConstant: 25.2, density: 8900),
+    MaterialModel(id: 'zinc', name: 'Zinc', color: Color(0xFFBDBDBD), materialConstant: 20.2, density: 7140),
+    MaterialModel(id: 'titanium', name: 'Titanium', color: Color(0xFF9E9E9E), materialConstant: 12.8, density: 4500),
+    MaterialModel(id: 'silver', name: 'Silver', color: Color(0xFFC0C0C0), materialConstant: 29.7, density: 10490),
+    MaterialModel(id: 'gold_24k', name: 'Gold (24k)', color: Color(0xFFFFD700), materialConstant: 54.7, density: 19300),
+    MaterialModel(id: 'platinum', name: 'Platinum', color: Color(0xFFE5E4E2), materialConstant: 60.8, density: 21450),
+    MaterialModel(id: 'molybdenum', name: 'Molybdenum', color: Color(0xFF9C9C9C), materialConstant: 28.9, density: 10200),
+    MaterialModel(id: 'chrome', name: 'Chrome (Chromium)', color: Color(0xFFB0BEC5), materialConstant: 20.4, density: 7190),
+    MaterialModel(id: 'nichrome', name: 'Nichrome', color: Color(0xFF7E7E7E), materialConstant: 23.8, density: 8400),
+    MaterialModel(id: 'monel', name: 'Monel', color: Color(0xFF8C8C8C), materialConstant: 25.0, density: 8800),
+    MaterialModel(id: 'hastelloy', name: 'Hastelloy', color: Color(0xFF7A7A7A), materialConstant: 25.3, density: 8900),
+    MaterialModel(id: 'inconel', name: 'Inconel', color: Color(0xFF6E6E6E), materialConstant: 24.1, density: 8470),
+    MaterialModel(id: 'pvc', name: 'PVC', color: Color(0xFFE0E0E0), materialConstant: 3.9, density: 1380),
+    MaterialModel(id: 'nylon', name: 'Nylon', color: Color(0xFFDADADA), materialConstant: 3.2, density: 1150),
+    MaterialModel(id: 'hdpe', name: 'Polyethylene (HDPE)', color: Color(0xFFECEFF1), materialConstant: 2.7, density: 950),
+    MaterialModel(id: 'ptfe', name: 'Teflon (PTFE)', color: Color(0xFFFFFFFF), materialConstant: 6.2, density: 2200),
+    MaterialModel(id: 'epoxy_resin', name: 'Resin (Epoxy)', color: Color(0xFFE3F2FD), materialConstant: 3.4, density: 1200),
+    MaterialModel(id: 'glass', name: 'Glass', color: Color(0xFFBBDEFB), materialConstant: 7.1, density: 2500),
+    MaterialModel(id: 'bakelite', name: 'Bakelite', color: Color(0xFF795548), materialConstant: 3.7, density: 1300),
+    MaterialModel(id: 'textolite', name: 'Textolite', color: Color(0xFF6D4C41), materialConstant: 4.0, density: 1400),
+    MaterialModel(id: 'silicon', name: 'Silicon', color: Color(0xFF90A4AE), materialConstant: 6.6, density: 2330),
+    MaterialModel(id: 'cement', name: 'Cement (Set)', color: Color(0xFFBDBDBD), materialConstant: 8.5, density: 2400),
   ];
 
   void setSelectedMaterial(MaterialModel materialModel) {
     material = materialModel;
     notifyListeners();
   }
-
-
 }

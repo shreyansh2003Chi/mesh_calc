@@ -21,6 +21,13 @@ class WeightPerRole extends StatefulWidget {
 
 class _WeightPerRoleState extends State<WeightPerRole> {
   @override
+  void initState() {
+    Provider.of<WeightPerRoleProvider>(context, listen: false).clearController();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors().cf5F6FA,
@@ -34,6 +41,7 @@ class _WeightPerRoleState extends State<WeightPerRole> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         padding: const EdgeInsets.all(16),
         child: Consumer<WeightPerRoleProvider>(
           builder: (context, p, child) {
@@ -81,49 +89,19 @@ class _WeightPerRoleState extends State<WeightPerRole> {
 
                 const SizedBox(height: 20),
 
-                MeasurementField(
-                  controller: p.widthOpeningCtrl,
-                  label: AppString.widthOpeningWopgMm,
-                  unit: p.widthOpeningUnit,
-                  onUnitChanged: p.setWidthOpeningUnit,
-                ),
+                MeasurementField(controller: p.widthOpeningCtrl, label: AppString.widthOpeningWopgMm, unit: p.widthOpeningUnit, onUnitChanged: p.setWidthOpeningUnit),
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.wireDiameterWidthCtrl,
-                  label: AppString.wireDiameter,
-                  unit: p.widthDiameterUnit,
-                  onUnitChanged: p.setWidthDiameterUnit,
-                ),
+                MeasurementField(controller: p.wireDiameterWidthCtrl, label: AppString.wireDiameter, unit: p.widthDiameterUnit, onUnitChanged: p.setWidthDiameterUnit),
 
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.lengthOpeningCtrl,
-                  label: AppString.lengthOpeningLOPG,
-                  unit: p.lengthOpeningUnit,
-                  onUnitChanged: p.setLengthOpeningUnit,
-                ),
+                MeasurementField(controller: p.lengthOpeningCtrl, label: AppString.lengthOpeningLOPG, unit: p.lengthOpeningUnit, onUnitChanged: p.setLengthOpeningUnit),
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.wireDiameterLengthCtrl,
-                  label: AppString.wireDiameter,
-                  unit: p.lengthDiameterUnit,
-                  onUnitChanged: p.setLengthDiameterUnit,
-                ),
+                MeasurementField(controller: p.wireDiameterLengthCtrl, label: AppString.wireDiameter, unit: p.lengthDiameterUnit, onUnitChanged: p.setLengthDiameterUnit),
 
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.widthCtrl,
-                  label: AppString.widthW,
-                  unit: p.widthUnit,
-                  onUnitChanged: p.setWidthUnit,
-                ),
+                MeasurementField(controller: p.widthCtrl, label: AppString.widthW, unit: p.widthUnit, onUnitChanged: p.setWidthUnit),
                 const SizedBox(height: 16),
-                MeasurementField(
-                  controller: p.lengthCtrl,
-                  label: AppString.lengthL,
-                  unit: p.lengthUnit,
-                  onUnitChanged: p.setLengthUnit,
-                ),
+                MeasurementField(controller: p.lengthCtrl, label: AppString.lengthL, unit: p.lengthUnit, onUnitChanged: p.setLengthUnit),
 
                 const SizedBox(height: 18),
                 AppTextField().textField(p.wastageCtrl, "${AppString.wastage} (%)"),
@@ -153,8 +131,10 @@ class _WeightPerRoleState extends State<WeightPerRole> {
 
                 GestureDetector(
                   onTap: () {
+                    p.calculate();
                     showDialog(
                       context: context,
+                      barrierDismissible: true,
                       builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
                     );
                   },

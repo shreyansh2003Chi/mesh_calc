@@ -30,10 +30,7 @@ class _MaterialSelectionBottomSheetState extends State<MaterialSelectionBottomSh
               ),
 
               const SizedBox(height: 14),
-              Text(
-                "Select Material",
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
-              ),
+              Text("Select Material", style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
 
               const SizedBox(height: 10),
               const Divider(),
@@ -43,7 +40,6 @@ class _MaterialSelectionBottomSheetState extends State<MaterialSelectionBottomSh
                   itemBuilder: (context, index) {
                     final m = p.materials[index];
                     final isSelected = m.id == p.material.id;
-
                     return ListTile(
                       leading: Container(
                         decoration: BoxDecoration(color: m.color.withOpacity(0.2), shape: BoxShape.circle),

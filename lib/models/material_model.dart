@@ -4,9 +4,10 @@ class MaterialModel {
   final String id;
   final String name;
   final Color color;
-  final double kValue;
+  final double materialConstant;
+  final int density;
 
-  MaterialModel({required this.id, required this.name, required this.color, required this.kValue});
+  MaterialModel({required this.id, required this.name, required this.color, required this.materialConstant, required this.density});
 
   @override
   bool operator ==(Object other) {

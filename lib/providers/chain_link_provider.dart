@@ -19,7 +19,19 @@ class ChainLinkProvider extends ChangeNotifier {
   double totalWeight = 0;
   double totalCost = 0;
 
-  MaterialModel selectedMaterial = MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), kValue: 67);
+  MaterialModel selectedMaterial = MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), materialConstant: 67, density: 2700);
+
+  void clearControllers() {
+    openingCtrl.clear();
+    diameterCtrl.clear();
+    widthCtrl.clear();
+    lengthCtrl.clear();
+    wastageCtrl.clear();
+    costCtrl.clear();
+    totalWeight = 0;
+    totalCost = 0;
+    notifyListeners();
+  }
 
   void setSelectedMaterial(MaterialModel m) {
     selectedMaterial = m;
@@ -64,7 +76,7 @@ class ChainLinkProvider extends ChangeNotifier {
 
     final area = widthM * lengthM;
 
-    final factor = (selectedMaterial.kValue * pow(diameterMm, 2)) / (openingMm + diameterMm);
+    final factor = (selectedMaterial.materialConstant * pow(diameterMm, 2)) / (openingMm + diameterMm);
 
     final netWeight = factor * area;
     final totalWithWastage = netWeight * (1 + wastage / 100);
@@ -73,16 +85,5 @@ class ChainLinkProvider extends ChangeNotifier {
     totalCost = totalWeight * costKg;
 
     notifyListeners();
-  }
-
-  @override
-  void dispose() {
-    openingCtrl.dispose();
-    diameterCtrl.dispose();
-    widthCtrl.dispose();
-    lengthCtrl.dispose();
-    wastageCtrl.dispose();
-    costCtrl.dispose();
-    super.dispose();
   }
 }
