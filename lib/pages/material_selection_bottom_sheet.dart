@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:measurements/providers/chain_link_provider.dart';
+import 'package:measurements/providers/material_selection_bottom_sheet_provider.dart';
 import 'package:provider/provider.dart';
 
 class MaterialSelectionBottomSheet extends StatefulWidget {
@@ -12,7 +12,7 @@ class MaterialSelectionBottomSheet extends StatefulWidget {
 class _MaterialSelectionBottomSheetState extends State<MaterialSelectionBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ChainLinkProvider>(
+    return Consumer<MaterialSelectionBottomSheetProvider>(
       builder: (context, p, child) {
         return Container(
           height: MediaQuery.of(context).size.height * 0.4,
@@ -30,7 +30,6 @@ class _MaterialSelectionBottomSheetState extends State<MaterialSelectionBottomSh
               ),
 
               const SizedBox(height: 14),
-
               Text(
                 "Select Material",
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -43,7 +42,7 @@ class _MaterialSelectionBottomSheetState extends State<MaterialSelectionBottomSh
                   itemCount: p.materials.length,
                   itemBuilder: (context, index) {
                     final m = p.materials[index];
-                    final isSelected = m.id == p.materialModel.id;
+                    final isSelected = m.id == p.material.id;
 
                     return ListTile(
                       leading: Container(
@@ -63,8 +62,8 @@ class _MaterialSelectionBottomSheetState extends State<MaterialSelectionBottomSh
                       ),
                       trailing: isSelected ? Icon(Icons.check, color: m.color) : null,
                       onTap: () {
-                        p.onMaterialChange(m);
-                        Navigator.pop(context);
+                        p.setSelectedMaterial(m);
+                        Navigator.pop(context, m);
                       },
                     );
                   },

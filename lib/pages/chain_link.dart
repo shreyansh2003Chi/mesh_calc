@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
+import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/pages/result_dialog.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:measurements/utils/app_assets.dart';
@@ -50,13 +51,26 @@ class ChainLinkScreen extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () => p.showMaterialBottomSheet(context, p),
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (_) {
+                            return MaterialSelectionBottomSheet();
+                          },
+                        ).then((value) {
+                          if (value != null) {
+                            p.setSelectedMaterial(value);
+                          }
+                        });
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         decoration: BoxDecoration(
-                          color: p.materialModel.color.withOpacity(0.12),
+                          color: p.selectedMaterial.color.withOpacity(0.12),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: p.materialModel.color, width: 1.4),
+                          border: Border.all(color: p.selectedMaterial.color, width: 1.4),
                         ),
                         child: Row(
                           children: [
@@ -65,17 +79,17 @@ class ChainLinkScreen extends StatelessWidget {
                               child: Container(
                                 width: 14,
                                 height: 14,
-                                decoration: BoxDecoration(color: p.materialModel.color, shape: BoxShape.circle),
+                                decoration: BoxDecoration(color: p.selectedMaterial.color, shape: BoxShape.circle),
                               ),
                             ),
                             const SizedBox(width: 10),
                             Expanded(
                               child: Text(
-                                p.materialModel.name,
-                                style: TextStyle(color: p.materialModel.color, fontWeight: FontWeight.w500),
+                                p.selectedMaterial.name,
+                                style: TextStyle(color: p.selectedMaterial.color, fontWeight: FontWeight.w500),
                               ),
                             ),
-                            Icon(Icons.keyboard_arrow_down, color: p.materialModel.color),
+                            Icon(Icons.keyboard_arrow_down, color: p.selectedMaterial.color),
                           ],
                         ),
                       ),
@@ -83,19 +97,39 @@ class ChainLinkScreen extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    MeasurementField(controller: p.openingCtrl, label: AppString.openingOpgMm, unit: p.openingUnit, onUnitChanged: p.setOpeningUnit),
+                    MeasurementField(
+                      controller: p.openingCtrl,
+                      label: AppString.openingOpgMm,
+                      unit: p.openingUnit,
+                      onUnitChanged: p.setOpeningUnit,
+                    ),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(controller: p.diameterCtrl, label: AppString.wireDiameter, unit: p.diameterUnit, onUnitChanged: p.setDiameterUnit),
+                    MeasurementField(
+                      controller: p.diameterCtrl,
+                      label: AppString.wireDiameter,
+                      unit: p.diameterUnit,
+                      onUnitChanged: p.setDiameterUnit,
+                    ),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(controller: p.widthCtrl, label: AppString.widthW, unit: p.widthUnit, onUnitChanged: p.setWidthUnit),
+                    MeasurementField(
+                      controller: p.widthCtrl,
+                      label: AppString.widthW,
+                      unit: p.widthUnit,
+                      onUnitChanged: p.setWidthUnit,
+                    ),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(controller: p.lengthCtrl, label: AppString.lengthL, unit: p.lengthUnit, onUnitChanged: p.setLengthUnit),
+                    MeasurementField(
+                      controller: p.lengthCtrl,
+                      label: AppString.lengthL,
+                      unit: p.lengthUnit,
+                      onUnitChanged: p.setLengthUnit,
+                    ),
 
                     const SizedBox(height: 18),
 

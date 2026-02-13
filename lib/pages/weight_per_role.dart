@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
+import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/pages/result_dialog.dart';
 import 'package:measurements/providers/weight_per_role_provider.dart';
 import 'package:measurements/utils/app_button.dart';
@@ -41,25 +42,38 @@ class _WeightPerRoleState extends State<WeightPerRole> {
                 Image.asset(widget.meshItem.image, height: 200),
                 const SizedBox(height: 12),
                 GestureDetector(
-                  onTap: () => p.showMaterialBottomSheet(context, p),
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (_) {
+                        return MaterialSelectionBottomSheet();
+                      },
+                    ).then((value) {
+                      if (value != null) {
+                        p.setSelectedMaterial(value);
+                      }
+                    });
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: p.materialModel.color),
-                      color: p.materialModel.color.withOpacity(0.12),
+                      border: Border.all(color: p.selectedMaterial.color),
+                      color: p.selectedMaterial.color.withOpacity(0.12),
                     ),
                     child: Row(
                       children: [
-                        CircleAvatar(radius: 7, backgroundColor: p.materialModel.color),
+                        CircleAvatar(radius: 7, backgroundColor: p.selectedMaterial.color),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            p.materialModel.name,
-                            style: TextStyle(color: p.materialModel.color, fontWeight: FontWeight.w600),
+                            p.selectedMaterial.name,
+                            style: TextStyle(color: p.selectedMaterial.color, fontWeight: FontWeight.w600),
                           ),
                         ),
-                        Icon(Icons.keyboard_arrow_down, color: p.materialModel.color),
+                        Icon(Icons.keyboard_arrow_down, color: p.selectedMaterial.color),
                       ],
                     ),
                   ),
@@ -67,19 +81,49 @@ class _WeightPerRoleState extends State<WeightPerRole> {
 
                 const SizedBox(height: 20),
 
-                MeasurementField(controller: p.widthOpeningCtrl, label: AppString.widthOpeningWopgMm, unit: p.widthOpeningUnit, onUnitChanged: p.setWidthOpeningUnit),
+                MeasurementField(
+                  controller: p.widthOpeningCtrl,
+                  label: AppString.widthOpeningWopgMm,
+                  unit: p.widthOpeningUnit,
+                  onUnitChanged: p.setWidthOpeningUnit,
+                ),
                 const SizedBox(height: 16),
-                MeasurementField(controller: p.wireDiameterWidthCtrl, label: AppString.wireDiameter, unit: p.widthDiameterUnit, onUnitChanged: p.setWidthDiameterUnit),
+                MeasurementField(
+                  controller: p.wireDiameterWidthCtrl,
+                  label: AppString.wireDiameter,
+                  unit: p.widthDiameterUnit,
+                  onUnitChanged: p.setWidthDiameterUnit,
+                ),
 
                 const SizedBox(height: 16),
-                MeasurementField(controller: p.lengthOpeningCtrl, label: AppString.openingOpgMm, unit: p.lengthOpeningUnit, onUnitChanged: p.setLengthOpeningUnit),
+                MeasurementField(
+                  controller: p.lengthOpeningCtrl,
+                  label: AppString.lengthOpeningLOPG,
+                  unit: p.lengthOpeningUnit,
+                  onUnitChanged: p.setLengthOpeningUnit,
+                ),
                 const SizedBox(height: 16),
-                MeasurementField(controller: p.wireDiameterLengthCtrl, label: AppString.wireDiameter, unit: p.lengthDiameterUnit, onUnitChanged: p.setLengthDiameterUnit),
+                MeasurementField(
+                  controller: p.wireDiameterLengthCtrl,
+                  label: AppString.wireDiameter,
+                  unit: p.lengthDiameterUnit,
+                  onUnitChanged: p.setLengthDiameterUnit,
+                ),
 
                 const SizedBox(height: 16),
-                MeasurementField(controller: p.widthCtrl, label: AppString.widthW, unit: p.widthUnit, onUnitChanged: p.setWidthUnit),
+                MeasurementField(
+                  controller: p.widthCtrl,
+                  label: AppString.widthW,
+                  unit: p.widthUnit,
+                  onUnitChanged: p.setWidthUnit,
+                ),
                 const SizedBox(height: 16),
-                MeasurementField(controller: p.lengthCtrl, label: AppString.lengthL, unit: p.lengthUnit, onUnitChanged: p.setLengthUnit),
+                MeasurementField(
+                  controller: p.lengthCtrl,
+                  label: AppString.lengthL,
+                  unit: p.lengthUnit,
+                  onUnitChanged: p.setLengthUnit,
+                ),
 
                 const SizedBox(height: 18),
                 AppTextField().textField(p.wastageCtrl, "${AppString.wastage} (%)"),

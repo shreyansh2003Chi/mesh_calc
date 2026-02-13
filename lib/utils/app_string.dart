@@ -15,7 +15,7 @@ class AppString {
 
   static const String widthOpeningWOPG = 'Width Opening (WOPG)';
   static const String wireDiameter = 'Wire Diameter(WD)';
-  static const String lengthOpeningWOPG = 'Length Opening (LOPG)';
+  static const String lengthOpeningLOPG = 'Length Opening (LOPG)';
   static const String widthW = 'Width (W)';
   static const String lengthL = 'Length (L)';
   static const String selectCrimp = 'Select Crimp';
