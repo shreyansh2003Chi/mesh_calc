@@ -30,10 +30,10 @@ class _WeightPerRoleState extends State<WeightPerRole> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors().cf5F6FA,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: AppColors().c5B2C2C,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         iconTheme: IconThemeData(color: AppColors().cFFFFFF),
         title: Text(
           widget.meshItem.title,
@@ -136,7 +136,7 @@ class _WeightPerRoleState extends State<WeightPerRole> {
                         onTap: () {
                           p.clearController();
                         },
-                        child: AppButton().appButton(AppString.clear),
+                        child: AppButton().appButton(AppString.clear, context),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -150,7 +150,7 @@ class _WeightPerRoleState extends State<WeightPerRole> {
                             builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
                           );
                         },
-                        child: AppButton().appButton(AppString.calculate),
+                        child: AppButton().appButton(AppString.calculate, context),
                       ),
                     ),
                   ],

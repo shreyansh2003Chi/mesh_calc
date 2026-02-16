@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:measurements/pages/home_page.dart';
 import 'package:measurements/pages/splash_screen.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:measurements/providers/home_page_provider.dart';
 import 'package:measurements/providers/material_selection_bottom_sheet_provider.dart';
 import 'package:measurements/providers/weight_per_role_provider.dart';
+import 'package:measurements/utils/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -26,6 +26,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen(), theme: ThemeClass.lightTheme, darkTheme: ThemeClass.darkTheme, themeMode: ThemeMode.system);
   }
 }

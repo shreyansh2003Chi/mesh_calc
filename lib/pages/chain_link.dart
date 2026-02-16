@@ -32,11 +32,11 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors().cf5F6FA,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        backgroundColor: AppColors().c5B2C2C,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         title: Text(
           AppString.chainLinkCalculator,
           style: TextStyle(fontWeight: FontWeight.w600, color: AppColors().cFFFFFF),
@@ -147,7 +147,7 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
                       builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
                     );
                   },
-                  child: AppButton().appButton(AppString.calculate),
+                  child: AppButton().appButton(AppString.calculate,context),
                 ),
               ],
             );
