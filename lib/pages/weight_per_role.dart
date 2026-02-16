@@ -129,16 +129,31 @@ class _WeightPerRoleState extends State<WeightPerRole> {
                 ),
                 const SizedBox(height: 24),
 
-                GestureDetector(
-                  onTap: () {
-                    p.calculate();
-                    showDialog(
-                      context: context,
-                      barrierDismissible: true,
-                      builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
-                    );
-                  },
-                  child: AppButton().appButton(AppString.calculate),
+                Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          p.clearController();
+                        },
+                        child: AppButton().appButton(AppString.clear),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          p.calculate();
+                          showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
+                          );
+                        },
+                        child: AppButton().appButton(AppString.calculate),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             );

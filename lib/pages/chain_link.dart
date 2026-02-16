@@ -44,9 +44,7 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
         iconTheme: IconThemeData(color: AppColors().cFFFFFF),
       ),
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics(),
-        ),
+        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         padding: const EdgeInsets.all(16),
         child: Consumer<ChainLinkProvider>(
           builder: (context, p, child) {

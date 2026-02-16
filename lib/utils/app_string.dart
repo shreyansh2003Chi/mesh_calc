@@ -1,6 +1,7 @@
 class AppString {
   static const String totalWeight = "Total Weight";
   static const String calculate = "Calculate";
+  static const String clear = "Clear";
   static const String totalCost = "Total Cost";
   static const String openingOpgMm = "Opening (OPG)";
   static const String widthOpeningWopgMm = "Width Opening (WOPG)";
