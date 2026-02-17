@@ -13,7 +13,7 @@ class AppString {
   static const String chainLinkCalculator = 'Chain Link Calculator';
   static const String chainLink = 'Chain Link';
   static const String weightPerRole = 'Weight Per Role';
-
+  static const String vMiCalculator = 'VMI Calculator';
   static const String widthOpeningWOPG = 'Width Opening (WOPG)';
   static const String wireDiameter = 'Wire Diameter(WD)';
   static const String lengthOpeningLOPG = 'Length Opening (LOPG)';

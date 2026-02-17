@@ -66,18 +66,9 @@ class AppColors {
   Color cFDFBFB = Color(0xffFDFBFB);
   Color c2B1414 = Color(0xff2B1414);
 
-  // Primary Dark Blue (Main Logo Text Color)
-  static const Color c1F5F8B = Color(0xff1F5F8B);
-
-  // Secondary Blue (Gradient Mid Tone)
-  static const Color c2C6F9E = Color(0xff2C6F9E);
-
-  // Light Blue (Gradient Highlight)
-  static const Color c4C86B3 = Color(0xff4C86B3);
-
-  // Grey (Left Side of W Gradient)
-  static const Color c7A8793 = Color(0xff7A8793);
-
-  // Light Grey Accent
-  static const Color cB0B7BF = Color(0xffB0B7BF);
+  Color c1F5F8B = Color(0xff1F5F8B);
+  Color c2C6F9E = Color(0xff2C6F9E);
+  Color c4C86B3 = Color(0xff4C86B3);
+  Color c7A8793 = Color(0xff7A8793);
+  Color cB0B7BF = Color(0xffB0B7BF);
 }

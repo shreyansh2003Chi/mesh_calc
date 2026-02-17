@@ -32,11 +32,11 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: AppColors().cFFFFFF,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: AppColors().c1F5F8B,
         title: Text(
           AppString.chainLinkCalculator,
           style: TextStyle(fontWeight: FontWeight.w600, color: AppColors().cFFFFFF),
@@ -101,7 +101,7 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
                             Expanded(
                               child: Text(
                                 p.selectedMaterial.name,
-                                style: TextStyle(color: p.selectedMaterial.color, fontWeight: FontWeight.w500),
+                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: p.selectedMaterial.color, fontWeight: FontWeight.w500),
                               ),
                             ),
                             Icon(Icons.keyboard_arrow_down, color: p.selectedMaterial.color),
@@ -138,16 +138,31 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
 
                 const SizedBox(height: 20),
 
-                GestureDetector(
-                  onTap: () {
-                    p.calculate();
-                    showDialog(
-                      context: context,
-                      barrierDismissible: true,
-                      builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
-                    );
-                  },
-                  child: AppButton().appButton(AppString.calculate,context),
+                Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          p.clearControllers();
+                        },
+                        child: AppButton().outlinedButton(AppString.clear, context),
+                      ),
+                    ),
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          p.calculate();
+                          showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
+                          );
+                        },
+                        child: AppButton().appButton(AppString.calculate, context),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             );

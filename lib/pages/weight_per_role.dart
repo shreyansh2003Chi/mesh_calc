@@ -30,10 +30,10 @@ class _WeightPerRoleState extends State<WeightPerRole> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: AppColors().cFFFFFF,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: AppColors().c1F5F8B,
         iconTheme: IconThemeData(color: AppColors().cFFFFFF),
         title: Text(
           widget.meshItem.title,
@@ -78,7 +78,7 @@ class _WeightPerRoleState extends State<WeightPerRole> {
                         Expanded(
                           child: Text(
                             p.selectedMaterial.name,
-                            style: TextStyle(color: p.selectedMaterial.color, fontWeight: FontWeight.w600),
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: p.selectedMaterial.color, fontWeight: FontWeight.w500),
                           ),
                         ),
                         Icon(Icons.keyboard_arrow_down, color: p.selectedMaterial.color),
@@ -136,10 +136,10 @@ class _WeightPerRoleState extends State<WeightPerRole> {
                         onTap: () {
                           p.clearController();
                         },
-                        child: AppButton().appButton(AppString.clear, context),
+                        child: AppButton().outlinedButton(AppString.clear, context),
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {

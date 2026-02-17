@@ -14,12 +14,12 @@ class MeshHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: AppColors().cFFFFFF,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        title: Text("Mesh Calc", style: TextStyle(color: AppColors().cFFFFFF)),
+        backgroundColor: AppColors().c1F5F8B,
+        title: Text(AppString.vMiCalculator, style: TextStyle(color: AppColors().cFFFFFF)),
       ),
       body: ListView.separated(
         physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),

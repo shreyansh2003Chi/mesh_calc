@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:measurements/utils/app_colors.dart';
 
 class ThemeClass {
-  // ===== LIGHT THEME =====
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
@@ -57,25 +56,5 @@ class ThemeClass {
     bottomSheetTheme: BottomSheetThemeData(backgroundColor: AppColors().cFFFFFF),
 
     textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.blue, selectionColor: Colors.blue[200], selectionHandleColor: Colors.blue),
-  );
-
-  // ===== DARK THEME =====
-  static ThemeData darkTheme = ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.dark,
-
-    primaryColor: AppColors().c1F2836,
-    scaffoldBackgroundColor: const Color(0xff0F172A),
-
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xff1E293B),
-      iconTheme: IconThemeData(color: Colors.white),
-    ),
-
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(backgroundColor: Color(0xff1E293B)),
-
-    dialogTheme: const DialogThemeData(backgroundColor: Color(0xff1E293B)),
-
-    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Color(0xff1E293B)),
   );
 }
