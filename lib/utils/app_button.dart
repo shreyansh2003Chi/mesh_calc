@@ -7,7 +7,7 @@ class AppButton {
       width: double.infinity,
       decoration: BoxDecoration(color: AppColors().c1F5F8B, borderRadius: BorderRadius.all(Radius.circular(14))),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 14),
         child: Center(
           child: Text(
             label,
@@ -27,7 +27,7 @@ class AppButton {
         borderRadius: BorderRadius.all(Radius.circular(14)),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 12),
         child: Center(
           child: Text(
             label,
