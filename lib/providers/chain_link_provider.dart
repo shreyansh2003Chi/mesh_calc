@@ -58,7 +58,7 @@ class ChainLinkProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void calculate() {
+  Future<void> calculate() async {
     final openingMm = openingUnit.toMm(double.tryParse(openingCtrl.text) ?? 0);
     final diameterMm = diameterUnit.toMm(double.tryParse(diameterCtrl.text) ?? 0);
     final widthM = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0) / 1000;

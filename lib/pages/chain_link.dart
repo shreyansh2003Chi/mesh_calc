@@ -11,6 +11,8 @@ import 'package:measurements/utils/app_text_field.dart';
 import 'package:measurements/utils/measurement_field.dart';
 import 'package:provider/provider.dart';
 
+import 'show_result_bottom_sheet.dart';
+
 class ChainLinkScreen extends StatefulWidget {
   final MeshItem item;
 
@@ -152,12 +154,20 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          p.calculate();
-                          showDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
-                          );
+                          p.calculate().then((value) {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (_) => ShowResultBottomSheet(totalWeight: p.totalWeight, totalCost: p.totalCost),
+                            );
+                          });
+
+                          // showDialog(
+                          //   context: context,
+                          //   barrierDismissible: true,
+                          //   builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
+                          // );
                         },
                         child: AppButton().appButton(AppString.calculate, context),
                       ),
@@ -168,6 +178,21 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
             );
           },
         ),
+      ),
+    );
+  }
+
+  Widget _sheetTile(BuildContext context, {required String label, required String value, required IconData icon}) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(18)),
+      child: Row(
+        children: [
+          Icon(icon),
+          const SizedBox(width: 14),
+          Expanded(child: Text(label)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
+        ],
       ),
     );
   }

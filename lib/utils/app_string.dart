@@ -20,4 +20,5 @@ class AppString {
   static const String widthW = 'Width (W)';
   static const String lengthL = 'Length (L)';
   static const String selectCrimp = 'Select Crimp';
+  static const String ok = 'Ok';
 }
