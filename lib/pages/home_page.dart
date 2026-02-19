@@ -40,7 +40,7 @@ class _MeshHomePageState extends State<MeshHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F6FA),
+      backgroundColor: AppColors().cFaFaFa,
       body: Column(
         children: [
           _modernHeader(),
@@ -163,7 +163,7 @@ class _MeshHomePageState extends State<MeshHomePage> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 18, offset: const Offset(0, 10))],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 18, offset: const Offset(0, 10))],
         ),
         child: Row(
           children: [

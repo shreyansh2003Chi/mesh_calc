@@ -1,108 +1,83 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:measurements/utils/app_button.dart';
+import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
 
-class ChainLinkResultDialog extends StatelessWidget {
+class ResultDialog extends StatelessWidget {
   final double totalWeight;
   final double totalCost;
 
-  const ChainLinkResultDialog({
-    super.key,
-    required this.totalWeight,
-    required this.totalCost,
-  });
+  const ResultDialog({super.key, required this.totalWeight, required this.totalCost});
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 20),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: Container(
-            padding: const EdgeInsets.all(22),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.92),
-              borderRadius: BorderRadius.circular(24),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
-                  blurRadius: 20,
-                  spreadRadius: 5,
-                )
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-
-                /// HEADER
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    final width = MediaQuery.of(context).size.width;
+    final theme = Theme.of(context);
+    return PopScope(
+      canPop: false,
+      child: Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: width > 600 ? 420 : double.infinity),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surface.withOpacity(0.96),
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: [BoxShadow(blurRadius: 30, spreadRadius: 0, offset: const Offset(0, 12), color: Colors.black.withOpacity(0.12))],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
                       children: [
                         Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.blue.shade400,
-                                Colors.blue.shade600
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: const Icon(
-                            Icons.calculate_outlined,
-                            color: Colors.white,
-                          ),
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(color: theme.colorScheme.primary.withOpacity(0.12), borderRadius: BorderRadius.circular(12)),
+                          child: Icon(Icons.analytics_outlined, color: AppColors().c1F5F8B, size: 20),
                         ),
                         const SizedBox(width: 12),
-                        Text(
-                          "Calculation Result",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(fontWeight: FontWeight.w700),
+                        Expanded(
+                          child: Text("Calculation Result", style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500)),
                         ),
+                        IconButton(splashRadius: 20, icon: const Icon(Icons.close, size: 25), onPressed: () => Navigator.pop(context)),
                       ],
                     ),
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.close),
-                    )
+
+                    const SizedBox(height: 24),
+
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: theme.colorScheme.surfaceVariant.withOpacity(0.4)),
+                      child: Column(
+                        children: [
+                          _resultRow(context, AppString.totalWeight, "${totalWeight.toStringAsFixed(2)} kg"),
+                          const SizedBox(height: 18),
+                          Divider(height: 1, thickness: 0.6, color: Colors.grey.shade300),
+                          const SizedBox(height: 18),
+                          _resultRow(context, AppString.totalCost, "₹ ${totalCost.toStringAsFixed(2)}"),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 28),
+
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: SizedBox(width: double.infinity, height: 48, child: AppButton().appButton("Ok", context)),
+                    ),
                   ],
                 ),
-
-                const SizedBox(height: 25),
-
-                _resultTile(
-                  context,
-                  label: AppString.totalWeight,
-                  value: "${totalWeight.toStringAsFixed(2)} kg",
-                  icon: Icons.monitor_weight_outlined,
-                ),
-
-                const SizedBox(height: 14),
-
-                _resultTile(
-                  context,
-                  label: AppString.totalCost,
-                  value: "₹ ${totalCost.toStringAsFixed(2)}",
-                  icon: Icons.currency_rupee,
-                ),
-
-                const SizedBox(height: 28),
-
-                SizedBox(
-                  width: double.infinity,
-                  child: AppButton().appButton(AppString.ok, context),
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -110,37 +85,16 @@ class ChainLinkResultDialog extends StatelessWidget {
     );
   }
 
-  Widget _resultTile(
-      BuildContext context, {
-        required String label,
-        required String value,
-        required IconData icon,
-      }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.grey.shade700),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ),
-          Text(
-            value,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.w700),
-          ),
-        ],
-      ),
+  Widget _resultRow(BuildContext context, String label, String value) {
+    final theme = Theme.of(context);
+
+    return Row(
+      children: [
+        Expanded(
+          child: Text(label, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+        ),
+        Text(value, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+      ],
     );
   }
 }

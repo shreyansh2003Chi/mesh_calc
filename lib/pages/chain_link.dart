@@ -11,7 +11,6 @@ import 'package:measurements/utils/app_text_field.dart';
 import 'package:measurements/utils/measurement_field.dart';
 import 'package:provider/provider.dart';
 
-import 'show_result_bottom_sheet.dart';
 
 class ChainLinkScreen extends StatefulWidget {
   final MeshItem item;
@@ -34,7 +33,7 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors().cFFFFFF,
+      backgroundColor: AppColors().cFaFaFa,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
@@ -155,19 +154,12 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
                       child: GestureDetector(
                         onTap: () {
                           p.calculate().then((value) {
-                            showModalBottomSheet(
+                            showDialog(
                               context: context,
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              builder: (_) => ShowResultBottomSheet(totalWeight: p.totalWeight, totalCost: p.totalCost),
+                              barrierDismissible: true,
+                              builder: (_) => ResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
                             );
                           });
-
-                          // showDialog(
-                          //   context: context,
-                          //   barrierDismissible: true,
-                          //   builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
-                          // );
                         },
                         child: AppButton().appButton(AppString.calculate, context),
                       ),

@@ -77,7 +77,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - assets/chain_link.jpg
+    - assets/chain_link.png
     - assets/weight_per_role.png
     - assets/logo.png
 

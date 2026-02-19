@@ -30,7 +30,7 @@ class _WeightPerRoleState extends State<WeightPerRole> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors().cFFFFFF,
+      backgroundColor: AppColors().cFaFaFa,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColors().c1F5F8B,
@@ -147,7 +147,7 @@ class _WeightPerRoleState extends State<WeightPerRole> {
                           showDialog(
                             context: context,
                             barrierDismissible: true,
-                            builder: (_) => ChainLinkResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
+                            builder: (_) => ResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
                           );
                         },
                         child: AppButton().appButton(AppString.calculate, context),

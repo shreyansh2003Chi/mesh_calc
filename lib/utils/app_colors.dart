@@ -71,4 +71,5 @@ class AppColors {
   Color c4C86B3 = Color(0xff4C86B3);
   Color c7A8793 = Color(0xff7A8793);
   Color cB0B7BF = Color(0xffB0B7BF);
+  Color cFaFaFa = Color(0xffFAFAFA);
 }
