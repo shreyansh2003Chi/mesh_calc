@@ -14,9 +14,7 @@ import 'package:provider/provider.dart';
 
 class ChainLinkScreen extends StatefulWidget {
   final MeshItem item;
-
   const ChainLinkScreen({super.key, required this.item});
-
   @override
   State<ChainLinkScreen> createState() => _ChainLinkScreenState();
 }
