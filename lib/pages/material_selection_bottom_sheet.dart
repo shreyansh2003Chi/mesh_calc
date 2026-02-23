@@ -93,7 +93,6 @@ class _MaterialSelectionBottomSheetState extends State<MaterialSelectionBottomSh
                     itemBuilder: (context, index) {
                       final m = p.filteredMaterials[index];
                       final isSelected = m.id == p.material.id;
-
                       return ListTile(
                         leading: Container(
                           decoration: BoxDecoration(color: m.color.withOpacity(0.2), shape: BoxShape.circle),
