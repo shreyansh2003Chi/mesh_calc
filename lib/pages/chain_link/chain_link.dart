@@ -11,10 +11,11 @@ import 'package:measurements/utils/app_text_field.dart';
 import 'package:measurements/utils/measurement_field.dart';
 import 'package:provider/provider.dart';
 
-
 class ChainLinkScreen extends StatefulWidget {
   final MeshItem item;
+
   const ChainLinkScreen({super.key, required this.item});
+
   @override
   State<ChainLinkScreen> createState() => _ChainLinkScreenState();
 }
@@ -168,21 +169,6 @@ class _ChainLinkScreenState extends State<ChainLinkScreen> {
             );
           },
         ),
-      ),
-    );
-  }
-
-  Widget _sheetTile(BuildContext context, {required String label, required String value, required IconData icon}) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(18)),
-      child: Row(
-        children: [
-          Icon(icon),
-          const SizedBox(width: 14),
-          Expanded(child: Text(label)),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ],
       ),
     );
   }

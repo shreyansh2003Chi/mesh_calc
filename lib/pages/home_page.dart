@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:measurements/pages/chain_link.dart';
-import 'package:measurements/pages/weight_per_role.dart';
+import 'package:measurements/pages/chain_link/chain_link.dart';
+import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
 import 'package:measurements/providers/home_page_provider.dart';
 import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
@@ -145,17 +145,13 @@ class _MeshHomePageState extends State<MeshHomePage> {
                             return InkWell(
                               borderRadius: BorderRadius.circular(24),
                               onTap: () {
-                                if (item.title == AppString.chainLink) {
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => ChainLinkScreen(item: item)));
-                                } else if (item.title == AppString.weightPerRole) {
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRole(meshItem: item)));
-                                }
+                                pr.pageChange(item, context);
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(18),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(24),
-                                  color:  AppColors().cFaFaFa,
+                                  color: AppColors().cFaFaFa,
                                   boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 18, offset: const Offset(0, 10))],
                                 ),
                                 child: Row(
@@ -186,11 +182,7 @@ class _MeshHomePageState extends State<MeshHomePage> {
                             return InkWell(
                               borderRadius: BorderRadius.circular(24),
                               onTap: () {
-                                if (item.title == AppString.chainLink) {
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => ChainLinkScreen(item: item)));
-                                } else if (item.title == AppString.weightPerRole) {
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRole(meshItem: item)));
-                                }
+                                pr.pageChange(item, context);
                               },
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 200),
@@ -198,7 +190,7 @@ class _MeshHomePageState extends State<MeshHomePage> {
                                 padding: const EdgeInsets.all(18),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(24),
-                                  color:  AppColors().cFaFaFa,
+                                  color: AppColors().cFaFaFa,
                                   boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 20, offset: const Offset(0, 12))],
                                 ),
                                 child: Column(

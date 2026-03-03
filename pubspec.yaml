@@ -80,6 +80,8 @@ flutter:
     - assets/chain_link.png
     - assets/weight_per_role.png
     - assets/logo.png
+    - assets/expanded_metal.png
+    - assets/expanded_metal_core.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

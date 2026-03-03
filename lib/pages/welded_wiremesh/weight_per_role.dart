@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/pages/result_dialog.dart';
-import 'package:measurements/providers/weight_per_role_provider.dart';
+import 'package:measurements/providers/welded_wire_mesh_provider.dart';
 import 'package:measurements/utils/app_button.dart';
 import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
@@ -22,7 +22,7 @@ class WeightPerRole extends StatefulWidget {
 class _WeightPerRoleState extends State<WeightPerRole> {
   @override
   void initState() {
-    Provider.of<WeightPerRoleProvider>(context, listen: false).clearController();
+    Provider.of<WeldedWireMeshProvider>(context, listen: false).clearController();
 
     super.initState();
   }
@@ -43,7 +43,7 @@ class _WeightPerRoleState extends State<WeightPerRole> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         padding: const EdgeInsets.all(16),
-        child: Consumer<WeightPerRoleProvider>(
+        child: Consumer<WeldedWireMeshProvider>(
           builder: (context, p, child) {
             return Column(
               children: [

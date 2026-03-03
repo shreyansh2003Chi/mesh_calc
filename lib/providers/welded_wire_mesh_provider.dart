@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:measurements/models/material_model.dart';
 import 'package:measurements/utils/measurement_unit.dart';
 
-class WeightPerRoleProvider with ChangeNotifier {
+class WeldedWireMeshProvider with ChangeNotifier {
   final widthCtrl = TextEditingController();
   final lengthCtrl = TextEditingController();
   final wastageCtrl = TextEditingController();

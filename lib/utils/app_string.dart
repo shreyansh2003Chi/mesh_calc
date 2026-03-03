@@ -11,6 +11,7 @@ class AppString {
   static const String chainLinkFenceParameters = 'Chain Link Fence Parameters';
   static const String material = 'Material';
   static const String chainLinkCalculator = 'Chain Link Calculator';
+  static const String expandedMetal = 'Expanded Metal';
   static const String chainLink = 'Chain Link';
   static const String weightPerRole = 'Weight Per Role';
   static const String vMiCalculator = 'VMI Calculator';
@@ -21,4 +22,9 @@ class AppString {
   static const String lengthL = 'Length (L)';
   static const String selectCrimp = 'Select Crimp';
   static const String ok = 'Ok';
+  static const String shortWayDiagonal = 'Short Way Diagonal (SWD)';
+  static const String longWayDiagonal = 'Long Way Diagonal (LWD)';
+  static const String strand = 'Strand(S)';
+  static const String thickness = 'Thickness(T)';
+
 }
