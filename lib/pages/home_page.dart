@@ -50,14 +50,21 @@ class _MeshHomePageState extends State<MeshHomePage> {
                           children: [
                             const Text(
                               AppString.vMiCalculator,
-                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Colors.white, letterSpacing: 0.8),
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                                letterSpacing: 0.8,
+                              ),
                             ),
                             IconButton(
                               color: AppColors().cFFFFFF,
                               onPressed: () {
                                 pr.changeView();
                               },
-                              icon: pr.isGridView ? Icon(Icons.format_list_bulleted_outlined) : Icon(Icons.grid_view_rounded),
+                              icon: pr.isGridView
+                                  ? Icon(Icons.format_list_bulleted_outlined)
+                                  : Icon(Icons.grid_view_rounded),
                             ),
                           ],
                         ),
@@ -67,7 +74,13 @@ class _MeshHomePageState extends State<MeshHomePage> {
                           duration: const Duration(milliseconds: 250),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: 20, offset: const Offset(0, 10))],
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.15),
+                                blurRadius: 20,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
@@ -108,7 +121,10 @@ class _MeshHomePageState extends State<MeshHomePage> {
                                         },
                                         child: Container(
                                           padding: const EdgeInsets.all(6),
-                                          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.25)),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.white.withOpacity(0.25),
+                                          ),
                                           child: const Icon(Icons.close, size: 16, color: Colors.white),
                                         ),
                                       ),
@@ -131,7 +147,10 @@ class _MeshHomePageState extends State<MeshHomePage> {
                   transitionBuilder: (child, animation) {
                     return FadeTransition(
                       opacity: animation,
-                      child: ScaleTransition(scale: Tween<double>(begin: 0.95, end: 1).animate(animation), child: child),
+                      child: ScaleTransition(
+                        scale: Tween<double>(begin: 0.95, end: 1).animate(animation),
+                        child: child,
+                      ),
                     );
                   },
                   child: pr.isGridView == false
@@ -152,7 +171,13 @@ class _MeshHomePageState extends State<MeshHomePage> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(24),
                                   color: AppColors().cFaFaFa,
-                                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 18, offset: const Offset(0, 10))],
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.02),
+                                      blurRadius: 18,
+                                      offset: const Offset(0, 10),
+                                    ),
+                                  ],
                                 ),
                                 child: Row(
                                   children: [
@@ -162,7 +187,10 @@ class _MeshHomePageState extends State<MeshHomePage> {
                                     ),
                                     const SizedBox(width: 18),
                                     Expanded(
-                                      child: Text(item.title, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600)),
+                                      child: Text(
+                                        item.title,
+                                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                                      ),
                                     ),
                                     const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.grey),
                                   ],
@@ -175,7 +203,12 @@ class _MeshHomePageState extends State<MeshHomePage> {
                           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
                           itemCount: pr.filteredItems.length,
-                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 220, crossAxisSpacing: 18, mainAxisSpacing: 18, childAspectRatio: 0.85),
+                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 220,
+                            crossAxisSpacing: 18,
+                            mainAxisSpacing: 18,
+                            childAspectRatio: 0.85,
+                          ),
                           itemBuilder: (context, index) {
                             final item = pr.filteredItems[index];
 
@@ -191,7 +224,13 @@ class _MeshHomePageState extends State<MeshHomePage> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(24),
                                   color: AppColors().cFaFaFa,
-                                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 20, offset: const Offset(0, 12))],
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 20,
+                                      offset: const Offset(0, 12),
+                                    ),
+                                  ],
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,

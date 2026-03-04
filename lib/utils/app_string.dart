@@ -26,5 +26,6 @@ class AppString {
   static const String longWayDiagonal = 'Long Way Diagonal (LWD)';
   static const String strand = 'Strand(S)';
   static const String thickness = 'Thickness(T)';
+  static const String hexagonalWiremesh = 'Hexagonal Wiremesh';
 
 }

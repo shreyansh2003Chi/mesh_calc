@@ -82,6 +82,8 @@ flutter:
     - assets/logo.png
     - assets/expanded_metal.png
     - assets/expanded_metal_core.png
+    - assets/hexagonal_wiremesh.png
+    - assets/hexagonal_wiremesh_core.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

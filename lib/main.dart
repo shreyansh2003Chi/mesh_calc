@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:measurements/pages/splash_screen.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:measurements/providers/expanded_metal_provider/expanded_metal_provider.dart';
+import 'package:measurements/providers/hexagonal_wiremesh_provider/hexagonal_wiremesh_provider.dart';
 import 'package:measurements/providers/home_page_provider.dart';
 import 'package:measurements/providers/material_selection_bottom_sheet_provider.dart';
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
@@ -16,6 +17,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => WeldedWireMeshProvider()),
         ChangeNotifierProvider(create: (_) => MaterialSelectionBottomSheetProvider()),
         ChangeNotifierProvider(create: (_) => ExpandedMetalProvider()),
+        ChangeNotifierProvider(create: (_) => HexagonalWiremeshProvider()),
       ],
       child: const MyApp(),
     ),

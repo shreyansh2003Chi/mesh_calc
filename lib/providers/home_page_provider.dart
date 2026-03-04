@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/chain_link/chain_link.dart';
 import 'package:measurements/pages/expanded_metal/expanded_metal.dart';
+import 'package:measurements/pages/hexagonal_wiremesh/hexagonal_wiremesh.dart';
 import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
@@ -13,6 +14,7 @@ class HomePageProvider with ChangeNotifier {
     MeshItem(title: AppString.weightPerRole, image: AppAssets.weightPerRole),
     MeshItem(title: AppString.chainLink, image: AppAssets.chainLink),
     MeshItem(title: AppString.expandedMetal, image: AppAssets.expandedMetal),
+    MeshItem(title: AppString.hexagonalWiremesh, image: AppAssets.hexagonalWiremesh),
   ];
   List<MeshItem> filteredItems = [];
 
@@ -58,6 +60,9 @@ class HomePageProvider with ChangeNotifier {
         break;
       case AppString.expandedMetal:
         Navigator.push(context, MaterialPageRoute(builder: (_) => ExpandedMetal(item: meshItem)));
+        break;
+      case AppString.hexagonalWiremesh:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => HexagonalWiremesh(item: meshItem)));
         break;
     }
   }
