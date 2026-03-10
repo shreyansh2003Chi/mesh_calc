@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/pages/result_dialog.dart';
-import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:measurements/providers/expanded_metal_provider/expanded_metal_provider.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_button.dart';

@@ -13,6 +13,8 @@ import 'package:measurements/utils/app_text_field.dart';
 import 'package:measurements/utils/measurement_field.dart';
 import 'package:provider/provider.dart';
 
+import '../pitch_selection_bottom_sheet.dart';
+
 class HexagonalWiremesh extends StatefulWidget {
   final MeshItem item;
 
@@ -46,7 +48,7 @@ class _HexagonalWiremeshState extends State<HexagonalWiremesh> {
         iconTheme: IconThemeData(color: AppColors().cFFFFFF),
       ),
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16),
         child: Consumer<HexagonalWiremeshProvider>(
           builder: (context, p, child) {
@@ -117,6 +119,45 @@ class _HexagonalWiremeshState extends State<HexagonalWiremesh> {
 
                     const SizedBox(height: 20),
 
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (_) {
+                            return PitchSelectionBottomSheet();
+                          },
+                        ).then((value) {
+                          if (value != null) {
+                            p.setPitch(value);
+                          }
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.12),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.grey, width: 1.4),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.straighten),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                p.selectedPitch == null ? "Select Pitch" : "${p.selectedPitch} mm",
+                                style: const TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            const Icon(Icons.keyboard_arrow_down),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+
                     MeasurementField(
                       controller: p.wireDiameterController,
                       label: AppString.thickness,
@@ -130,6 +171,7 @@ class _HexagonalWiremeshState extends State<HexagonalWiremesh> {
                       unit: p.widthUnit,
                       onUnitChanged: p.setWidthUnit,
                     ),
+
                     const SizedBox(height: 18),
                     MeasurementField(
                       controller: p.lengthController,
@@ -137,6 +179,8 @@ class _HexagonalWiremeshState extends State<HexagonalWiremesh> {
                       unit: p.lengthUnit,
                       onUnitChanged: p.setLengthUnit,
                     ),
+                    const SizedBox(height: 18),
+                    AppTextField().textField(p.wastageController, AppString.wastage),
                     const SizedBox(height: 18),
                     AppTextField().textField(p.costPerKgController, AppString.costPerKg),
                   ],
@@ -175,21 +219,6 @@ class _HexagonalWiremeshState extends State<HexagonalWiremesh> {
             );
           },
         ),
-      ),
-    );
-  }
-
-  Widget _sheetTile(BuildContext context, {required String label, required String value, required IconData icon}) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(18)),
-      child: Row(
-        children: [
-          Icon(icon),
-          const SizedBox(width: 14),
-          Expanded(child: Text(label)),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ],
       ),
     );
   }
