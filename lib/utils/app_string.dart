@@ -27,5 +27,9 @@ class AppString {
   static const String strand = 'Strand(S)';
   static const String thickness = 'Thickness(T)';
   static const String hexagonalWiremesh = 'Hexagonal Wiremesh';
-
+  static const String perforatedSheet = 'Perforated Sheet';
+  static const String openAreaCalculation = 'Open Area (%) Calculation';
+  static const String weightPerRoll = 'Weight Per Roll';
+  static const String weightPerOd = 'Weight Per Od';
+  static const String weightPerOdLessId = 'Weight Per Od Less Id';
 }

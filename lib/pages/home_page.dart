@@ -16,14 +16,6 @@ class MeshHomePage extends StatefulWidget {
 
 class _MeshHomePageState extends State<MeshHomePage> {
   @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<HomePageProvider>(context, listen: false).init();
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Consumer<HomePageProvider>(
       builder: (BuildContext context, pr, Widget? child) {
@@ -35,16 +27,15 @@ class _MeshHomePageState extends State<MeshHomePage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: AppColors().c1F5F8B,
-                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(0)),
                 ),
                 child: SafeArea(
                   bottom: false,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 28),
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const SizedBox(width: 4),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -67,72 +58,6 @@ class _MeshHomePageState extends State<MeshHomePage> {
                                   : Icon(Icons.grid_view_rounded),
                             ),
                           ],
-                        ),
-
-                        const SizedBox(height: 22),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 250),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.15),
-                                blurRadius: 20,
-                                offset: const Offset(0, 10),
-                              ),
-                            ],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
-                              child: Container(
-                                height: 52,
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.20),
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: Colors.white.withOpacity(0.35)),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.search, color: Colors.white, size: 22),
-                                    const SizedBox(width: 12),
-                                    Expanded(
-                                      child: TextField(
-                                        controller: pr.searchController,
-                                        onChanged: (value) {
-                                          pr.filter(value);
-                                        },
-                                        cursorColor: Colors.white,
-                                        style: const TextStyle(color: Colors.white, fontSize: 15),
-                                        decoration: const InputDecoration(
-                                          hintText: "Search calculators...",
-                                          hintStyle: TextStyle(color: Colors.white70),
-                                          border: InputBorder.none,
-                                          isDense: true,
-                                        ),
-                                      ),
-                                    ),
-                                    if (pr.searchController.text.isNotEmpty)
-                                      GestureDetector(
-                                        onTap: () {
-                                          pr.clearFilter();
-                                        },
-                                        child: Container(
-                                          padding: const EdgeInsets.all(6),
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.white.withOpacity(0.25),
-                                          ),
-                                          child: const Icon(Icons.close, size: 16, color: Colors.white),
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
                         ),
                       ],
                     ),
@@ -157,10 +82,10 @@ class _MeshHomePageState extends State<MeshHomePage> {
                       ? ListView.separated(
                           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-                          itemCount: pr.filteredItems.length,
+                          itemCount: pr.allItems.length,
                           separatorBuilder: (_, _) => const SizedBox(height: 20),
                           itemBuilder: (context, index) {
-                            final item = pr.filteredItems[index];
+                            final item = pr.allItems[index];
                             return InkWell(
                               borderRadius: BorderRadius.circular(24),
                               onTap: () {
@@ -202,7 +127,7 @@ class _MeshHomePageState extends State<MeshHomePage> {
                       : GridView.builder(
                           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-                          itemCount: pr.filteredItems.length,
+                          itemCount: pr.allItems.length,
                           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 220,
                             crossAxisSpacing: 18,
@@ -210,7 +135,7 @@ class _MeshHomePageState extends State<MeshHomePage> {
                             childAspectRatio: 0.85,
                           ),
                           itemBuilder: (context, index) {
-                            final item = pr.filteredItems[index];
+                            final item = pr.allItems[index];
 
                             return InkWell(
                               borderRadius: BorderRadius.circular(24),

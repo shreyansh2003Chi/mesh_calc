@@ -5,4 +5,6 @@ class AppAssets {
   static const String expandedMetalCore = "assets/expanded_metal_core.png";
   static const String hexagonalWiremesh = "assets/hexagonal_wiremesh.png";
   static const String hexagonalWiremeshCore = "assets/hexagonal_wiremesh_core.jpeg";
+  static const String perforatedSheet = "assets/perforatedSheet.png";
+  static const String openAreaCalculation = "assets/openAreaCalculation.png";
 }
