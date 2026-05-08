@@ -32,4 +32,22 @@ class AppString {
   static const String weightPerRoll = 'Weight Per Roll';
   static const String weightPerOd = 'Weight Per Od';
   static const String weightPerOdLessId = 'Weight Per Od Less Id';
+
+  // Open Area Calculation
+
+  static const String capsuleCenterToCenterHole = 'Capsule Center To Center Hole';
+  static const String capsuleStaggeredTriangularHole = 'Capsule Staggered Triangular Hole';
+  static const String hexagonalStaggeredTriangularHole = 'Hexagonal Staggered Triangular Hole';
+  static const String rectangularCenterToCenterHole = 'Rectangular Center To Center Hole';
+  static const String rectangularStaggeredTriangularHole = 'Rectangular Staggered Triangular Hole';
+  static const String round45StaggeredTriangularHole = 'Round 45° Staggered Triangular Hole';
+  static const String round60StaggeredTriangularHole = 'Round 60° Staggered Triangular Hole';
+  static const String round90CenterToCenterHole = 'Round 90° Center To Center Hole';
+  static const String squareCenterToCenterHole = 'Square Center To Center Hole';
+  static const String squareStaggeredTriangularHole = 'Square Staggered Triangular Hole';
+
+  static const String widthHole = 'Width Hole (WH)';
+  static const String lengthHole = 'Length Hole (LH)';
+  static const String widthPitch = 'Width Pitch (WP)';
+  static const String lengthPitch = 'Length Pitch (LP)';
 }

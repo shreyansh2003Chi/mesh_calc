@@ -86,6 +86,20 @@ flutter:
     - assets/hexagonal_wiremesh_core.jpeg
     - assets/perforatedSheet.png
     - assets/openAreaCalculation.png
+    - assets/capsule_center_to_center_hole.jpeg
+    - assets/capsule_center_to_center_hole.jpeg
+    - assets/capsule_staggered_triangular_hole.jpeg
+    - assets/hexagonal_staggered_triangular_hole.jpeg
+    - assets/rectangular_center_to_center_hole.jpeg
+    - assets/rectangular_staggered_triangular_hole.jpeg
+    - assets/round_45_staggered_triangular_hole.jpeg
+    - assets/round_60_staggered_triangular_hole.jpeg
+    - assets/round_90_center_to_center_hole.jpeg
+    - assets/square_center_to_center_hole.jpeg
+    - assets/square_staggered_triangular_hole.jpeg
+    - assets/weight_per_roll.png
+    - assets/weight_per_od.png
+    - assets/weight_per_od_less_id.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

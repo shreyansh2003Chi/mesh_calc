@@ -9,6 +9,8 @@ import 'package:measurements/providers/perforated_sheet_provider/perforated_shee
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/perforated_sheet_provider/open_area_calculation_provider/open_area_calculation_provider.dart';
+
 void main() {
   runApp(
     MultiProvider(
@@ -20,6 +22,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ExpandedMetalProvider()),
         ChangeNotifierProvider(create: (_) => HexagonalWiremeshProvider()),
         ChangeNotifierProvider(create: (_) => PerforatedSheetProvider()),
+        ChangeNotifierProvider(create: (_) => OpenAreaCalculationProvider()),
       ],
       child: const MyApp(),
     ),

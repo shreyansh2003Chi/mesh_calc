@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:measurements/providers/perforated_sheet_provider/perforated_sheet_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/open_area_calculation_provider.dart';
 import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
 import 'package:provider/provider.dart';
 
-class PerforatedSheet extends StatefulWidget {
-  const PerforatedSheet({super.key});
+class OpenAreaCalculation extends StatefulWidget {
+  const OpenAreaCalculation({super.key});
 
   @override
-  State<PerforatedSheet> createState() => _PerforatedSheetState();
+  State<OpenAreaCalculation> createState() => _OpenAreaCalculationState();
 }
-
-class _PerforatedSheetState extends State<PerforatedSheet> {
+class _OpenAreaCalculationState extends State<OpenAreaCalculation> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<PerforatedSheetProvider>(
+    return Consumer<OpenAreaCalculationProvider>(
       builder: (BuildContext context, pr, Widget? child) {
         return Scaffold(
           backgroundColor: AppColors().cFaFaFa,
