@@ -50,4 +50,7 @@ class AppString {
   static const String lengthHole = 'Length Hole (LH)';
   static const String widthPitch = 'Width Pitch (WP)';
   static const String lengthPitch = 'Length Pitch (LP)';
+  static const String pitch = 'Pitch (P)';
+  static const String hexagonalHole = 'Hexagonal Hole (HH)';
+  static const String holeDiameter = 'Hole Diameter (HD)';
 }

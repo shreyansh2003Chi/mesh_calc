@@ -3,6 +3,12 @@ import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/chain_link/chain_link.dart';
 import 'package:measurements/pages/expanded_metal/expanded_metal.dart';
 import 'package:measurements/pages/hexagonal_wiremesh/hexagonal_wiremesh.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/capsule_center_to_center_hall.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/capsule_staggered_triangular_hole.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/hexagonal_staggered_triangular_hole.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/rectangular_center_to_center_hole.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/rectangular_staggered_triangular_hole.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/round_45_staggered_triangular_hole.dart';
 import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
@@ -50,71 +56,25 @@ class OpenAreaCalculationProvider with ChangeNotifier {
     }
   }
 
-  Widget dynamicWidget() {
-    return Column(
-      children: [
-        Column(
-          children: [
-            Image.asset(AppAssets.capsuleCenterToCenterHole, height: 200, fit: BoxFit.contain),
-            const SizedBox(height: 12),
-            const Text(
-              AppString.capsuleCenterToCenterHole,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black87),
-            ),
-            const SizedBox(height: 15),
-            MeasurementField(
-              controller: widthHoleController,
-              label: AppString.openingOpgMm,
-              unit: widthHoleUnitController,
-              onUnitChanged: (value) => setUnit(value, AppString.widthHole),
-            ),
-            const SizedBox(height: 18),
-
-            MeasurementField(
-              controller: lengthHoleController,
-              label: AppString.openingOpgMm,
-              unit: lengthHoleUnitController,
-              onUnitChanged: (value) => setUnit(value, AppString.lengthHole),
-            ),
-            const SizedBox(height: 18),
-
-            MeasurementField(
-              controller: widthPitchController,
-              label: AppString.openingOpgMm,
-              unit: widthPitchUnitController,
-              onUnitChanged: (value) => setUnit(value, AppString.widthPitch),
-            ),
-            const SizedBox(height: 18),
-
-            MeasurementField(
-              controller: lengthPitchController,
-              label: AppString.openingOpgMm,
-              unit: lengthPitchUnitController,
-              onUnitChanged: (value) => setUnit(value, AppString.lengthPitch),
-            ),
-            const SizedBox(height: 18),
-          ],
-        ),
-      ],
-    );
-  }
-
   void pageChange(MeshItem meshItem, BuildContext context) {
     switch (meshItem.title) {
-      case AppString.chainLink:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => ChainLinkScreen(item: meshItem)));
-        break;
-      case AppString.weightPerRole:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRole(meshItem: meshItem)));
-        break;
-      case AppString.expandedMetal:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => ExpandedMetal(item: meshItem)));
-        break;
-      case AppString.hexagonalWiremesh:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => HexagonalWiremesh(item: meshItem)));
-        break;
-
       case AppString.capsuleCenterToCenterHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => CapsuleCenterToCenterHall(item: meshItem)));
+        break;
+      case AppString.capsuleStaggeredTriangularHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => CapsuleStaggeredTriangularHole(item: meshItem)));
+        break;
+      case AppString.hexagonalStaggeredTriangularHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => HexagonalStaggeredTriangularHole(item: meshItem)));
+        break;
+      case AppString.rectangularCenterToCenterHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => RectangularCenterToCenterHole(item: meshItem)));
+        break;
+      case AppString.rectangularStaggeredTriangularHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => RectangularStaggeredTriangularHole(item: meshItem)));
+        break;
+      case AppString.round45StaggeredTriangularHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => Round45StaggeredTriangularHole(item: meshItem)));
         break;
     }
   }

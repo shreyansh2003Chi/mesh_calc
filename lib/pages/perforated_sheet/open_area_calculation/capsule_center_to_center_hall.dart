@@ -3,6 +3,7 @@ import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/pages/result_dialog.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/capsule_center_to_center_hole_provider.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_button.dart';
 import 'package:measurements/utils/app_colors.dart';
@@ -23,9 +24,8 @@ class CapsuleCenterToCenterHall extends StatefulWidget {
 class _CapsuleCenterToCenterHallState extends State<CapsuleCenterToCenterHall> {
   @override
   void initState() {
-    print("clicked");
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<ChainLinkProvider>(context, listen: false).clearControllers();
+      Provider.of<CapsuleCenterToCenterHoleProvider>(context, listen: false).clearControllers();
     });
     super.initState();
   }
@@ -39,15 +39,15 @@ class _CapsuleCenterToCenterHallState extends State<CapsuleCenterToCenterHall> {
         elevation: 0,
         backgroundColor: AppColors().c1F5F8B,
         title: Text(
-          AppString.chainLinkCalculator,
+          AppString.capsuleCenterToCenterHole,
           style: TextStyle(fontWeight: FontWeight.w600, color: AppColors().cFFFFFF),
         ),
         iconTheme: IconThemeData(color: AppColors().cFFFFFF),
       ),
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16),
-        child: Consumer<ChainLinkProvider>(
+        child: Consumer<CapsuleCenterToCenterHoleProvider>(
           builder: (context, p, child) {
             return Column(
               children: [
@@ -67,44 +67,39 @@ class _CapsuleCenterToCenterHallState extends State<CapsuleCenterToCenterHall> {
                 Column(
                   children: [
                     const SizedBox(height: 20),
-
                     MeasurementField(
-                      controller: p.openingCtrl,
-                      label: AppString.openingOpgMm,
-                      unit: p.openingUnit,
-                      onUnitChanged: p.setOpeningUnit,
+                      controller: p.widthHoleCtrl,
+                      label: AppString.widthHole,
+                      unit: p.widthHoleUnit,
+                      onUnitChanged: p.setWidthHoleUnit,
                     ),
 
                     const SizedBox(height: 18),
 
                     MeasurementField(
-                      controller: p.diameterCtrl,
-                      label: AppString.wireDiameter,
-                      unit: p.diameterUnit,
-                      onUnitChanged: p.setDiameterUnit,
+                      controller: p.lengthHoleCtrl,
+                      label: AppString.lengthHole,
+                      unit: p.lengthHoleUnit,
+                      onUnitChanged: p.setLengthHoleUnit,
                     ),
 
                     const SizedBox(height: 18),
 
                     MeasurementField(
-                      controller: p.widthCtrl,
-                      label: AppString.widthW,
-                      unit: p.widthUnit,
-                      onUnitChanged: p.setWidthUnit,
+                      controller: p.widthPitchCtrl,
+                      label: AppString.widthPitch,
+                      unit: p.widthPitchUnit,
+                      onUnitChanged: p.setWidthPitchUnit,
                     ),
 
                     const SizedBox(height: 18),
 
                     MeasurementField(
-                      controller: p.lengthCtrl,
+                      controller: p.lengthPitchCtrl,
                       label: AppString.lengthL,
-                      unit: p.lengthUnit,
-                      onUnitChanged: p.setLengthUnit,
+                      unit: p.lengthPitchUnit,
+                      onUnitChanged: p.setLengthPitchUnit,
                     ),
-
-                    const SizedBox(height: 18),
-
-                    AppTextField().textField(p.wastageCtrl, "${AppString.wastage} (%)"),
 
                     const SizedBox(height: 18),
 
