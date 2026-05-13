@@ -11,6 +11,10 @@ import 'package:measurements/providers/perforated_sheet_provider/open_area_calcu
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/rectangular_center_to_center_hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/rectangular_staggered_triangular_hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/round_45_staggered_triangular_hole_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/round_60_staggered_triangular_hole_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/round_90_center_to_center_hole_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/square_center_to_center__hole_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/square_staggered_triangular_hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/perforated_sheet_provider.dart';
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +39,10 @@ void main() {
         ChangeNotifierProvider(create: (_) => RectangularCenterToCenterHoleProvider()),
         ChangeNotifierProvider(create: (_) => RectangularStaggeredTriangularHoleProvider()),
         ChangeNotifierProvider(create: (_) => Round45StaggeredTriangularHoleProvider()),
+        ChangeNotifierProvider(create: (_) => Round60StaggeredTriangularHoleProvider()),
+        ChangeNotifierProvider(create: (_) => Round90CenterToCenterHoleProvider()),
+        ChangeNotifierProvider(create: (_) => SquareCenterToCenterHoleProvider()),
+        ChangeNotifierProvider(create: (_) => SquareStaggeredTriangularHoleProvider()),
       ],
       child: const MyApp(),
     ),

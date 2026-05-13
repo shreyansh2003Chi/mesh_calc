@@ -53,4 +53,5 @@ class AppString {
   static const String pitch = 'Pitch (P)';
   static const String hexagonalHole = 'Hexagonal Hole (HH)';
   static const String holeDiameter = 'Hole Diameter (HD)';
+  static const String squareHole = 'Square Hole (SH)';
 }

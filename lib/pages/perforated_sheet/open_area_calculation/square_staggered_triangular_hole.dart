@@ -8,7 +8,8 @@ import 'package:measurements/providers/perforated_sheet_provider/open_area_calcu
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/hexagonal_staggered_triangular_hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/round_45_staggered_triangular_hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/round_60_staggered_triangular_hole_provider.dart';
-import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/round_90_center_to_center_hole_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/square_center_to_center__hole_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/square_staggered_triangular_hole_provider.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_button.dart';
 import 'package:measurements/utils/app_colors.dart';
@@ -17,20 +18,20 @@ import 'package:measurements/utils/app_text_field.dart';
 import 'package:measurements/utils/measurement_field.dart';
 import 'package:provider/provider.dart';
 
-class Round90CenterToCenterHole extends StatefulWidget {
+class SquareStaggeredTriangularHole extends StatefulWidget {
   final MeshItem item;
 
-  const Round90CenterToCenterHole({super.key, required this.item});
+  const SquareStaggeredTriangularHole({super.key, required this.item});
 
   @override
-  State<Round90CenterToCenterHole> createState() => _Round90CenterToCenterHoleState();
+  State<SquareStaggeredTriangularHole> createState() => _SquareStaggeredTriangularHoleState();
 }
 
-class _Round90CenterToCenterHoleState extends State<Round90CenterToCenterHole> {
+class _SquareStaggeredTriangularHoleState extends State<SquareStaggeredTriangularHole> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<Round90CenterToCenterHoleProvider>(context, listen: false).clearControllers();
+      Provider.of<SquareStaggeredTriangularHoleProvider>(context, listen: false).clearControllers();
     });
     super.initState();
   }
@@ -44,7 +45,7 @@ class _Round90CenterToCenterHoleState extends State<Round90CenterToCenterHole> {
         elevation: 0,
         backgroundColor: AppColors().c1F5F8B,
         title: Text(
-          AppString.round90CenterToCenterHole,
+          AppString.squareStaggeredTriangularHole,
           style: TextStyle(fontWeight: FontWeight.w600, color: AppColors().cFFFFFF),
         ),
         iconTheme: IconThemeData(color: AppColors().cFFFFFF),
@@ -52,16 +53,16 @@ class _Round90CenterToCenterHoleState extends State<Round90CenterToCenterHole> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16),
-        child: Consumer<Round90CenterToCenterHoleProvider>(
+        child: Consumer<SquareStaggeredTriangularHoleProvider>(
           builder: (context, p, child) {
             return Column(
               children: [
                 Column(
                   children: [
-                    Image.asset(AppAssets.round90CenterToCenterHole, height: 200, fit: BoxFit.contain),
+                    Image.asset(AppAssets.squareStaggeredTriangularHole, height: 200, fit: BoxFit.contain),
                     const SizedBox(height: 12),
                     const Text(
-                      AppString.round90CenterToCenterHole,
+                      AppString.squareStaggeredTriangularHole,
                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black87),
                     ),
                   ],
@@ -73,10 +74,10 @@ class _Round90CenterToCenterHoleState extends State<Round90CenterToCenterHole> {
                   children: [
                     const SizedBox(height: 20),
                     MeasurementField(
-                      controller: p.holeDiameterCtrl,
-                      label: AppString.holeDiameter,
-                      unit: p.holeDiameterUnit,
-                      onUnitChanged: p.setHoleDiameterUnit,
+                      controller: p.squareHoleCtrl,
+                      label: AppString.squareHole,
+                      unit: p.squareHoleUnit,
+                      onUnitChanged: p.setSquareHoleUnit,
                     ),
 
                     const SizedBox(height: 18),

@@ -9,6 +9,10 @@ import 'package:measurements/pages/perforated_sheet/open_area_calculation/hexago
 import 'package:measurements/pages/perforated_sheet/open_area_calculation/rectangular_center_to_center_hole.dart';
 import 'package:measurements/pages/perforated_sheet/open_area_calculation/rectangular_staggered_triangular_hole.dart';
 import 'package:measurements/pages/perforated_sheet/open_area_calculation/round_45_staggered_triangular_hole.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/round_60_staggered_triangular_hole.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/round_90_center_to_center_hole.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/square_center_to_center__hole.dart';
+import 'package:measurements/pages/perforated_sheet/open_area_calculation/square_staggered_triangular_hole.dart';
 import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
@@ -75,6 +79,18 @@ class OpenAreaCalculationProvider with ChangeNotifier {
         break;
       case AppString.round45StaggeredTriangularHole:
         Navigator.push(context, MaterialPageRoute(builder: (_) => Round45StaggeredTriangularHole(item: meshItem)));
+        break;
+      case AppString.round60StaggeredTriangularHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => Round60StaggeredTriangularHole(item: meshItem)));
+        break;
+      case AppString.round90CenterToCenterHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => Round90CenterToCenterHole(item: meshItem)));
+        break;
+      case AppString.squareCenterToCenterHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => SquareCenterToCenterHole(item: meshItem)));
+        break;
+      case AppString.squareStaggeredTriangularHole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => SquareStaggeredTriangularHole(item: meshItem)));
         break;
     }
   }
