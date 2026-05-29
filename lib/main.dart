@@ -17,6 +17,8 @@ import 'package:measurements/providers/perforated_sheet_provider/open_area_calcu
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/square_staggered_triangular_hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/perforated_sheet_provider.dart';
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
+import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_provider.dart';
+import 'package:measurements/providers/wire_mesh/wire_mesh_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/perforated_sheet_provider/open_area_calculation_provider/open_area_calculation_provider.dart';
@@ -43,6 +45,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => Round90CenterToCenterHoleProvider()),
         ChangeNotifierProvider(create: (_) => SquareCenterToCenterHoleProvider()),
         ChangeNotifierProvider(create: (_) => SquareStaggeredTriangularHoleProvider()),
+        ChangeNotifierProvider(create: (_) => WireMeshProvider()),
+        ChangeNotifierProvider(create: (_) => DutchWovenWireMeshProvider()),
       ],
       child: const MyApp(),
     ),

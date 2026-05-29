@@ -32,6 +32,9 @@ class AppString {
   static const String weightPerRoll = 'Weight Per Roll';
   static const String weightPerOd = 'Weight Per Od';
   static const String weightPerOdLessId = 'Weight Per Od Less Id';
+  static const String wireMesh = 'Wire Mesh';
+  static const String dutchWovenWireMesh = 'Dutch Woven Wire Mesh';
+
 
   // Open Area Calculation
 

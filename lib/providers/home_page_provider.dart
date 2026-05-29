@@ -4,6 +4,7 @@ import 'package:measurements/pages/chain_link/chain_link.dart';
 import 'package:measurements/pages/expanded_metal/expanded_metal.dart';
 import 'package:measurements/pages/hexagonal_wiremesh/hexagonal_wiremesh.dart';
 import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
+import 'package:measurements/pages/wire_mesh/wire_mesh.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
 
@@ -18,6 +19,8 @@ class HomePageProvider with ChangeNotifier {
     MeshItem(title: AppString.expandedMetal, image: AppAssets.expandedMetal),
     MeshItem(title: AppString.hexagonalWiremesh, image: AppAssets.hexagonalWiremesh),
     MeshItem(title: AppString.perforatedSheet, image: AppAssets.perforatedSheet),
+    MeshItem(title: AppString.wireMesh, image: AppAssets.wireMesh2),
+
   ];
 
 
@@ -47,6 +50,9 @@ class HomePageProvider with ChangeNotifier {
         break;
         case AppString.perforatedSheet:
         Navigator.push(context, MaterialPageRoute(builder: (_) => PerforatedSheet()));
+        break;
+    case AppString.wireMesh:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WireMesh()));
         break;
     }
   }

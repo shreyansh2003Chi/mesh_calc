@@ -7,6 +7,8 @@ class AppAssets {
   static const String hexagonalWiremeshCore = "assets/hexagonal_wiremesh_core.jpeg";
   static const String perforatedSheet = "assets/perforatedSheet.png";
   static const String openAreaCalculation = "assets/openAreaCalculation.png";
+  static const String dutchWovenWireMesh = "assets/dutch_woven_wire_mesh_2.png";
+  static const String wireMesh2 = "assets/wire_mesh_2.png";
 
   static const String capsuleCenterToCenterHole = "assets/capsule_center_to_center_hole.jpeg";
   static const String capsuleStaggeredTriangularHole = "assets/capsule_staggered_triangular_hole.jpeg";
@@ -22,4 +24,8 @@ class AppAssets {
   static const String weightPerRoll = "assets/weight_per_roll.png";
   static const String weightPerOd = "assets/weight_per_od.png";
   static const String weightPerOdLessId = "assets/weight_per_od_less_id.png";
+
+  static const String weightPerRoll2 = "assets/weight_per_role2.png";
+  static const String weightPerOd2= "assets/weight_per_od_2.png";
+  static const String weightPerOdLessId2 = "assets/weight_per_od_less_id_2.png";
 }

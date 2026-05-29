@@ -100,6 +100,11 @@ flutter:
     - assets/weight_per_roll.png
     - assets/weight_per_od.png
     - assets/weight_per_od_less_id.png
+    - assets/wire_mesh_2.png
+    - assets/dutch_woven_wire_mesh_2.png
+    - assets/weight_per_od_less_id_2.png
+    - assets/weight_per_od_2.png
+    - assets/weight_per_role2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
