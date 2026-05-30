@@ -57,4 +57,6 @@ class AppString {
   static const String hexagonalHole = 'Hexagonal Hole (HH)';
   static const String holeDiameter = 'Hole Diameter (HD)';
   static const String squareHole = 'Square Hole (SH)';
+  static const String widthMesh = 'Width Mesh (WM)';
+  static const String lengthMesh = 'Length Mesh (LM)';
 }

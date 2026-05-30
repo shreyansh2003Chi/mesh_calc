@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/perforated_sheet/open_area_calculation/open_area_calculation.dart';
+import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
+import 'package:measurements/pages/wire_mesh/dutch_woven_wire_mesh/weight_per_od.dart';
+import 'package:measurements/pages/wire_mesh/dutch_woven_wire_mesh/weight_per_od_less_id.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
 
-class DutchWovenWireMeshProvider with ChangeNotifier{
+class DutchWovenWireMeshProvider with ChangeNotifier {
   bool isGridView = true;
   final TextEditingController searchController = TextEditingController();
   final List<MeshItem> allItems = [
     MeshItem(title: AppString.weightPerRoll, image: AppAssets.weightPerRoll2),
     MeshItem(title: AppString.weightPerOd, image: AppAssets.weightPerOd2),
     MeshItem(title: AppString.weightPerOdLessId, image: AppAssets.weightPerOdLessId2),
-
   ];
 
   void changeView() {
@@ -21,8 +23,14 @@ class DutchWovenWireMeshProvider with ChangeNotifier{
 
   void pageChange(MeshItem meshItem, BuildContext context) {
     switch (meshItem.title) {
-      case AppString.openAreaCalculation:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => OpenAreaCalculation()));
+      case AppString.weightPerRoll:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRole(meshItem: meshItem)));
+        break;
+      case AppString.weightPerOd:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerOd(item: meshItem)));
+        break;
+      case AppString.weightPerOdLessId:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerOdLessId(item: meshItem)));
         break;
     }
   }
