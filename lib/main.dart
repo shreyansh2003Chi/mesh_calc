@@ -18,6 +18,9 @@ import 'package:measurements/providers/perforated_sheet_provider/open_area_calcu
 import 'package:measurements/providers/perforated_sheet_provider/perforated_sheet_provider.dart';
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
 import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_provider.dart';
+import 'package:measurements/providers/wire_mesh/weight_per_od_less_id_provider.dart';
+import 'package:measurements/providers/wire_mesh/weight_per_od_provider.dart';
+import 'package:measurements/providers/wire_mesh/weight_per_roll_provider.dart';
 import 'package:measurements/providers/wire_mesh/wire_mesh_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -47,6 +50,9 @@ void main() {
         ChangeNotifierProvider(create: (_) => SquareStaggeredTriangularHoleProvider()),
         ChangeNotifierProvider(create: (_) => WireMeshProvider()),
         ChangeNotifierProvider(create: (_) => DutchWovenWireMeshProvider()),
+        ChangeNotifierProvider(create: (_) => WeightPerRollProvider()),
+        ChangeNotifierProvider(create: (_) => WeightPerOdProvider()),
+        ChangeNotifierProvider(create: (_) => WeightPerOdLessIdProvider()),
       ],
       child: const MyApp(),
     ),

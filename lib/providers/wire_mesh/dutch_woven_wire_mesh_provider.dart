@@ -4,6 +4,7 @@ import 'package:measurements/pages/perforated_sheet/open_area_calculation/open_a
 import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
 import 'package:measurements/pages/wire_mesh/dutch_woven_wire_mesh/weight_per_od.dart';
 import 'package:measurements/pages/wire_mesh/dutch_woven_wire_mesh/weight_per_od_less_id.dart';
+import 'package:measurements/pages/wire_mesh/dutch_woven_wire_mesh/weight_per_roll.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
 
@@ -24,7 +25,7 @@ class DutchWovenWireMeshProvider with ChangeNotifier {
   void pageChange(MeshItem meshItem, BuildContext context) {
     switch (meshItem.title) {
       case AppString.weightPerRoll:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRole(meshItem: meshItem)));
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRoll(item: meshItem)));
         break;
       case AppString.weightPerOd:
         Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerOd(item: meshItem)));

@@ -3,6 +3,7 @@ import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/pages/result_dialog.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
+import 'package:measurements/providers/wire_mesh/weight_per_od_provider.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_button.dart';
 import 'package:measurements/utils/app_colors.dart';
@@ -46,7 +47,7 @@ class _WeightPerOdState extends State<WeightPerOd> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         padding: const EdgeInsets.all(16),
-        child: Consumer<ChainLinkProvider>(
+        child: Consumer<WeightPerOdProvider>(
           builder: (context, p, child) {
             return Column(
               children: [
@@ -115,38 +116,35 @@ class _WeightPerOdState extends State<WeightPerOd> {
 
                     const SizedBox(height: 20),
 
-                    MeasurementField(
-                      controller: p.openingCtrl,
-                      label: AppString.openingOpgMm,
-                      unit: p.openingUnit,
-                      onUnitChanged: p.setOpeningUnit,
-                    ),
+                    MeasurementField(controller: p.widthMeshCtrl, label: AppString.widthMesh, showUnit: false),
 
                     const SizedBox(height: 18),
 
                     MeasurementField(
-                      controller: p.diameterCtrl,
+                      controller: p.wireDiameterOneCtrl,
                       label: AppString.wireDiameter,
-                      unit: p.diameterUnit,
-                      onUnitChanged: p.setDiameterUnit,
+                      unit: p.wireDiameterOneUnit,
+                      onUnitChanged: p.setWireDiameterOneUnit,
                     ),
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(
-                      controller: p.widthCtrl,
-                      label: AppString.widthW,
-                      unit: p.widthUnit,
-                      onUnitChanged: p.setWidthUnit,
-                    ),
+                    MeasurementField(controller: p.lengthMeshCtrl, label: AppString.lengthMesh, showUnit: false),
 
                     const SizedBox(height: 18),
 
                     MeasurementField(
-                      controller: p.lengthCtrl,
-                      label: AppString.lengthL,
-                      unit: p.lengthUnit,
-                      onUnitChanged: p.setLengthUnit,
+                      controller: p.wireDiameterTwoCtrl,
+                      label: AppString.wireDiameter,
+                      unit: p.wireDiameterTwoUnit,
+                      onUnitChanged: p.setWireDiameterTwoUnit,
+                    ),
+                    const SizedBox(height: 18),
+                    MeasurementField(
+                      controller: p.outerDiameterCtrl,
+                      label: AppString.outerDiameter,
+                      unit: p.outerDiameterUnit,
+                      onUnitChanged: p.setOuterDiameterUnit,
                     ),
 
                     const SizedBox(height: 18),
@@ -155,7 +153,7 @@ class _WeightPerOdState extends State<WeightPerOd> {
 
                     const SizedBox(height: 18),
 
-                    AppTextField().textField(p.costCtrl, AppString.costPerKg),
+                    AppTextField().textField(p.costPerKgCtrl, AppString.costPerKg),
                   ],
                 ),
 

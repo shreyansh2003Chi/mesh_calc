@@ -34,6 +34,8 @@ class AppString {
   static const String weightPerOdLessId = 'Weight Per Od Less Id';
   static const String wireMesh = 'Wire Mesh';
   static const String dutchWovenWireMesh = 'Dutch Woven Wire Mesh';
+  static const String outerDiameter = 'Outer Diameter (OD)';
+  static const String innerDiameter = 'Inner Diameter (ID)';
 
 
   // Open Area Calculation
