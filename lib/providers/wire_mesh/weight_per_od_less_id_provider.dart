@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:measurements/models/material_model.dart';
 import 'package:measurements/utils/measurement_unit.dart';
@@ -11,8 +9,7 @@ class WeightPerOdLessIdProvider with ChangeNotifier {
   final wireDiameterTwoCtrl = TextEditingController();
   final outerDiameterCtrl = TextEditingController();
   final innerDiameterCtrl = TextEditingController();
-  final widthCtrl = TextEditingController();
-  final lengthCtrl = TextEditingController();
+
   final wastageCtrl = TextEditingController();
   final costPerKgCtrl = TextEditingController();
 
@@ -20,8 +17,6 @@ class WeightPerOdLessIdProvider with ChangeNotifier {
   MeasureUnit wireDiameterTwoUnit = MeasureUnit.mm;
   MeasureUnit outerDiameterUnit = MeasureUnit.mm;
   MeasureUnit innerDiameterUnit = MeasureUnit.mm;
-  MeasureUnit widthUnit = MeasureUnit.mm;
-  MeasureUnit lengthUnit = MeasureUnit.mm;
 
   double totalWeight = 0;
   double totalCost = 0;
@@ -39,8 +34,7 @@ class WeightPerOdLessIdProvider with ChangeNotifier {
     wireDiameterOneCtrl.clear();
     lengthMeshCtrl.clear();
     wireDiameterTwoCtrl.clear();
-    widthCtrl.clear();
-    lengthCtrl.clear();
+
     wastageCtrl.clear();
     costPerKgCtrl.clear();
 
@@ -75,83 +69,77 @@ class WeightPerOdLessIdProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setWidthUnit(MeasureUnit u) {
-    widthUnit = u;
-    notifyListeners();
-  }
-
-  void setLengthUnit(MeasureUnit u) {
-    lengthUnit = u;
-    notifyListeners();
-  }
-
   Future<void> calculate() async {
-    try {
-      // Mesh openings
-      final wm = double.tryParse(widthMeshCtrl.text) ?? 0;
-      final lm = double.tryParse(lengthMeshCtrl.text) ?? 0;
+    final widthMeshMm =
+        double.tryParse(widthMeshCtrl.text.trim()) ?? 0;
 
-      // Wire diameters (convert to mm)
-      final wd1Mm = wireDiameterOneUnit.toMm(double.tryParse(wireDiameterOneCtrl.text) ?? 0);
+    final lengthMeshMm =
+        double.tryParse(lengthMeshCtrl.text.trim()) ?? 0;
 
-      final wd2Mm = wireDiameterTwoUnit.toMm(double.tryParse(wireDiameterTwoCtrl.text) ?? 0);
+    final wireDia1Mm = wireDiameterOneUnit.toMm(
+      double.tryParse(wireDiameterOneCtrl.text.trim()) ?? 0,
+    );
 
-      // Roll dimensions (convert to meters)
-      final widthM = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0) / 1000;
+    final wireDia2Mm = wireDiameterTwoUnit.toMm(
+      double.tryParse(wireDiameterTwoCtrl.text.trim()) ?? 0,
+    );
 
-      final lengthM = lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0) / 1000;
+    final outerDiameterMm = outerDiameterUnit.toMm(
+      double.tryParse(outerDiameterCtrl.text.trim()) ?? 0,
+    );
 
-      final wastage = double.tryParse(wastageCtrl.text) ?? 0;
-      final costPerKg = double.tryParse(costPerKgCtrl.text) ?? 0;
+    final innerDiameterMm = innerDiameterUnit.toMm(
+      double.tryParse(innerDiameterCtrl.text.trim()) ?? 0,
+    );
 
-      if (wm <= 0 || lm <= 0 || wd1Mm <= 0 || wd2Mm <= 0 || widthM <= 0 || lengthM <= 0) {
-        totalWeight = 0;
-        totalCost = 0;
-        notifyListeners();
-        return;
-      }
+    final wastage =
+        double.tryParse(wastageCtrl.text.trim()) ?? 0;
 
-      // Convert mm → meter
-      final wmM = wm / 1000;
-      final lmM = lm / 1000;
+    final costPerKg =
+        double.tryParse(costPerKgCtrl.text.trim()) ?? 0;
 
-      final wd1M = wd1Mm / 1000;
-      final wd2M = wd2Mm / 1000;
-
-      // Number of wires
-      final verticalWires = widthM / (wmM + wd1M);
-      final horizontalWires = lengthM / (lmM + wd2M);
-
-      // Cross-sectional areas
-      final area1 = pi * pow(wd1M, 2) / 4;
-      final area2 = pi * pow(wd2M, 2) / 4;
-
-      // Volume of all vertical wires
-      final verticalVolume = verticalWires * lengthM * area1;
-
-      // Volume of all horizontal wires
-      final horizontalVolume = horizontalWires * widthM * area2;
-
-      // Total wire volume (m³)
-      final totalVolume = verticalVolume + horizontalVolume;
-
-      // Density (kg/m³)
-      final density = selectedMaterial.density;
-
-      // Net weight
-      final netWeight = totalVolume * density;
-
-      // Add wastage
-      totalWeight = netWeight * (1 + (wastage / 100));
-
-      // Cost
-      totalCost = totalWeight * costPerKg;
-
-      notifyListeners();
-    } catch (e) {
+    if (widthMeshMm <= 0 ||
+        lengthMeshMm <= 0 ||
+        wireDia1Mm <= 0 ||
+        wireDia2Mm <= 0 ||
+        outerDiameterMm <= 0 ||
+        innerDiameterMm < 0 ||
+        innerDiameterMm >= outerDiameterMm) {
       totalWeight = 0;
       totalCost = 0;
       notifyListeners();
+      return;
     }
-  }
-}
+
+    final factor1 =
+        (selectedMaterial.materialConstant *
+            wireDia1Mm *
+            wireDia1Mm) /
+            (widthMeshMm + wireDia1Mm);
+
+    final factor2 =
+        (selectedMaterial.materialConstant *
+            wireDia2Mm *
+            wireDia2Mm) /
+            (lengthMeshMm + wireDia2Mm);
+
+    final meshFactor = factor1 + factor2;
+
+    final rollFactor =
+        ((outerDiameterMm * outerDiameterMm) -
+            (innerDiameterMm * innerDiameterMm)) /
+            100000.0;
+
+    double weight = meshFactor * rollFactor;
+
+    weight *= (1 + wastage / 100);
+
+    totalWeight =
+        double.parse(weight.toStringAsFixed(3));
+
+    totalCost =
+        double.parse((totalWeight * costPerKg)
+            .toStringAsFixed(2));
+
+    notifyListeners();
+  }}
