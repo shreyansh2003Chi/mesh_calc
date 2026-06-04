@@ -5,6 +5,8 @@ import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
 import 'package:measurements/providers/home_page_provider.dart';
 import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
+import 'package:measurements/utils/grid_card.dart';
+import 'package:measurements/utils/list_card.dart';
 import 'package:provider/provider.dart';
 
 class MeshHomePage extends StatefulWidget {
@@ -27,12 +29,14 @@ class _MeshHomePageState extends State<MeshHomePage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: AppColors().c1F5F8B,
-                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(0)),
+                  borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(0)),
                 ),
                 child: SafeArea(
                   bottom: false,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 16),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -73,113 +77,55 @@ class _MeshHomePageState extends State<MeshHomePage> {
                     return FadeTransition(
                       opacity: animation,
                       child: ScaleTransition(
-                        scale: Tween<double>(begin: 0.95, end: 1).animate(animation),
+                        scale: Tween<double>(begin: 0.95, end: 1).animate(
+                            animation),
                         child: child,
                       ),
                     );
                   },
                   child: pr.isGridView == false
                       ? ListView.separated(
-                          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-                          itemCount: pr.allItems.length,
-                          separatorBuilder: (_, _) => const SizedBox(height: 20),
-                          itemBuilder: (context, index) {
-                            final item = pr.allItems[index];
-                            return InkWell(
-                              borderRadius: BorderRadius.circular(24),
-                              onTap: () {
-                                pr.pageChange(item, context);
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(18),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(24),
-                                  color: AppColors().cFaFaFa,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.02),
-                                      blurRadius: 18,
-                                      offset: const Offset(0, 10),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(16),
-                                      child: Image.asset(item.image, width: 70, height: 70, fit: BoxFit.cover),
-                                    ),
-                                    const SizedBox(width: 18),
-                                    Expanded(
-                                      child: Text(
-                                        item.title,
-                                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.grey),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        )
+                    physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 24),
+                    itemCount: pr.allItems.length,
+                    separatorBuilder: (_, _) => const SizedBox(height: 20),
+                    itemBuilder: (context, index) {
+                      final item = pr.allItems[index];
+                      return  ListCard(
+                        image: item.image,
+                        title: item.title,
+                        onTap: () {
+                          pr.pageChange(item, context);
+                        },
+                      );
+                    },
+                  )
                       : GridView.builder(
-                          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-                          itemCount: pr.allItems.length,
-                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 220,
-                            crossAxisSpacing: 18,
-                            mainAxisSpacing: 18,
-                            childAspectRatio: 0.85,
-                          ),
-                          itemBuilder: (context, index) {
-                            final item = pr.allItems[index];
+                    physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 24),
+                    itemCount: pr.allItems.length,
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: 0.78,
+                    ),
+                    itemBuilder: (context, index) {
+                      final item = pr.allItems[index];
 
-                            return InkWell(
-                              borderRadius: BorderRadius.circular(24),
-                              onTap: () {
-                                pr.pageChange(item, context);
-                              },
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.easeOut,
-                                padding: const EdgeInsets.all(18),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(24),
-                                  color: AppColors().cFaFaFa,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.04),
-                                      blurRadius: 20,
-                                      offset: const Offset(0, 12),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Flexible(
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(18),
-                                        child: Image.asset(item.image, fit: BoxFit.contain),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    Text(
-                                      item.title,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                      return GridCard(
+                        image: item.image,
+                        title: item.title,
+                        onTap: () {
+                          pr.pageChange(item, context);
+                        },
+                      );                    },
+                  ),
                 ),
               ),
             ],

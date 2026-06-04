@@ -12,13 +12,19 @@ class WeldedWireMeshProvider with ChangeNotifier {
   final wireDiameterWidthCtrl = TextEditingController();
   final wireDiameterLengthCtrl = TextEditingController();
   final lengthOpeningCtrl = TextEditingController();
+
   double totalWeight = 0;
   double totalCost = 0;
 
-  String? selectedCrimp;
-  double? selectedCrimpPercentage = 0;
+  String selectedCrimp = "NO CRIMP";
+  double selectedCrimpPercentage = 0;
 
-  List<String>? crimpList = ["NO CRIMP", "2% CRIMP", "5% CRIMP", "9% CRIMP"];
+  final List<String> crimpList = [
+    "NO CRIMP",
+    "2% CRIMP",
+    "5% CRIMP",
+    "9% CRIMP",
+  ];
 
   MeasureUnit widthOpeningUnit = MeasureUnit.mm;
   MeasureUnit lengthOpeningUnit = MeasureUnit.mm;
@@ -28,7 +34,13 @@ class WeldedWireMeshProvider with ChangeNotifier {
   MeasureUnit widthDiameterUnit = MeasureUnit.mm;
   MeasureUnit lengthDiameterUnit = MeasureUnit.mm;
 
-  MaterialModel selectedMaterial = MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), materialConstant: 67, density: 2700);
+  MaterialModel selectedMaterial = MaterialModel(
+    id: 'al',
+    name: 'Aluminium',
+    color: const Color(0xFFB0BEC5),
+    materialConstant: 67,
+    density: 2700,
+  );
 
   void clearController() {
     widthCtrl.clear();
@@ -39,88 +51,170 @@ class WeldedWireMeshProvider with ChangeNotifier {
     wireDiameterWidthCtrl.clear();
     wireDiameterLengthCtrl.clear();
     lengthOpeningCtrl.clear();
-  }
 
-  void setSelectedMaterial(MaterialModel m) {
-    selectedMaterial = m;
+    totalWeight = 0;
+    totalCost = 0;
+
+    selectedCrimp = "NO CRIMP";
+    selectedCrimpPercentage = 0;
+
     notifyListeners();
   }
 
-  void setWidthOpeningUnit(MeasureUnit u) {
-    widthOpeningUnit = u;
+  void setSelectedMaterial(MaterialModel material) {
+    selectedMaterial = material;
     notifyListeners();
   }
 
-  void setWidthDiameterUnit(MeasureUnit u) {
-    widthDiameterUnit = u;
+  void setWidthOpeningUnit(MeasureUnit unit) {
+    widthOpeningUnit = unit;
     notifyListeners();
   }
 
-  void setLengthOpeningUnit(MeasureUnit u) {
-    lengthOpeningUnit = u;
+  void setWidthDiameterUnit(MeasureUnit unit) {
+    widthDiameterUnit = unit;
     notifyListeners();
   }
 
-  void setLengthDiameterUnit(MeasureUnit u) {
-    lengthDiameterUnit = u;
+  void setLengthOpeningUnit(MeasureUnit unit) {
+    lengthOpeningUnit = unit;
     notifyListeners();
   }
 
-  void setWidthUnit(MeasureUnit u) {
-    widthUnit = u;
+  void setLengthDiameterUnit(MeasureUnit unit) {
+    lengthDiameterUnit = unit;
     notifyListeners();
   }
 
-  void setLengthUnit(MeasureUnit u) {
-    lengthUnit = u;
+  void setWidthUnit(MeasureUnit unit) {
+    widthUnit = unit;
     notifyListeners();
   }
 
-  void setSelectedCrimpPercentage(String? s) {
-    selectedCrimp = s;
+  void setLengthUnit(MeasureUnit unit) {
+    lengthUnit = unit;
+    notifyListeners();
+  }
+
+  void setSelectedCrimpPercentage(String? value) {
+    if (value == null) return;
+
+    selectedCrimp = value;
+
+    switch (value) {
+      case "NO CRIMP":
+        selectedCrimpPercentage = 0;
+        break;
+      case "2% CRIMP":
+        selectedCrimpPercentage = 2;
+        break;
+      case "5% CRIMP":
+        selectedCrimpPercentage = 5;
+        break;
+      case "9% CRIMP":
+        selectedCrimpPercentage = 9;
+        break;
+      default:
+        selectedCrimpPercentage = 0;
+    }
+
     notifyListeners();
   }
 
   void calculate() {
-    final wOpg = widthOpeningUnit.toMm(double.tryParse(widthOpeningCtrl.text) ?? 0) / 1000;
-    final wwd = widthDiameterUnit.toMm(double.tryParse(wireDiameterWidthCtrl.text) ?? 0) / 1000;
-    final lOpg = lengthOpeningUnit.toMm(double.tryParse(lengthOpeningCtrl.text) ?? 0) / 1000;
-    final lwd = lengthDiameterUnit.toMm(double.tryParse(wireDiameterLengthCtrl.text) ?? 0) / 1000;
+    final double wOpg =
+        widthOpeningUnit.toMm(double.tryParse(widthOpeningCtrl.text) ?? 0) /
+            1000;
 
-    final widthM = widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0) / 1000;
-    final lengthM = lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0) / 1000;
+    final double wwd =
+        widthDiameterUnit
+            .toMm(double.tryParse(wireDiameterWidthCtrl.text) ?? 0) /
+            1000;
 
-    final wastage = double.tryParse(wastageCtrl.text) ?? 0;
-    final costKg = double.tryParse(costCtrl.text) ?? 0;
+    final double lOpg =
+        lengthOpeningUnit.toMm(double.tryParse(lengthOpeningCtrl.text) ?? 0) /
+            1000;
 
-    double pitch1 = wOpg + wwd;
-    double pitch2 = lOpg + lwd;
+    final double lwd =
+        lengthDiameterUnit
+            .toMm(double.tryParse(wireDiameterLengthCtrl.text) ?? 0) /
+            1000;
 
-    if (pitch1 <= 0 || pitch2 <= 0 || widthM <= 0 || lengthM <= 0) {
+    final double widthM =
+        widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0) / 1000;
+
+    final double lengthM =
+        lengthUnit.toMm(double.tryParse(lengthCtrl.text) ?? 0) / 1000;
+
+    final double wastage =
+        double.tryParse(wastageCtrl.text.trim()) ?? 0;
+
+    final double costKg =
+        double.tryParse(costCtrl.text.trim()) ?? 0;
+
+    final double pitchWidth = wOpg + wwd;
+    final double pitchLength = lOpg + lwd;
+
+    if (pitchWidth <= 0 ||
+        pitchLength <= 0 ||
+        widthM <= 0 ||
+        lengthM <= 0) {
       totalWeight = 0;
       totalCost = 0;
       notifyListeners();
       return;
     }
 
-    double numWiresWarp = widthM / pitch1;
-    double numWiresWeft = lengthM / pitch2;
+    // Number of wires
+    final double noOfWidthWires = widthM / pitchWidth;
+    final double noOfLengthWires = lengthM / pitchLength;
 
-    double area1 = (pi * pow(wwd, 2)) / 4;
-    double totalLengthWarp = numWiresWarp * lengthM;
-    double volumeWarp = totalLengthWarp * area1;
+    // Width wire calculations
+    final double widthWireArea = (pi * pow(wwd, 2)) / 4;
+    final double totalWidthWireLength = noOfWidthWires * lengthM;
+    final double widthWireVolume =
+        totalWidthWireLength * widthWireArea;
 
-    double area2 = (pi * pow(lwd, 2)) / 4;
-    double totalLengthWeft = numWiresWeft * widthM;
-    double volumeWeft = totalLengthWeft * area2;
+    // Length wire calculations
+    final double lengthWireArea = (pi * pow(lwd, 2)) / 4;
+    final double totalLengthWireLength = noOfLengthWires * widthM;
+    final double lengthWireVolume =
+        totalLengthWireLength * lengthWireArea;
 
-    double totalBaseWeight = (volumeWarp + volumeWeft) * selectedMaterial.density;
+    // Total volume
+    final double totalVolume =
+        widthWireVolume + lengthWireVolume;
 
-    double weightWithCrimp = totalBaseWeight * (1 + (2 / 100));
+    // Base weight in KG
+    final double baseWeight =
+        totalVolume * selectedMaterial.density;
 
-    totalWeight = weightWithCrimp * (1 + (wastage / 100));
+    // Apply selected crimp percentage
+    final double weightAfterCrimp =
+        baseWeight *
+            (1 + (selectedCrimpPercentage / 100));
+
+    // Apply wastage percentage
+    totalWeight =
+        weightAfterCrimp *
+            (1 + (wastage / 100));
+
+    // Cost
     totalCost = totalWeight * costKg;
 
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    widthCtrl.dispose();
+    lengthCtrl.dispose();
+    wastageCtrl.dispose();
+    costCtrl.dispose();
+    widthOpeningCtrl.dispose();
+    wireDiameterWidthCtrl.dispose();
+    wireDiameterLengthCtrl.dispose();
+    lengthOpeningCtrl.dispose();
+    super.dispose();
   }
 }
