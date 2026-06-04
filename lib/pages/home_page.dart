@@ -29,14 +29,12 @@ class _MeshHomePageState extends State<MeshHomePage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: AppColors().c1F5F8B,
-                  borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(0)),
+                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(0)),
                 ),
                 child: SafeArea(
                   bottom: false,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -77,55 +75,50 @@ class _MeshHomePageState extends State<MeshHomePage> {
                     return FadeTransition(
                       opacity: animation,
                       child: ScaleTransition(
-                        scale: Tween<double>(begin: 0.95, end: 1).animate(
-                            animation),
+                        scale: Tween<double>(begin: 0.95, end: 1).animate(animation),
                         child: child,
                       ),
                     );
                   },
                   child: pr.isGridView == false
                       ? ListView.separated(
-                    physics: const BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics()),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 24),
-                    itemCount: pr.allItems.length,
-                    separatorBuilder: (_, _) => const SizedBox(height: 20),
-                    itemBuilder: (context, index) {
-                      final item = pr.allItems[index];
-                      return  ListCard(
-                        image: item.image,
-                        title: item.title,
-                        onTap: () {
-                          pr.pageChange(item, context);
-                        },
-                      );
-                    },
-                  )
+                          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+                          itemCount: pr.allItems.length,
+                          separatorBuilder: (_, _) => const SizedBox(height: 20),
+                          itemBuilder: (context, index) {
+                            final item = pr.allItems[index];
+                            return ListCard(
+                              image: item.image,
+                              title: item.title,
+                              onTap: () {
+                                pr.pageChange(item, context);
+                              },
+                            );
+                          },
+                        )
                       : GridView.builder(
-                    physics: const BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics()),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 24),
-                    itemCount: pr.allItems.length,
-                    gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                      childAspectRatio: 0.78,
-                    ),
-                    itemBuilder: (context, index) {
-                      final item = pr.allItems[index];
+                          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
+                          itemCount: pr.allItems.length,
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: 0.78,
+                          ),
+                          itemBuilder: (context, index) {
+                            final item = pr.allItems[index];
 
-                      return GridCard(
-                        image: item.image,
-                        title: item.title,
-                        onTap: () {
-                          pr.pageChange(item, context);
-                        },
-                      );                    },
-                  ),
+                            return GridCard(
+                              image: item.image,
+                              title: item.title,
+                              onTap: () {
+                                pr.pageChange(item, context);
+                              },
+                            );
+                          },
+                        ),
                 ),
               ),
             ],
