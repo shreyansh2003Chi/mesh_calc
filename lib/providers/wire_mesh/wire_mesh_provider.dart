@@ -15,7 +15,7 @@ class WireMeshProvider with ChangeNotifier {
   final TextEditingController searchController = TextEditingController();
   final List<MeshItem> allItems = [
     MeshItem(title: AppString.dutchWovenWireMesh, image: AppAssets.dutchWovenWireMesh),
-
+    MeshItem(title: AppString.weightPerRole, image: AppAssets.weightPerRole),
   ];
 
   void changeView() {
@@ -27,6 +27,9 @@ class WireMeshProvider with ChangeNotifier {
     switch (meshItem.title) {
       case AppString.dutchWovenWireMesh:
         Navigator.push(context, MaterialPageRoute(builder: (_) => DutchWovenWireMesh()));
+        break;
+      case AppString.weightPerRole:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRole(meshItem: meshItem)));
         break;
     }
   }

@@ -14,7 +14,6 @@ class HomePageProvider with ChangeNotifier {
   bool isGridView = true;
   final TextEditingController searchController = TextEditingController();
   final List<MeshItem> allItems = [
-    MeshItem(title: AppString.weightPerRole, image: AppAssets.weightPerRole),
     MeshItem(title: AppString.chainLink, image: AppAssets.chainLink),
     MeshItem(title: AppString.expandedMetal, image: AppAssets.expandedMetal),
     MeshItem(title: AppString.hexagonalWiremesh, image: AppAssets.hexagonalWiremesh),
@@ -38,9 +37,6 @@ class HomePageProvider with ChangeNotifier {
     switch (meshItem.title) {
       case AppString.chainLink:
         Navigator.push(context, MaterialPageRoute(builder: (_) => ChainLinkScreen(item: meshItem)));
-        break;
-      case AppString.weightPerRole:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRole(meshItem: meshItem)));
         break;
       case AppString.expandedMetal:
         Navigator.push(context, MaterialPageRoute(builder: (_) => ExpandedMetal(item: meshItem)));
