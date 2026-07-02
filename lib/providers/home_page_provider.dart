@@ -11,7 +11,6 @@ import 'package:measurements/utils/app_string.dart';
 import '../pages/perforated_sheet/perforated_sheet.dart';
 
 class HomePageProvider with ChangeNotifier {
-  bool isGridView = true;
   final TextEditingController searchController = TextEditingController();
   final List<MeshItem> allItems = [
     MeshItem(title: AppString.chainLink, image: AppAssets.chainLink),
@@ -21,16 +20,6 @@ class HomePageProvider with ChangeNotifier {
     MeshItem(title: AppString.wireMesh, image: AppAssets.wireMesh2),
 
   ];
-
-
-
-  void changeView() {
-    isGridView = !isGridView;
-    notifyListeners();
-  }
-
-
-
 
 
   void pageChange(MeshItem meshItem, BuildContext context) {

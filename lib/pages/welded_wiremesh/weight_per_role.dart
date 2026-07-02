@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/pages/result_dialog.dart';
+import 'package:measurements/utils/wiremesh_result_dialog.dart';
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
 import 'package:measurements/utils/app_button.dart';
 import 'package:measurements/utils/app_colors.dart';
@@ -147,7 +148,15 @@ class _WeightPerRoleState extends State<WeightPerRole> {
                           showDialog(
                             context: context,
                             barrierDismissible: true,
-                            builder: (_) => ResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
+                            builder: (_) => WiremeshResultDialog(
+                              totalWeight: p.totalWeight,
+                              totalCost: p.totalCost,
+                              areaOfWireMesh: p.areaOfWireMesh,
+                              numberOfCrossWires: p.numberOfCrossWires,
+                              numberOfLineWires: p.numberOfLineWires,
+                              weightWithoutWastage: p.weightWithoutWastage,
+                              weightWithWastage: p.weightWithWastage,
+                            ),
                           );
                         },
                         child: AppButton().appButton(AppString.calculate, context),

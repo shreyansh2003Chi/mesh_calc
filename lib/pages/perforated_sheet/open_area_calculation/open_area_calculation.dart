@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/open_area_calculation_provider.dart';
+import 'package:measurements/providers/global_view_provider.dart';
 import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
 import 'package:measurements/utils/grid_card.dart';
@@ -16,6 +17,7 @@ class OpenAreaCalculation extends StatefulWidget {
 class _OpenAreaCalculationState extends State<OpenAreaCalculation> {
   @override
   Widget build(BuildContext context) {
+    final globalView = Provider.of<GlobalViewProvider>(context);
     return Consumer<OpenAreaCalculationProvider>(
       builder: (BuildContext context, pr, Widget? child) {
         return Scaffold(
@@ -50,9 +52,9 @@ class _OpenAreaCalculationState extends State<OpenAreaCalculation> {
                             IconButton(
                               color: AppColors().cFFFFFF,
                               onPressed: () {
-                                pr.changeView();
+                                globalView.changeView();
                               },
-                              icon: pr.isGridView
+                              icon: globalView.isGridView
                                   ? Icon(Icons.format_list_bulleted_outlined)
                                   : Icon(Icons.grid_view_rounded),
                             ),
@@ -77,7 +79,7 @@ class _OpenAreaCalculationState extends State<OpenAreaCalculation> {
                       ),
                     );
                   },
-                  child: pr.isGridView == false
+                  child: globalView.isGridView == false
                       ? ListView.separated(
                           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),

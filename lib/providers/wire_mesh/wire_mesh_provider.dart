@@ -11,18 +11,11 @@ import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
 
 class WireMeshProvider with ChangeNotifier {
-  bool isGridView = true;
   final TextEditingController searchController = TextEditingController();
   final List<MeshItem> allItems = [
     MeshItem(title: AppString.dutchWovenWireMesh, image: AppAssets.dutchWovenWireMesh),
     MeshItem(title: AppString.weightPerRole, image: AppAssets.weightPerRole),
   ];
-
-  void changeView() {
-    isGridView = !isGridView;
-    notifyListeners();
-  }
-
   void pageChange(MeshItem meshItem, BuildContext context) {
     switch (meshItem.title) {
       case AppString.dutchWovenWireMesh:

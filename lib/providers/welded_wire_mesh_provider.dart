@@ -16,6 +16,12 @@ class WeldedWireMeshProvider with ChangeNotifier {
   double totalWeight = 0;
   double totalCost = 0;
 
+  double areaOfWireMesh = 0;
+  double numberOfCrossWires = 0;
+  double numberOfLineWires = 0;
+  double weightWithoutWastage = 0;
+  double weightWithWastage = 0;
+
   String selectedCrimp = "NO CRIMP";
   double selectedCrimpPercentage = 0;
 
@@ -54,6 +60,12 @@ class WeldedWireMeshProvider with ChangeNotifier {
 
     totalWeight = 0;
     totalCost = 0;
+
+    areaOfWireMesh = 0;
+    numberOfCrossWires = 0;
+    numberOfLineWires = 0;
+    weightWithoutWastage = 0;
+    weightWithWastage = 0;
 
     selectedCrimp = "NO CRIMP";
     selectedCrimpPercentage = 0;
@@ -161,23 +173,30 @@ class WeldedWireMeshProvider with ChangeNotifier {
         lengthM <= 0) {
       totalWeight = 0;
       totalCost = 0;
+      areaOfWireMesh = 0;
+      numberOfCrossWires = 0;
+      numberOfLineWires = 0;
+      weightWithoutWastage = 0;
+      weightWithWastage = 0;
       notifyListeners();
       return;
     }
 
+    areaOfWireMesh = widthM * lengthM;
+
     // Number of wires
-    final double noOfWidthWires = widthM / pitchWidth;
-    final double noOfLengthWires = lengthM / pitchLength;
+    numberOfLineWires = (widthM / pitchWidth).ceil() + 1;
+    numberOfCrossWires = (lengthM / pitchLength).ceil() + 1;
 
     // Width wire calculations
     final double widthWireArea = (pi * pow(wwd, 2)) / 4;
-    final double totalWidthWireLength = noOfWidthWires * lengthM;
+    final double totalWidthWireLength = numberOfLineWires * lengthM;
     final double widthWireVolume =
         totalWidthWireLength * widthWireArea;
 
     // Length wire calculations
     final double lengthWireArea = (pi * pow(lwd, 2)) / 4;
-    final double totalLengthWireLength = noOfLengthWires * widthM;
+    final double totalLengthWireLength = numberOfCrossWires * widthM;
     final double lengthWireVolume =
         totalLengthWireLength * lengthWireArea;
 
@@ -190,15 +209,16 @@ class WeldedWireMeshProvider with ChangeNotifier {
         totalVolume * selectedMaterial.density;
 
     // Apply selected crimp percentage
-    final double weightAfterCrimp =
+    weightWithoutWastage =
         baseWeight *
             (1 + (selectedCrimpPercentage / 100));
 
     // Apply wastage percentage
-    totalWeight =
-        weightAfterCrimp *
+    weightWithWastage =
+        weightWithoutWastage *
             (1 + (wastage / 100));
 
+    totalWeight = weightWithWastage;
     // Cost
     totalCost = totalWeight * costKg;
 

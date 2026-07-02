@@ -4,6 +4,7 @@ import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:measurements/providers/expanded_metal_provider/expanded_metal_provider.dart';
 import 'package:measurements/providers/hexagonal_wiremesh_provider/hexagonal_wiremesh_provider.dart';
 import 'package:measurements/providers/home_page_provider.dart';
+import 'package:measurements/providers/global_view_provider.dart';
 import 'package:measurements/providers/material_selection_bottom_sheet_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/capsule_center_to_center_hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/capsule_staggered_triangular_hole_provider.dart';
@@ -31,6 +32,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ChainLinkProvider()),
+        ChangeNotifierProvider(create: (_) => GlobalViewProvider()),
         ChangeNotifierProvider(create: (_) => HomePageProvider()),
         ChangeNotifierProvider(create: (_) => WeldedWireMeshProvider()),
         ChangeNotifierProvider(create: (_) => MaterialSelectionBottomSheetProvider()),

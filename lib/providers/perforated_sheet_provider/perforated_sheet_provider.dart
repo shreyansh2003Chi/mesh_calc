@@ -10,7 +10,6 @@ import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
 
 class PerforatedSheetProvider with ChangeNotifier {
-  bool isGridView = true;
   final TextEditingController searchController = TextEditingController();
   final List<MeshItem> allItems = [
     MeshItem(title: AppString.openAreaCalculation, image: AppAssets.openAreaCalculation),
@@ -18,11 +17,6 @@ class PerforatedSheetProvider with ChangeNotifier {
     MeshItem(title: AppString.weightPerOd, image: AppAssets.weightPerOd),
     MeshItem(title: AppString.weightPerOdLessId, image: AppAssets.weightPerOdLessId),
   ];
-
-  void changeView() {
-    isGridView = !isGridView;
-    notifyListeners();
-  }
 
   void pageChange(MeshItem meshItem, BuildContext context) {
     switch (meshItem.title) {

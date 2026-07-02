@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:measurements/providers/perforated_sheet_provider/perforated_sheet_provider.dart';
+import 'package:measurements/providers/global_view_provider.dart';
 import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
 import 'package:measurements/utils/grid_card.dart';
@@ -16,6 +17,7 @@ class PerforatedSheet extends StatefulWidget {
 class _PerforatedSheetState extends State<PerforatedSheet> {
   @override
   Widget build(BuildContext context) {
+    final globalView = Provider.of<GlobalViewProvider>(context);
     return Consumer<PerforatedSheetProvider>(
       builder: (BuildContext context, pr, Widget? child) {
         return Scaffold(
@@ -50,9 +52,9 @@ class _PerforatedSheetState extends State<PerforatedSheet> {
                             IconButton(
                               color: AppColors().cFFFFFF,
                               onPressed: () {
-                                pr.changeView();
+                                globalView.changeView();
                               },
-                              icon: pr.isGridView
+                              icon: globalView.isGridView
                                   ? Icon(Icons.format_list_bulleted_outlined)
                                   : Icon(Icons.grid_view_rounded),
                             ),
@@ -77,7 +79,7 @@ class _PerforatedSheetState extends State<PerforatedSheet> {
                       ),
                     );
                   },
-                  child: pr.isGridView == false
+                  child: globalView.isGridView == false
                       ? ListView.separated(
                           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),

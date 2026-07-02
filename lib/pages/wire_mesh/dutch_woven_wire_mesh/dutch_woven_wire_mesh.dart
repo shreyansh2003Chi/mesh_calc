@@ -6,6 +6,7 @@ import 'package:measurements/utils/list_card.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/wire_mesh/dutch_woven_wire_mesh_provider.dart';
+import 'package:measurements/providers/global_view_provider.dart';
 
 class DutchWovenWireMesh extends StatefulWidget {
   const DutchWovenWireMesh({super.key});
@@ -17,6 +18,7 @@ class DutchWovenWireMesh extends StatefulWidget {
 class _DutchWovenWireMeshState extends State<DutchWovenWireMesh> {
   @override
   Widget build(BuildContext context) {
+    final globalView = Provider.of<GlobalViewProvider>(context);
     return Consumer<DutchWovenWireMeshProvider>(
       builder: (BuildContext context, pr, Widget? child) {
         return Scaffold(
@@ -51,9 +53,9 @@ class _DutchWovenWireMeshState extends State<DutchWovenWireMesh> {
                             IconButton(
                               color: AppColors().cFFFFFF,
                               onPressed: () {
-                                pr.changeView();
+                                globalView.changeView();
                               },
-                              icon: pr.isGridView
+                              icon: globalView.isGridView
                                   ? Icon(Icons.format_list_bulleted_outlined)
                                   : Icon(Icons.grid_view_rounded),
                             ),
@@ -78,7 +80,7 @@ class _DutchWovenWireMeshState extends State<DutchWovenWireMesh> {
                       ),
                     );
                   },
-                  child: pr.isGridView == false
+                  child: globalView.isGridView == false
                       ? ListView.separated(
                           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),

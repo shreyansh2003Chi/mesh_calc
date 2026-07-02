@@ -20,7 +20,6 @@ import 'package:measurements/utils/measurement_field.dart';
 import 'package:measurements/utils/measurement_unit.dart';
 
 class OpenAreaCalculationProvider with ChangeNotifier {
-  bool isGridView = true;
   final TextEditingController searchController = TextEditingController();
 
   final widthHoleController = TextEditingController();
@@ -47,11 +46,6 @@ class OpenAreaCalculationProvider with ChangeNotifier {
     MeshItem(title: AppString.squareCenterToCenterHole, image: AppAssets.squareCenterToCenterHole),
     MeshItem(title: AppString.squareStaggeredTriangularHole, image: AppAssets.squareStaggeredTriangularHole),
   ];
-
-  void changeView() {
-    isGridView = !isGridView;
-    notifyListeners();
-  }
 
   void setUnit(MeasureUnit u, String s) {
     switch (s) {
