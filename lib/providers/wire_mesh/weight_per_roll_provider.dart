@@ -14,6 +14,12 @@ class WeightPerRollProvider with ChangeNotifier{
   final wastageCtrl = TextEditingController();
   final costPerKgCtrl = TextEditingController();
 
+  double areaOfWireMesh = 0;
+  double numberOfCrossWires = 0;
+  double numberOfLineWires = 0;
+  double weightWithoutWastage = 0;
+  double weightWithWastage = 0;
+
   MeasureUnit wireDiameterOneUnit = MeasureUnit.mm;
   MeasureUnit wireDiameterTwoUnit = MeasureUnit.mm;
   MeasureUnit widthUnit = MeasureUnit.mm;
@@ -25,7 +31,6 @@ class WeightPerRollProvider with ChangeNotifier{
   MaterialModel selectedMaterial = MaterialModel(id: 'al', name: 'Aluminium', color: Color(0xFFB0BEC5), materialConstant: 67, density: 2700);
 
   void clearControllers() {
-
     widthMeshCtrl.clear();
     wireDiameterOneCtrl.clear();
     lengthMeshCtrl.clear();
@@ -34,6 +39,12 @@ class WeightPerRollProvider with ChangeNotifier{
     lengthCtrl.clear();
     wastageCtrl.clear();
     costPerKgCtrl.clear();
+
+    areaOfWireMesh = 0;
+    numberOfCrossWires = 0;
+    numberOfLineWires = 0;
+    weightWithoutWastage = 0;
+    weightWithWastage = 0;
 
     totalWeight = 0;
     totalCost = 0;
@@ -69,11 +80,13 @@ class WeightPerRollProvider with ChangeNotifier{
 
   Future<void> calculate() async {
     try {
-      // Mesh openings
-      final wm = double.tryParse(widthMeshCtrl.text) ?? 0;
-      final lm = double.tryParse(lengthMeshCtrl.text) ?? 0;
+      //==========================
+      // Read Inputs
+      //==========================
 
-      // Wire diameters (convert to mm)
+      final wm = double.tryParse(widthMeshCtrl.text) ?? 0; // Mesh Opening Width (mm)
+      final lm = double.tryParse(lengthMeshCtrl.text) ?? 0; // Mesh Opening Length (mm)
+
       final wd1Mm = wireDiameterOneUnit.toMm(
         double.tryParse(wireDiameterOneCtrl.text) ?? 0,
       );
@@ -82,7 +95,6 @@ class WeightPerRollProvider with ChangeNotifier{
         double.tryParse(wireDiameterTwoCtrl.text) ?? 0,
       );
 
-      // Roll dimensions (convert to meters)
       final widthM =
           widthUnit.toMm(double.tryParse(widthCtrl.text) ?? 0) / 1000;
 
@@ -92,63 +104,101 @@ class WeightPerRollProvider with ChangeNotifier{
       final wastage = double.tryParse(wastageCtrl.text) ?? 0;
       final costPerKg = double.tryParse(costPerKgCtrl.text) ?? 0;
 
+      //==========================
+      // Validation
+      //==========================
+
       if (wm <= 0 ||
           lm <= 0 ||
           wd1Mm <= 0 ||
           wd2Mm <= 0 ||
           widthM <= 0 ||
           lengthM <= 0) {
+        areaOfWireMesh = 0;
+        numberOfCrossWires = 0;
+        numberOfLineWires = 0;
+        weightWithoutWastage = 0;
+        weightWithWastage = 0;
         totalWeight = 0;
         totalCost = 0;
+
         notifyListeners();
         return;
       }
 
-      // Convert mm → meter
+      //==========================
+      // Unit Conversion
+      //==========================
+
       final wmM = wm / 1000;
       final lmM = lm / 1000;
 
       final wd1M = wd1Mm / 1000;
       final wd2M = wd2Mm / 1000;
 
-      // Number of wires
-      final verticalWires = widthM / (wmM + wd1M);
-      final horizontalWires = lengthM / (lmM + wd2M);
+      //==========================
+      // 1. Area of Mesh
+      //==========================
 
-      // Cross-sectional areas
+      areaOfWireMesh = widthM * lengthM;
+
+      //==========================
+      // 2. Number of Wires
+      //==========================
+
+      numberOfLineWires =
+          (widthM / (wmM + wd1M)).ceil() + 1;
+
+      numberOfCrossWires =
+          (lengthM / (lmM + wd2M)).ceil() + 1;
+
+      //==========================
+      // 3. Cross Section Area
+      //==========================
+
       final area1 = pi * pow(wd1M, 2) / 4;
       final area2 = pi * pow(wd2M, 2) / 4;
 
-      // Volume of all vertical wires
+      //==========================
+      // 4. Volume
+      //==========================
+
       final verticalVolume =
-          verticalWires * lengthM * area1;
+          numberOfLineWires * lengthM * area1;
 
-      // Volume of all horizontal wires
       final horizontalVolume =
-          horizontalWires * widthM * area2;
+          numberOfCrossWires * widthM * area2;
 
-      // Total wire volume (m³)
       final totalVolume =
           verticalVolume + horizontalVolume;
 
-      // Density (kg/m³)
-      final density = selectedMaterial.density;
+      //==========================
+      // 5. Weight
+      //==========================
 
-      // Net weight
-      final netWeight = totalVolume * density;
+      weightWithoutWastage =
+          totalVolume * selectedMaterial.density;
 
-      // Add wastage
-      totalWeight =
-          netWeight * (1 + (wastage / 100));
+      weightWithWastage =
+          weightWithoutWastage * (1 + wastage / 100);
 
-      // Cost
+      //==========================
+      // 6. Final Result
+      //==========================
+
+      totalWeight = weightWithWastage;
       totalCost = totalWeight * costPerKg;
 
       notifyListeners();
     } catch (e) {
+      areaOfWireMesh = 0;
+      numberOfCrossWires = 0;
+      numberOfLineWires = 0;
+      weightWithoutWastage = 0;
+      weightWithWastage = 0;
       totalWeight = 0;
       totalCost = 0;
+
       notifyListeners();
     }
-  }
-}
+  }}

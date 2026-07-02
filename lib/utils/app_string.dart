@@ -20,6 +20,7 @@ class AppString {
   static const String lengthOpeningLOPG = 'Length Opening (LOPG)';
   static const String widthW = 'Width (W)';
   static const String lengthL = 'Length (L)';
+  static const String result = 'Result';
   static const String selectCrimp = 'Select Crimp';
   static const String ok = 'Ok';
   static const String shortWayDiagonal = 'Short Way Diagonal (SWD)';
@@ -36,7 +37,6 @@ class AppString {
   static const String dutchWovenWireMesh = 'Dutch Woven Wire Mesh';
   static const String outerDiameter = 'Outer Diameter (OD)';
   static const String innerDiameter = 'Inner Diameter (ID)';
-
 
   // Open Area Calculation
 

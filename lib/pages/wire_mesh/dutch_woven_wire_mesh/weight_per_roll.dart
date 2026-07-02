@@ -10,6 +10,7 @@ import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
 import 'package:measurements/utils/app_text_field.dart';
 import 'package:measurements/utils/measurement_field.dart';
+import 'package:measurements/utils/wiremesh_result_dialog.dart';
 import 'package:provider/provider.dart';
 
 class WeightPerRoll extends StatefulWidget {
@@ -25,7 +26,7 @@ class _WeightPerRollState extends State<WeightPerRoll> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<ChainLinkProvider>(context, listen: false).clearControllers();
+      Provider.of<WeightPerRollProvider>(context, listen: false).clearControllers();
     });
     super.initState();
   }
@@ -135,7 +136,7 @@ class _WeightPerRollState extends State<WeightPerRoll> {
 
                     const SizedBox(height: 18),
 
-                    MeasurementField(controller: p.lengthMeshCtrl, label: AppString.lengthMesh,showUnit: false,),
+                    MeasurementField(controller: p.lengthMeshCtrl, label: AppString.lengthMesh, showUnit: false),
 
                     const SizedBox(height: 18),
 
@@ -192,8 +193,15 @@ class _WeightPerRollState extends State<WeightPerRoll> {
                           p.calculate().then((value) {
                             showDialog(
                               context: context,
-                              barrierDismissible: true,
-                              builder: (_) => ResultDialog(totalWeight: p.totalWeight, totalCost: p.totalCost),
+                              builder: (_) => WiremeshResultDialog(
+                                totalWeight: p.totalWeight,
+                                totalCost: p.totalCost,
+                                areaOfWireMesh: p.areaOfWireMesh,
+                                numberOfCrossWires: p.numberOfCrossWires,
+                                numberOfLineWires: p.numberOfLineWires,
+                                weightWithoutWastage: p.weightWithoutWastage,
+                                weightWithWastage: p.weightWithWastage,
+                              ),
                             );
                           });
                         },

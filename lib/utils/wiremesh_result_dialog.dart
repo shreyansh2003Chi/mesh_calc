@@ -5,11 +5,25 @@ import 'package:measurements/utils/app_button.dart';
 import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
 
-class ResultDialog extends StatelessWidget {
+class WiremeshResultDialog extends StatelessWidget {
+  final double areaOfWireMesh;
+  final double numberOfCrossWires;
+  final double numberOfLineWires;
+  final double weightWithoutWastage;
+  final double weightWithWastage;
   final double totalWeight;
   final double totalCost;
 
-  const ResultDialog({super.key, required this.totalWeight, required this.totalCost});
+  const WiremeshResultDialog({
+    super.key,
+    required this.areaOfWireMesh,
+    required this.numberOfCrossWires,
+    required this.numberOfLineWires,
+    required this.weightWithoutWastage,
+    required this.weightWithWastage,
+    required this.totalWeight,
+    required this.totalCost,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +33,7 @@ class ResultDialog extends StatelessWidget {
     final bool isSmall = size.width < 360;
     final bool isTablet = size.width >= 600;
 
-    final double dialogWidth = isTablet ? 430 : size.width * .92;
+    final double dialogWidth = isTablet ? 460 : size.width * .92;
     final double padding = isSmall ? 16 : 24;
     final double iconSize = isSmall ? 18 : 22;
     final double titleSize = isSmall ? 17 : 20;
@@ -50,6 +64,7 @@ class ResultDialog extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      //---------------- HEADER ----------------//
                       Row(
                         children: [
                           Container(
@@ -81,7 +96,7 @@ class ResultDialog extends StatelessWidget {
 
                       SizedBox(height: isSmall ? 18 : 24),
 
-                      //---------------- Result Card ----------------//
+                      //---------------- RESULT CARD ----------------//
                       Container(
                         decoration: BoxDecoration(
                           color: theme.colorScheme.surfaceVariant.withOpacity(.35),
@@ -91,11 +106,51 @@ class ResultDialog extends StatelessWidget {
                           children: [
                             _resultRow(
                               context,
+                              "Area of Wire Mesh",
+                              "${areaOfWireMesh.toStringAsFixed(2)} m²",
+                              rowPadding,
+                            ),
+                            _divider(),
+
+                            _resultRow(
+                              context,
+                              "Number of Cross Wires",
+                              numberOfCrossWires.toInt().toString(),
+                              rowPadding,
+                            ),
+                            _divider(),
+
+                            _resultRow(
+                              context,
+                              "Number of Line Wires",
+                              numberOfLineWires.toInt().toString(),
+                              rowPadding,
+                            ),
+                            _divider(),
+
+                            _resultRow(
+                              context,
+                              "Weight Without Wastage",
+                              "${weightWithoutWastage.toStringAsFixed(2)} kg",
+                              rowPadding,
+                            ),
+                            _divider(),
+
+                            _resultRow(
+                              context,
+                              "Weight With Wastage",
+                              "${weightWithWastage.toStringAsFixed(2)} kg",
+                              rowPadding,
+                            ),
+                            _divider(),
+
+                            _resultRow(
+                              context,
                               AppString.totalWeight,
                               "${totalWeight.toStringAsFixed(2)} kg",
                               rowPadding,
+                              isHighlight: true,
                             ),
-
                             _divider(),
 
                             _resultRow(
@@ -146,14 +201,12 @@ class ResultDialog extends StatelessWidget {
             child: Text(
               label,
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
                 fontWeight: isHighlight ? FontWeight.w600 : FontWeight.w500,
+                color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
           ),
-
           const SizedBox(width: 12),
-
           Expanded(
             flex: 2,
             child: Text(

@@ -30,7 +30,6 @@ class ChainLinkProvider extends ChangeNotifier {
     costCtrl.clear();
     totalWeight = 0;
     totalCost = 0;
-    notifyListeners();
   }
 
   void setSelectedMaterial(MaterialModel m) {
