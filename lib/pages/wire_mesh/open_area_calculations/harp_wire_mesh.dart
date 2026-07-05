@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:measurements/models/mesh_item.dart';
-import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/pages/result_dialog.dart';
-import 'package:measurements/providers/chain_link_provider.dart';
 import 'package:measurements/providers/wire_mesh/open_area_calculations_providers/harp_wire_mesh_provider.dart';
-import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_button.dart';
 import 'package:measurements/utils/app_colors.dart';
 import 'package:measurements/utils/app_string.dart';
-import 'package:measurements/utils/app_text_field.dart';
 import 'package:measurements/utils/measurement_field.dart';
 import 'package:provider/provider.dart';
 
@@ -66,19 +62,42 @@ class _HarpWireMeshState extends State<HarpWireMesh> {
 
                 Column(
                   children: [
-
                     const SizedBox(height: 20),
 
-                    MeasurementField(controller: p.widthOpeningCtrl, label: "Width Opening", unit: p.widthOpeningUnit, onUnitChanged: p.setWidthOpeningUnit),
+                    MeasurementField(
+                      controller: p.widthOpeningCtrl,
+                      label: "Width Opening",
+                      unit: p.widthOpeningUnit,
+                      onUnitChanged: p.setWidthOpeningUnit,
+                    ),
                     const SizedBox(height: 18),
-                    MeasurementField(controller: p.wireDiameterCtrl, label: AppString.wireDiameter, unit: p.wireDiameterUnit, onUnitChanged: p.setWireDiameterUnit),
+                    MeasurementField(
+                      controller: p.wireDiameterCtrl,
+                      label: AppString.wireDiameter,
+                      unit: p.wireDiameterUnit,
+                      onUnitChanged: p.setWireDiameterUnit,
+                    ),
                     const SizedBox(height: 18),
-                    MeasurementField(controller: p.lengthOpeningCtrl, label: "Length Opening", unit: p.lengthOpeningUnit, onUnitChanged: p.setLengthOpeningUnit),
+                    MeasurementField(
+                      controller: p.lengthOpeningCtrl,
+                      label: "Length Opening",
+                      unit: p.lengthOpeningUnit,
+                      onUnitChanged: p.setLengthOpeningUnit,
+                    ),
                     const SizedBox(height: 18),
-                    MeasurementField(controller: p.lengthOpening1Ctrl, label: "Length Opening 1", unit: p.lengthOpening1Unit, onUnitChanged: p.setLengthOpening1Unit),
+                    MeasurementField(
+                      controller: p.lengthOpening1Ctrl,
+                      label: "Length Opening 1",
+                      unit: p.lengthOpening1Unit,
+                      onUnitChanged: p.setLengthOpening1Unit,
+                    ),
                     const SizedBox(height: 18),
-                    MeasurementField(controller: p.wireDiameter2Ctrl, label: "Wire Diameter 2", unit: p.wireDiameter2Unit, onUnitChanged: p.setWireDiameter2Unit),
-
+                    MeasurementField(
+                      controller: p.wireDiameter2Ctrl,
+                      label: "Wire Diameter 2",
+                      unit: p.wireDiameter2Unit,
+                      onUnitChanged: p.setWireDiameter2Unit,
+                    ),
                   ],
                 ),
 

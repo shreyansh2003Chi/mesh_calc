@@ -46,7 +46,7 @@ class WireMeshProvider with ChangeNotifier {
       case AppString.meshOpeningPitchCalculations:
         Navigator.push(context, MaterialPageRoute(builder: (_) => MeshOpeningPitchCalculations()));
         break;
-        case AppString.wireRequired:
+      case AppString.wireRequired:
         Navigator.push(context, MaterialPageRoute(builder: (_) => WireRequired()));
         break;
     }
