@@ -17,97 +17,70 @@ class ListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    final cardHeight = (width * 0.28).clamp(100.0, 130.0);
-    final imageSize = (width * 0.21).clamp(75.0, 95.0);
-    final titleSize = (width * 0.045).clamp(15.0, 19.0);
+    final imageSize = (width * 0.18).clamp(65.0, 85.0);
+    final titleSize = (width * 0.042).clamp(15.0, 17.0);
 
-    const cardRadius = BorderRadius.only(
-      topLeft: Radius.circular(10),
-      bottomLeft: Radius.circular(10),
-      topRight: Radius.circular(18),
-      bottomRight: Radius.circular(18),
-    );
-
-    return Material(
-      color: Colors.transparent,
-      borderRadius: cardRadius,
-      child: InkWell(
-        borderRadius: cardRadius,
-        onTap: onTap,
-        child: ClipRRect(
-          borderRadius: cardRadius,
-          child: Container(
-            height: cardHeight,
-            decoration: BoxDecoration(
-              color: AppColors().cFFFFFF,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.03),
-                  blurRadius: 10,
-                  spreadRadius: 1,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 14),
+      decoration: BoxDecoration(
+        color: AppColors().cFFFFFF,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             child: Row(
               children: [
-                // Left Accent Strip
-                Container(
-                  width: 8,
-                  decoration: BoxDecoration(
-                    color: AppColors().c1F5F8B,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                    ),
-                  ),
-                ),
-
-                SizedBox(width: width * 0.03),
-
-                // Image
+                // Image Container
                 Container(
                   width: imageSize,
                   height: imageSize,
                   padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade50,
-                    borderRadius: BorderRadius.circular(14),
-                  ),
                   child: Image.asset(
                     image,
                     fit: BoxFit.contain,
                   ),
                 ),
-
-                SizedBox(width: width * 0.04),
-
+                
+                const SizedBox(width: 16),
+                
                 // Title
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: Text(
-                      title.toUpperCase(),
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: titleSize,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff5A2A47),
-                        letterSpacing: 0.4,
-                      ),
+                  child: Text(
+                    title.toUpperCase(),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: titleSize,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xff5A2A47),
+                      letterSpacing: 0.3,
                     ),
                   ),
                 ),
-
+                
                 // Arrow
-                Padding(
-                  padding: const EdgeInsets.only(right: 12),
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: AppColors().c1F5F8B.withOpacity(0.06),
+                    shape: BoxShape.circle,
+                  ),
                   child: Icon(
                     Icons.arrow_forward_ios_rounded,
-                    size: width * 0.045,
-                    color: Colors.grey.shade500,
+                    size: 16,
+                    color: AppColors().c1F5F8B,
                   ),
                 ),
               ],

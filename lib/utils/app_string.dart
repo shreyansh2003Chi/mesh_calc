@@ -50,6 +50,8 @@ class AppString {
   static const String round90CenterToCenterHole = 'Round 90° Center To Center Hole';
   static const String squareCenterToCenterHole = 'Square Center To Center Hole';
   static const String squareStaggeredTriangularHole = 'Square Staggered Triangular Hole';
+  static const String mesh = 'Mesh';
+  static const String opening = 'Opening';
 
   static const String widthHole = 'Width Hole (WH)';
   static const String lengthHole = 'Length Hole (LH)';
@@ -61,4 +63,12 @@ class AppString {
   static const String squareHole = 'Square Hole (SH)';
   static const String widthMesh = 'Width Mesh (WM)';
   static const String lengthMesh = 'Length Mesh (LM)';
+  static const String meshOpeningPitchCalculations = 'MESH/OPENING/PITCH/CALCULATIONS';
+  static const String weightCalculation = 'Weight Calculation';
+  static const String wireRequired = 'Wire Required';
+  static const String harpWireMesh = 'Harp Wire Mesh';
+  static const String rectangularWireMesh = 'Rectangular Wire Mesh';
+  static const String squareWireMesh = 'Square Wire Mesh';
+
+  static const String micron = 'Micron/MM/B.S.S/A.S.T.M/I.S.S/Tyler/Twill Dutch/Reverse Plain Dutch/Plain Dutch Mesh';
 }

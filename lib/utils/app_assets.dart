@@ -28,4 +28,18 @@ class AppAssets {
   static const String weightPerRoll2 = "assets/weight_per_role2.png";
   static const String weightPerOd2= "assets/weight_per_od_2.png";
   static const String weightPerOdLessId2 = "assets/weight_per_od_less_id_2.png";
+
+  static const String dutchMeshPdf = "assets/dutch_mesh_pdf.jpeg";
+  static const String harpWireMesh = "assets/harp_wire_mesh.jpeg";
+  static const String mesh = "assets/mesh.jpeg";
+  static const String opening = "assets/opening.jpeg";
+  static const String pitch = "assets/pitch.jpeg";
+  static const String rectangularWireMesh = "assets/rectangular_wire_mesh.jpeg";
+  static const String squareWireMesh = "assets/square_wire_mesh.jpeg";
+
+  static const String openAreaCalculationWiremesh = "assets/open_area_calculations_wiremesh.png";
+  static const String meshOpeningPitchCalculations = "assets/mesh_opening_pitch_calculations.png";
+  static const String weightPerRollWiremesh = "assets/weight_per_roll_wiremesh.jpeg";
+
+
 }

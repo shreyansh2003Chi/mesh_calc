@@ -18,10 +18,20 @@ import 'package:measurements/providers/perforated_sheet_provider/open_area_calcu
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/square_staggered_triangular_hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/perforated_sheet_provider.dart';
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
-import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_provider.dart';
-import 'package:measurements/providers/wire_mesh/weight_per_od_less_id_provider.dart';
-import 'package:measurements/providers/wire_mesh/weight_per_od_provider.dart';
-import 'package:measurements/providers/wire_mesh/weight_per_roll_provider.dart';
+import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/dutch_woven_wire_mesh_provider.dart';
+import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/weight_per_od_provider.dart';
+import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/weight_per_roll_provider.dart';
+import 'package:measurements/providers/wire_mesh/open_area_calculations_providers/harp_wire_mesh_provider.dart';
+import 'package:measurements/providers/wire_mesh/open_area_calculations_providers/rectangular_wire_mesh_provider.dart';
+import 'package:measurements/providers/wire_mesh/open_area_calculations_providers/square_wire_mesh_provider.dart';
+import 'package:measurements/providers/wire_mesh/open_area_calculations_providers/open_area_calculations_provider.dart';
+import 'package:measurements/providers/wire_mesh/weight_calculation_providers/weight_calculation_provider.dart';
+import 'package:measurements/providers/wire_mesh/wire_required_provider.dart';
+import 'package:measurements/providers/wire_mesh/mesh_opening_pitch_calculations_providers/mesh_calculation_provider.dart';
+import 'package:measurements/providers/wire_mesh/mesh_opening_pitch_calculations_providers/mesh_opening_pitch_calculations_provider.dart';
+import 'package:measurements/providers/wire_mesh/mesh_opening_pitch_calculations_providers/opening_calculation_provider.dart';
+import 'package:measurements/providers/wire_mesh/mesh_opening_pitch_calculations_providers/pitch_calculation_provider.dart';
+import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/weight_per_od_less_id_provider.dart';
 import 'package:measurements/providers/wire_mesh/wire_mesh_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +65,16 @@ void main() {
         ChangeNotifierProvider(create: (_) => WeightPerRollProvider()),
         ChangeNotifierProvider(create: (_) => WeightPerOdProvider()),
         ChangeNotifierProvider(create: (_) => WeightPerOdLessIdProvider()),
+        ChangeNotifierProvider(create: (_) => OpenAreaCalculationsProvider()),
+        ChangeNotifierProvider(create: (_) => HarpWireMeshProvider()),
+        ChangeNotifierProvider(create: (_) => RectangularWireMeshProvider()),
+        ChangeNotifierProvider(create: (_) => SquareWireMeshProvider()),
+        ChangeNotifierProvider(create: (_) => WeightCalculationProvider()),
+        ChangeNotifierProvider(create: (_) => WireRequiredProvider()),
+        ChangeNotifierProvider(create: (_) => MeshOpeningPitchCalculationsProvider()),
+        ChangeNotifierProvider(create: (_) => MeshCalculationProvider()),
+        ChangeNotifierProvider(create: (_) => OpeningCalculationProvider()),
+        ChangeNotifierProvider(create: (_) => PitchCalculationProvider()),
       ],
       child: const MyApp(),
     ),

@@ -3,7 +3,7 @@ import 'package:measurements/models/mesh_item.dart';
 import 'package:measurements/pages/material_selection_bottom_sheet.dart';
 import 'package:measurements/pages/result_dialog.dart';
 import 'package:measurements/providers/chain_link_provider.dart';
-import 'package:measurements/providers/wire_mesh/weight_per_od_less_id_provider.dart';
+import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/weight_per_od_less_id_provider.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_button.dart';
 import 'package:measurements/utils/app_colors.dart';
