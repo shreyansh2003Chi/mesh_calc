@@ -25,14 +25,27 @@ import 'package:measurements/providers/wire_mesh/open_area_calculations_provider
 import 'package:measurements/providers/wire_mesh/open_area_calculations_providers/rectangular_wire_mesh_provider.dart';
 import 'package:measurements/providers/wire_mesh/open_area_calculations_providers/square_wire_mesh_provider.dart';
 import 'package:measurements/providers/wire_mesh/open_area_calculations_providers/open_area_calculations_provider.dart';
-import 'package:measurements/providers/wire_mesh/weight_calculation_providers/weight_calculation_provider.dart';
-import 'package:measurements/providers/wire_mesh/wire_required_provider.dart';
 import 'package:measurements/providers/wire_mesh/mesh_opening_pitch_calculations_providers/mesh_calculation_provider.dart';
 import 'package:measurements/providers/wire_mesh/mesh_opening_pitch_calculations_providers/mesh_opening_pitch_calculations_provider.dart';
 import 'package:measurements/providers/wire_mesh/mesh_opening_pitch_calculations_providers/opening_calculation_provider.dart';
 import 'package:measurements/providers/wire_mesh/mesh_opening_pitch_calculations_providers/pitch_calculation_provider.dart';
 import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/weight_per_od_less_id_provider.dart';
 import 'package:measurements/providers/wire_mesh/wire_mesh_provider.dart';
+import 'package:measurements/providers/wire/wire_provider.dart';
+import 'package:measurements/providers/wire/hexagonal_wire_provider.dart';
+import 'package:measurements/providers/wire/octagonal_wire_provider.dart';
+import 'package:measurements/providers/wire/re_enforced_bar_provider.dart';
+import 'package:measurements/providers/wire/rectangle_wire_provider.dart';
+import 'package:measurements/providers/wire/round_wire_provider.dart';
+import 'package:measurements/providers/wire/square_wire_provider.dart';
+import 'package:measurements/providers/wire/swg_to_mm_provider.dart';
+import 'package:measurements/providers/unit_calculator/unit_calculator_provider.dart';
+import 'package:measurements/providers/unit_calculator/area_converter_provider.dart';
+import 'package:measurements/providers/unit_calculator/length_converter_provider.dart';
+import 'package:measurements/providers/unit_calculator/weight_converter_provider.dart';
+import 'package:measurements/providers/unit_calculator/price_hub_provider.dart';
+import 'package:measurements/providers/unit_calculator/area_to_area_provider.dart';
+import 'package:measurements/providers/unit_calculator/area_to_running_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/perforated_sheet_provider/open_area_calculation_provider/open_area_calculation_provider.dart';
@@ -69,12 +82,25 @@ void main() {
         ChangeNotifierProvider(create: (_) => HarpWireMeshProvider()),
         ChangeNotifierProvider(create: (_) => RectangularWireMeshProvider()),
         ChangeNotifierProvider(create: (_) => SquareWireMeshProvider()),
-        ChangeNotifierProvider(create: (_) => WeightCalculationProvider()),
-        ChangeNotifierProvider(create: (_) => WireRequiredProvider()),
         ChangeNotifierProvider(create: (_) => MeshOpeningPitchCalculationsProvider()),
         ChangeNotifierProvider(create: (_) => MeshCalculationProvider()),
         ChangeNotifierProvider(create: (_) => OpeningCalculationProvider()),
         ChangeNotifierProvider(create: (_) => PitchCalculationProvider()),
+        ChangeNotifierProvider(create: (_) => WireProvider()),
+        ChangeNotifierProvider(create: (_) => HexagonalWireProvider()),
+        ChangeNotifierProvider(create: (_) => OctagonalWireProvider()),
+        ChangeNotifierProvider(create: (_) => ReEnforcedBarProvider()),
+        ChangeNotifierProvider(create: (_) => RectangleWireProvider()),
+        ChangeNotifierProvider(create: (_) => RoundWireProvider()),
+        ChangeNotifierProvider(create: (_) => SquareWireProvider()),
+        ChangeNotifierProvider(create: (_) => SwgToMmProvider()),
+        ChangeNotifierProvider(create: (_) => UnitCalculatorProvider()),
+        ChangeNotifierProvider(create: (_) => AreaConverterProvider()),
+        ChangeNotifierProvider(create: (_) => LengthConverterProvider()),
+        ChangeNotifierProvider(create: (_) => WeightConverterProvider()),
+        ChangeNotifierProvider(create: (_) => PriceHubProvider()),
+        ChangeNotifierProvider(create: (_) => AreaToAreaProvider()),
+        ChangeNotifierProvider(create: (_) => AreaToRunningProvider()),
       ],
       child: const MyApp(),
     ),

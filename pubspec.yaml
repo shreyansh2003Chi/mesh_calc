@@ -115,6 +115,21 @@ flutter:
     - assets/open_area_calculations_wiremesh.png
     - assets/mesh_opening_pitch_calculations.png
     - assets/weight_per_roll_wiremesh.jpeg
+    - assets/wire.png
+    - assets/hexagonal_wire.jpeg
+    - assets/octagonal_wire.jpeg
+    - assets/rectangle_wire.jpeg
+    - assets/re_enforced_bar.jpeg
+    - assets/round_wire.jpeg
+    - assets/square_wire.jpeg
+    - assets/swg_to_mm.jpeg
+    - assets/unit_converter.jpeg
+    - assets/area_converter.jpeg
+    - assets/lenght_converter.jpeg
+    - assets/weight_converter.jpeg
+    - assets/price_conerter.jpeg
+    - assets/area_to_area_converter.jpeg
+    - assets/area_to_running_converter.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

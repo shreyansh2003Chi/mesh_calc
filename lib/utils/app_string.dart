@@ -71,4 +71,27 @@ class AppString {
   static const String squareWireMesh = 'Square Wire Mesh';
 
   static const String micron = 'Micron/MM/B.S.S/A.S.T.M/I.S.S/Tyler/Twill Dutch/Reverse Plain Dutch/Plain Dutch Mesh';
+
+  static const String wire = 'WIRE';
+  static const String wireWire = 'Wire';
+  static const String hexagonalWire = 'Hexagonal Wire';
+  static const String octagonalWire = 'Octagonal Wire';
+  static const String rectangleWire = 'Rectangle Wire';
+  static const String reEnforcedBar = 'Re-Enforced Bar';
+  static const String roundWire = 'Round Wire';
+  static const String squareWire = 'Square Wire';
+  static const String swgToMm = 'SWG to MM';
+
+  static const String wireThicknessWt = 'Wire Thickness (WT)';
+  static const String widthWireThicknessWwt = 'Width Wire Thickness (WWT)';
+  static const String lengthWireThicknessLwt = 'Length Wire Thickness (LWT)';
+  static const String wireDiameterWd = 'Wire Diameter (WD)';
+
+  static const String unitCalculator = 'Unit Calculator';
+  static const String area = 'Area';
+  static const String length = 'Length';
+  static const String weight = 'Weight';
+  static const String price = 'Price';
+  static const String areaToArea = 'Area to Area';
+  static const String areaToRunningLength = 'Area to Running Length';
 }

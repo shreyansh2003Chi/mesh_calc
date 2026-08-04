@@ -9,6 +9,8 @@ import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
 
 import '../pages/perforated_sheet/perforated_sheet.dart';
+import 'package:measurements/pages/wire/wire_screen.dart';
+import 'package:measurements/pages/unit_calculator/unit_calculator_screen.dart';
 
 class HomePageProvider with ChangeNotifier {
   final TextEditingController searchController = TextEditingController();
@@ -18,7 +20,8 @@ class HomePageProvider with ChangeNotifier {
     MeshItem(title: AppString.hexagonalWiremesh, image: AppAssets.hexagonalWiremesh),
     MeshItem(title: AppString.perforatedSheet, image: AppAssets.perforatedSheet),
     MeshItem(title: AppString.wireMesh, image: AppAssets.wireMesh2),
-
+    MeshItem(title: AppString.wireWire, image: AppAssets.wire),
+    MeshItem(title: AppString.unitCalculator, image: AppAssets.unitConverter),
   ];
 
 
@@ -38,6 +41,12 @@ class HomePageProvider with ChangeNotifier {
         break;
     case AppString.wireMesh:
         Navigator.push(context, MaterialPageRoute(builder: (_) => WireMesh()));
+        break;
+    case AppString.wireWire:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WireScreen()));
+        break;
+    case AppString.unitCalculator:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => const UnitCalculatorScreen()));
         break;
     }
   }

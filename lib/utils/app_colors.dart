@@ -28,13 +28,16 @@ class AppColors {
   Color cDFDEDE = Color(0xffDFDEDE);
   Color cEFEEED = Color(0xffEFEEED);
   Color cF9F9F9 = Color(0xffF9F9F9);
+  Color cF2F2F2 = Color(0xffF2F2F2);
   Color cFFFFFF = Color(0xffFFFFFF);
 
   //Text
 
   Color c000000 = Color(0xff000000);
+  Color c212121 = Color(0xff212121);
   Color c464646 = Color(0xff464646);
   Color c666666 = Color(0xff666666);
+  Color c757575 = Color(0xff757575);
   Color cB6B6B6 = Color(0xffB6B6B6);
   Color cEAEAEA = Color(0xffEAEAEA);
 

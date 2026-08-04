@@ -107,7 +107,7 @@ class WiremeshResultDialog extends StatelessWidget {
                             _resultRow(
                               context,
                               "Area of Wire Mesh",
-                              "${areaOfWireMesh.toStringAsFixed(2)} m²",
+                              "${(areaOfWireMesh * 10.76391).toStringAsFixed(2)} sq ft",
                               rowPadding,
                             ),
                             _divider(),

@@ -41,5 +41,20 @@ class AppAssets {
   static const String meshOpeningPitchCalculations = "assets/mesh_opening_pitch_calculations.png";
   static const String weightPerRollWiremesh = "assets/weight_per_roll_wiremesh.jpeg";
 
+  static const String wire = "assets/wire.png";
+  static const String hexagonalWire = "assets/hexagonal_wire.jpeg";
+  static const String octagonalWire = "assets/octagonal_wire.jpeg";
+  static const String rectangleWire = "assets/rectangle_wire.jpeg";
+  static const String reEnforcedBar = "assets/re_enforced_bar.jpeg";
+  static const String roundWire = "assets/round_wire.jpeg";
+  static const String squareWire = "assets/square_wire.jpeg";
+  static const String swgToMm = "assets/swg_to_mm.jpeg";
 
+  static const String unitConverter = "assets/unit_converter.jpeg";
+  static const String areaConverter = "assets/area_converter.jpeg";
+  static const String lengthConverter = "assets/lenght_converter.jpeg";
+  static const String weightConverter = "assets/weight_converter.jpeg";
+  static const String priceConverter = "assets/price_conerter.jpeg";
+  static const String areaToArea = "assets/area_to_area_converter.jpeg";
+  static const String areaToRunning = "assets/area_to_running_converter.jpeg";
 }
