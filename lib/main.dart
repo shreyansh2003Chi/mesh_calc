@@ -17,6 +17,16 @@ import 'package:measurements/providers/perforated_sheet_provider/open_area_calcu
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/square_center_to_center__hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/open_area_calculation_provider/square_staggered_triangular_hole_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/perforated_sheet_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/capsule_center_to_center_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/capsule_staggered_triangular_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/hexagonal_staggered_triangular_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/rectangular_center_to_center_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/rectangular_staggered_triangular_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/square_staggered_triangular_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/square_center_to_center_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/round_60_staggered_triangular_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/round_90_center_to_center_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/round_45_staggered_triangular_hole_wpr_provider.dart';
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
 import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/dutch_woven_wire_mesh_provider.dart';
 import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/weight_per_od_provider.dart';
@@ -73,6 +83,16 @@ void main() {
         ChangeNotifierProvider(create: (_) => Round90CenterToCenterHoleProvider()),
         ChangeNotifierProvider(create: (_) => SquareCenterToCenterHoleProvider()),
         ChangeNotifierProvider(create: (_) => SquareStaggeredTriangularHoleProvider()),
+        ChangeNotifierProvider(create: (_) => CapsuleCenterToCenterHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => CapsuleStaggeredTriangularHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => HexagonalStaggeredTriangularHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => RectangularCenterToCenterHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => RectangularStaggeredTriangularHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => SquareStaggeredTriangularHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => SquareCenterToCenterHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => Round60StaggeredTriangularHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => Round90CenterToCenterHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => Round45StaggeredTriangularHoleWprProvider()),
         ChangeNotifierProvider(create: (_) => WireMeshProvider()),
         ChangeNotifierProvider(create: (_) => DutchWovenWireMeshProvider()),
         ChangeNotifierProvider(create: (_) => WeightPerRollProvider()),

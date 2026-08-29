@@ -9,6 +9,8 @@ import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
 
+import '../../pages/perforated_sheet/weight_per_roll/weight_per_roll.dart';
+
 class PerforatedSheetProvider with ChangeNotifier {
   final TextEditingController searchController = TextEditingController();
   final List<MeshItem> allItems = [
@@ -22,6 +24,9 @@ class PerforatedSheetProvider with ChangeNotifier {
     switch (meshItem.title) {
       case AppString.openAreaCalculation:
         Navigator.push(context, MaterialPageRoute(builder: (_) => OpenAreaCalculation()));
+        break;
+      case AppString.weightPerRoll:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRoll()));
         break;
     }
   }

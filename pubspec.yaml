@@ -77,59 +77,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - assets/chain_link.png
-    - assets/weight_per_role.png
-    - assets/logo.png
-    - assets/expanded_metal.png
-    - assets/expanded_metal_core.png
-    - assets/hexagonal_wiremesh.png
-    - assets/hexagonal_wiremesh_core.jpeg
-    - assets/perforatedSheet.png
-    - assets/openAreaCalculation.png
-    - assets/capsule_center_to_center_hole.jpeg
-    - assets/capsule_center_to_center_hole.jpeg
-    - assets/capsule_staggered_triangular_hole.jpeg
-    - assets/hexagonal_staggered_triangular_hole.jpeg
-    - assets/rectangular_center_to_center_hole.jpeg
-    - assets/rectangular_staggered_triangular_hole.jpeg
-    - assets/round_45_staggered_triangular_hole.jpeg
-    - assets/round_60_staggered_triangular_hole.jpeg
-    - assets/round_90_center_to_center_hole.jpeg
-    - assets/square_center_to_center_hole.jpeg
-    - assets/square_staggered_triangular_hole.jpeg
-    - assets/weight_per_roll.png
-    - assets/weight_per_od.png
-    - assets/weight_per_od_less_id.png
-    - assets/wire_mesh_2.png
-    - assets/dutch_woven_wire_mesh_2.png
-    - assets/weight_per_od_less_id_2.png
-    - assets/weight_per_od_2.png
-    - assets/weight_per_role2.png
-    - assets/dutch_mesh_pdf.jpeg
-    - assets/harp_wire_mesh.jpeg
-    - assets/mesh.jpeg
-    - assets/opening.jpeg
-    - assets/pitch.jpeg
-    - assets/rectangular_wire_mesh.jpeg
-    - assets/square_wire_mesh.jpeg
-    - assets/open_area_calculations_wiremesh.png
-    - assets/mesh_opening_pitch_calculations.png
-    - assets/weight_per_roll_wiremesh.jpeg
-    - assets/wire.png
-    - assets/hexagonal_wire.jpeg
-    - assets/octagonal_wire.jpeg
-    - assets/rectangle_wire.jpeg
-    - assets/re_enforced_bar.jpeg
-    - assets/round_wire.jpeg
-    - assets/square_wire.jpeg
-    - assets/swg_to_mm.jpeg
-    - assets/unit_converter.jpeg
-    - assets/area_converter.jpeg
-    - assets/lenght_converter.jpeg
-    - assets/weight_converter.jpeg
-    - assets/price_conerter.jpeg
-    - assets/area_to_area_converter.jpeg
-    - assets/area_to_running_converter.jpeg
+    - assets/
+    - assets/WPR/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
