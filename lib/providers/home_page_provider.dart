@@ -4,6 +4,7 @@ import 'package:measurements/pages/chain_link/chain_link.dart';
 import 'package:measurements/pages/expanded_metal/expanded_metal.dart';
 import 'package:measurements/pages/hexagonal_wiremesh/hexagonal_wiremesh.dart';
 import 'package:measurements/pages/welded_wiremesh/weight_per_role.dart';
+import 'package:measurements/pages/welded_wiremesh_ww/welded_wiremesh.dart';
 import 'package:measurements/pages/wire_mesh/wire_mesh.dart';
 import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
@@ -22,8 +23,8 @@ class HomePageProvider with ChangeNotifier {
     MeshItem(title: AppString.wireMesh, image: AppAssets.wireMesh2),
     MeshItem(title: AppString.wireWire, image: AppAssets.wire),
     MeshItem(title: AppString.unitCalculator, image: AppAssets.unitConverter),
+    MeshItem(title: AppString.weldedWiremesh, image: AppAssets.weldedWiremeshWw),
   ];
-
 
   void pageChange(MeshItem meshItem, BuildContext context) {
     switch (meshItem.title) {
@@ -36,17 +37,20 @@ class HomePageProvider with ChangeNotifier {
       case AppString.hexagonalWiremesh:
         Navigator.push(context, MaterialPageRoute(builder: (_) => HexagonalWiremesh(item: meshItem)));
         break;
-        case AppString.perforatedSheet:
+      case AppString.perforatedSheet:
         Navigator.push(context, MaterialPageRoute(builder: (_) => PerforatedSheet()));
         break;
-    case AppString.wireMesh:
+      case AppString.wireMesh:
         Navigator.push(context, MaterialPageRoute(builder: (_) => WireMesh()));
         break;
-    case AppString.wireWire:
+      case AppString.wireWire:
         Navigator.push(context, MaterialPageRoute(builder: (_) => WireScreen()));
         break;
-    case AppString.unitCalculator:
-        Navigator.push(context, MaterialPageRoute(builder: (_) => const UnitCalculatorScreen()));
+      case AppString.unitCalculator:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => UnitCalculatorScreen()));
+        break;
+      case AppString.weldedWiremesh:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WeldedWiremesh()));
         break;
     }
   }

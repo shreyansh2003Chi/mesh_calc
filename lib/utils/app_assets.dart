@@ -57,4 +57,14 @@ class AppAssets {
   static const String priceConverter = "assets/price_conerter.jpeg";
   static const String areaToArea = "assets/area_to_area_converter.jpeg";
   static const String areaToRunning = "assets/area_to_running_converter.jpeg";
+
+  static const String meshOpeningPitchCalculationWw = "assets/WW/mesh_opening_pitch_calculation_ww.jpeg";
+  static const String meshWw = "assets/WW/mesh_ww.jpeg";
+  static const String openingWw = "assets/WW/opening_ww.jpeg";
+  static const String pitchWw = "assets/WW/pitch_ww.jpeg";
+  static const String weightPerOdLessIdWw = "assets/WW/weight_per_od_less_id_ww.jpeg";
+  static const String weightPerOdWw = "assets/WW/weight_per_od_ww.jpeg";
+  static const String weightPerRollWw = "assets/WW/weight_per_roll_ww.jpeg";
+  static const String weldedWiremeshWw = "assets/WW/welded_wiremesh__ww.jpeg";
+  static const String wiresRequiredWw = "assets/WW/wires_required_ww.jpeg";
 }

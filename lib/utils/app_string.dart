@@ -69,6 +69,7 @@ class AppString {
   static const String harpWireMesh = 'Harp Wire Mesh';
   static const String rectangularWireMesh = 'Rectangular Wire Mesh';
   static const String squareWireMesh = 'Square Wire Mesh';
+  static const String weldedWiremesh = 'Welded Wiremesh';
 
   static const String micron = 'Micron/MM/B.S.S/A.S.T.M/I.S.S/Tyler/Twill Dutch/Reverse Plain Dutch/Plain Dutch Mesh';
 

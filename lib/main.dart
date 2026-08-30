@@ -48,6 +48,12 @@ import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_l
 import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/square_center_to_center_hole_wpoli_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/square_staggered_triangular_hole_wpoli_provider.dart';
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
+import 'package:measurements/providers/welded_wiremesh_provided/welded_wiremesh_provider.dart';
+import 'package:measurements/providers/welded_wiremesh_provided/mesh_opening_pitch_calculations_ww_provider.dart';
+import 'package:measurements/providers/welded_wiremesh_provided/weight_per_roll_ww_provider.dart';
+import 'package:measurements/providers/welded_wiremesh_provided/weight_per_od_ww_provider.dart';
+import 'package:measurements/providers/welded_wiremesh_provided/weight_per_od_less_id_ww_provider.dart';
+import 'package:measurements/providers/welded_wiremesh_provided/wires_required_ww_provider.dart';
 import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/dutch_woven_wire_mesh_provider.dart';
 import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/weight_per_od_provider.dart';
 import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/weight_per_roll_provider.dart';
@@ -161,6 +167,12 @@ void main() {
         ChangeNotifierProvider(create: (_) => PriceHubProvider()),
         ChangeNotifierProvider(create: (_) => AreaToAreaProvider()),
         ChangeNotifierProvider(create: (_) => AreaToRunningProvider()),
+        ChangeNotifierProvider(create: (_) => WeldedWiremeshProvider()),
+        ChangeNotifierProvider(create: (_) => MeshOpeningPitchCalculationsWwProvider()),
+        ChangeNotifierProvider(create: (_) => WeightPerRollWwProvider()),
+        ChangeNotifierProvider(create: (_) => WeightPerOdWwProvider()),
+        ChangeNotifierProvider(create: (_) => WeightPerOdLessIdWwProvider()),
+        ChangeNotifierProvider(create: (_) => WiresRequiredWwProvider()),
       ],
       child: const MyApp(),
     ),
