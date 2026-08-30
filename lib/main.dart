@@ -27,6 +27,26 @@ import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll
 import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/round_60_staggered_triangular_hole_wpr_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/round_90_center_to_center_hole_wpr_provider.dart';
 import 'package:measurements/providers/perforated_sheet_provider/weight_per_roll_provider/round_45_staggered_triangular_hole_wpr_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/capsule_center_to_center_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/capsule_staggered_triangular_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/hexagonal_staggered_triangular_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/rectangular_center_to_center_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/rectangular_staggered_triangular_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/round_45_staggered_triangular_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/round_60_staggered_triangular_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/round_90_center_to_center_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/square_center_to_center_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_provider/square_staggered_triangular_hole_wpo_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/capsule_center_to_center_hole_wpoli_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/capsule_staggered_triangular_hole_wpoli_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/hexagonal_staggered_triangular_hole_wpoli_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/rectangular_center_to_center_hole_wpoli_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/rectangular_staggered_triangular_hole_wpoli_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/round_45_staggered_triangular_hole_wpoli_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/round_60_staggered_triangular_hole_wpoli_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/round_90_center_to_center_hole_wpoli_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/square_center_to_center_hole_wpoli_provider.dart';
+import 'package:measurements/providers/perforated_sheet_provider/weight_per_od_less_id_provider/square_staggered_triangular_hole_wpoli_provider.dart';
 import 'package:measurements/providers/welded_wire_mesh_provider.dart';
 import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/dutch_woven_wire_mesh_provider.dart';
 import 'package:measurements/providers/wire_mesh/dutch_woven_wire_mesh_providers/weight_per_od_provider.dart';
@@ -93,6 +113,26 @@ void main() {
         ChangeNotifierProvider(create: (_) => Round60StaggeredTriangularHoleWprProvider()),
         ChangeNotifierProvider(create: (_) => Round90CenterToCenterHoleWprProvider()),
         ChangeNotifierProvider(create: (_) => Round45StaggeredTriangularHoleWprProvider()),
+        ChangeNotifierProvider(create: (_) => CapsuleCenterToCenterHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => CapsuleStaggeredTriangularHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => HexagonalStaggeredTriangularHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => RectangularCenterToCenterHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => RectangularStaggeredTriangularHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => Round45StaggeredTriangularHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => Round60StaggeredTriangularHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => Round90CenterToCenterHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => SquareCenterToCenterHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => SquareStaggeredTriangularHoleWpoProvider()),
+        ChangeNotifierProvider(create: (_) => CapsuleCenterToCenterHoleWpoliProvider()),
+        ChangeNotifierProvider(create: (_) => CapsuleStaggeredTriangularHoleWpoliProvider()),
+        ChangeNotifierProvider(create: (_) => HexagonalStaggeredTriangularHoleWpoliProvider()),
+        ChangeNotifierProvider(create: (_) => RectangularCenterToCenterHoleWpoliProvider()),
+        ChangeNotifierProvider(create: (_) => RectangularStaggeredTriangularHoleWpoliProvider()),
+        ChangeNotifierProvider(create: (_) => Round45StaggeredTriangularHoleWpoliProvider()),
+        ChangeNotifierProvider(create: (_) => Round60StaggeredTriangularHoleWpoliProvider()),
+        ChangeNotifierProvider(create: (_) => Round90CenterToCenterHoleWpoliProvider()),
+        ChangeNotifierProvider(create: (_) => SquareCenterToCenterHoleWpoliProvider()),
+        ChangeNotifierProvider(create: (_) => SquareStaggeredTriangularHoleWpoliProvider()),
         ChangeNotifierProvider(create: (_) => WireMeshProvider()),
         ChangeNotifierProvider(create: (_) => DutchWovenWireMeshProvider()),
         ChangeNotifierProvider(create: (_) => WeightPerRollProvider()),

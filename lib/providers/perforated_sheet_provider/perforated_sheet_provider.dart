@@ -10,6 +10,8 @@ import 'package:measurements/utils/app_assets.dart';
 import 'package:measurements/utils/app_string.dart';
 
 import '../../pages/perforated_sheet/weight_per_roll/weight_per_roll.dart';
+import '../../pages/perforated_sheet/weight_per_od/weight_per_od.dart';
+import '../../pages/perforated_sheet/weight_per_od_less_id/weight_per_od_less_id.dart';
 
 class PerforatedSheetProvider with ChangeNotifier {
   final TextEditingController searchController = TextEditingController();
@@ -27,6 +29,12 @@ class PerforatedSheetProvider with ChangeNotifier {
         break;
       case AppString.weightPerRoll:
         Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerRoll()));
+        break;
+      case AppString.weightPerOd:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerOd()));
+        break;
+      case AppString.weightPerOdLessId:
+        Navigator.push(context, MaterialPageRoute(builder: (_) => WeightPerOdLessId()));
         break;
     }
   }

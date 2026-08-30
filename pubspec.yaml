@@ -79,6 +79,9 @@ flutter:
   assets:
     - assets/
     - assets/WPR/
+    - assets/WPO/
+    - assets/WPOLI/
+    - assets/WW/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
